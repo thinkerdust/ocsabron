@@ -44,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('SubMenu', function ($user, $code_menu) {
             $db = DB::table('akses_role as ar')
                     ->join('users as u', 'ar.id_role', '=', 'u.id_role')
-                    ->where([['u.id_role', $user->id_role], ['ar.kode_menu', $code_menu], ['ar.flag_access', '<>', 0]])
+                    ->where([['u.id_role', $user->id_role], ['ar.kode_menu', $code_menu], ['ar.flag_access', '<>', 9]])
                     ->select('ar.kode_menu')->first();
             return $db;
         });

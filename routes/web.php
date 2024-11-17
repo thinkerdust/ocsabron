@@ -2,6 +2,66 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MasterController;
+use App\Http\Controllers\UserManagementController;
+
+Route::get('/', function () { return redirect('login'); });
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'login')->name('login');
+    Route::post('/authenticate', 'authenticate')->name('authenticate');
+    Route::get('/logout', 'logout')->name('logout');
+});
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+
+    Route::get('log-viewer', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/change-password', [AuthController::class, 'change_password']);
+    Route::post('/process-change-password', [AuthController::class, 'process_change_password'])->middleware('ajax-request');
+
+    // Get Data Master
+    Route::middleware('ajax-request')->group(function() {
+        Route::controller(MasterController::class)->group(function () {
+            Route::get('/data-role', 'list_data_role');
+        });
+    });
+
+    // User Management
+    Route::middleware("can:Menu, 'UM'")->group(function () {
+        Route::controller(AuthController::class)->group(function () {
+            Route::get('/reset-password/{id}', 'reset_password')->middleware('ajax-request');
+        });
+
+        Route::group(['prefix' => 'user-management'], function () {
+            Route::controller(UserManagementController::class)->group(function () {
+                // user
+                Route::get('/', 'index')->middleware("can:SubMenu, 'UM1'");
+                Route::get('/datatable-user-management', 'datatable_user_management');
+                Route::post('/register', 'register')->name('register');
+                Route::get('/edit-user/{id}', 'edit_user');
+                Route::get('/delete-user/{id}', 'delete_user');
+
+                // menu
+                Route::get('/menu', 'menu')->middleware("can:SubMenu, 'UM2'");
+                Route::get('/datatable-menu', 'datatable_menu');
+                Route::post('/store-menu', 'store_menu');
+                Route::get('/edit-menu/{id}', 'edit_menu');
+                Route::get('/delete-menu/{id}', 'delete_menu');
+
+                // role
+                Route::get('/role', 'role')->middleware("can:SubMenu, 'UM3'");
+                Route::get('/datatable-role', 'datatable_role');
+                Route::get('/list-permissions-menu', 'list_permissions_menu')->middleware('ajax-request');
+                Route::post('/store-role', 'store_role');
+                Route::get('/edit-role/{id}', 'edit_role');
+                Route::get('/delete-role/{id}', 'delete_role');
+            });
+        });
+
+    });
 });
