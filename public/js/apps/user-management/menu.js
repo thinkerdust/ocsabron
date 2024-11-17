@@ -4,35 +4,18 @@ var table = NioApp.DataTable('#dt-table', {
     responsive: true,
     searchDelay: 500,
     ajax: {
-        url: '/datatable-menu'
+        url: '/user-management/datatable-menu'
     },
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
         {data: 'parent'},
         {data: 'kode'},
         {data: 'nama'},
-        {data: 'icon', orderable: false,},
-        {data: 'url', orderable: false,},
-        {data: 'status'},
+        {data: 'icon', orderable: false, searchable: false},
+        {data: 'url', orderable: false},
         {data: 'id'},
     ],
     columnDefs: [
-        {
-            targets: -2,
-            orderable: false,
-            searchable: false,
-            render: function(data, type, full, meta) {
-                
-                var status = {
-                    0: {'title': 'Non-Aktif', 'class': ' bg-danger'},
-                    1: {'title': 'Aktif', 'class': ' bg-success'},
-                };
-                if (typeof status[full['status']] === 'undefined') {
-                    return data;
-                }
-                return '<span class="badge '+ status[full['status']].class +'">'+ status[full['status']].title +'</span>';
-            }
-        },
         {
             targets: -1,
             orderable: false,
@@ -69,7 +52,7 @@ $('#form-data').submit(function(e) {
     var btn = $('#btn-submit');
 
     $.ajax({
-        url : "/store-menu",  
+        url : "/user-management/store-menu",  
         data : formData,
         type : "POST",
         dataType : "JSON",
@@ -104,7 +87,7 @@ $('#form-data').submit(function(e) {
 
 function edit(id) {
     $.ajax({
-        url: '/edit-menu/'+id,
+        url: '/user-management/edit-menu/'+id,
         dataType: 'JSON',
         success: function(response) {
             if(response.status) {
@@ -127,15 +110,14 @@ function edit(id) {
 
 function hapus(id) {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin akan menghapus data?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Ya, saya yakin!'
     }).then((result) => {
         if (result.value) {
             $.ajax({
-                url: '/delete-menu/'+id,
+                url: '/user-management/delete-menu/'+id,
                 dataType: 'JSON',
                 success: function(response) {
                     if(response.status){

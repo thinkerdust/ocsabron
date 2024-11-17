@@ -4,31 +4,14 @@ var table = NioApp.DataTable('#dt-table', {
     responsive: true,
     searchDelay: 500,
     ajax: {
-        url: '/datatable-role'
+        url: '/user-management/datatable-role'
     },
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
         {data: 'nama'},
-        {data: 'status'},
         {data: 'id'},
     ],
     columnDefs: [
-        {
-            targets: -2,
-            orderable: false,
-            searchable: false,
-            render: function(data, type, full, meta) {
-                
-                var status = {
-                    0: {'title': 'Non-Aktif', 'class': ' bg-danger'},
-                    1: {'title': 'Aktif', 'class': ' bg-success'},
-                };
-                if (typeof status[full['status']] === 'undefined') {
-                    return data;
-                }
-                return '<span class="badge '+ status[full['status']].class +'">'+ status[full['status']].title +'</span>';
-            }
-        },
         {
             targets: -1,
             orderable: false,
@@ -41,6 +24,7 @@ var table = NioApp.DataTable('#dt-table', {
                             <div class="dropdown-menu dropdown-menu-end">
                                 <ul class="link-list-opt no-bdr">
                                     <li><a class="btn" onclick="edit(${full['id']})"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                                    <li><a class="btn" onclick="hapus(${full['id']})"><em class="icon ni ni-trash"></em><span>Delete</span></a></li>
                                 </ul>
                             </div>
                         </div>`;
@@ -53,7 +37,7 @@ var table = NioApp.DataTable('#dt-table', {
 });
 
 function tree_menu() {
-    $.getJSON("/list-permissions-menu", function (data) {
+    $.getJSON("/user-management/list-permissions-menu", function (data) {
         let menu_json = data.menu;
         $("#tree_menu").jstree("destroy");
 
@@ -87,7 +71,7 @@ function tree_menu() {
 }
 
 function edit_tree_menu(id) {
-    $.getJSON("/list-permissions-menu?id=" + id,
+    $.getJSON("/user-management/list-permissions-menu?id=" + id,
         function (data) {
             let menu_json = data.menu;
             $("#tree_menu").jstree("destroy");
@@ -137,7 +121,7 @@ $('#form-data').submit(function(e) {
     var btn = $('#btn-submit');
 
     $.ajax({
-        url : "/store-role",  
+        url : "/user-management/store-role",  
         data : formData,
         type : "POST",
         dataType : "JSON",
@@ -172,7 +156,7 @@ $('#form-data').submit(function(e) {
 
 function edit(id) {
     $.ajax({
-        url: '/edit-role/'+id,
+        url: '/user-management/edit-role/'+id,
         dataType: 'JSON',
         success: function(response) {
             if(response.status) {
@@ -188,4 +172,32 @@ function edit(id) {
             NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
         }
     })
+}
+
+function hapus(id) {
+    Swal.fire({
+        title: 'Apakah anda yakin akan menghapus data?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, saya yakin!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '/user-management/delete-menu/'+id,
+                dataType: 'JSON',
+                success: function(response) {
+                    if(response.status){
+                        $("#dt-table").DataTable().ajax.reload(null, false);
+                        NioApp.Toast(response.message, 'success', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+                    }
+                },
+                error: function(error) {
+                    console.log(error)
+                    NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+                }
+            })
+        }
+    });
 }

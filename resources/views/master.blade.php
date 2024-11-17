@@ -9,7 +9,7 @@
     <meta name="description" content="{{ config('app.name', 'Laravel') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="{{ asset('images/logo-bdg.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/brand-logo.svg') }}">
     <!-- Page Title  -->
     <title>Panel | {{ config('app.name', 'Laravel') }}</title>
     <!-- StyleSheets  -->
@@ -22,6 +22,12 @@
     @if(isset($css_library))
     {!! $css_library !!}
     @endif
+
+    <style type="text/css">
+        .nk-sidebar.is-compact:not(:hover) .logo-img-small {
+            max-height: 20px;
+        }
+    </style>
 
 </head>
 
