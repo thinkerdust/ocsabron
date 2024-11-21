@@ -164,7 +164,7 @@ class UserManagementController extends BaseController
     {
         $id = $request->id;
         $user = Auth::user();
-        $process = Menu::where('id', 20000)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
+        $process = Menu::where('id', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
 
         if($process) {
             return $this->ajaxResponse(true, 'Data berhasil dihapus');
