@@ -35,8 +35,9 @@ class AuthServiceProvider extends ServiceProvider
             $db = DB::table('akses_role as ar')
                     ->join('users as u', 'ar.id_role', '=', 'u.id_role')
                     ->where([['ar.flag_access', '<>', 9], ['u.id_role', $user->id_role]])
-                    ->whereRaw("LEFT(ar.kode_menu, 2) = '$kd_parent'")
-                    ->select('ar.kode_menu')->first();
+                    ->whereRaw("REGEXP_REPLACE(ar.kode_menu, '[0-9]', '') = ?", [$kd_parent])
+                    ->select('ar.kode_menu')
+                    ->first();
             return $db;
         });
 

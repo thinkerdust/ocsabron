@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\JobController;
 
 Route::get('/', function () { return redirect('login'); });
 
@@ -63,5 +64,17 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             });
         });
 
+    });
+
+    // Job
+    Route::group(['prefix' => 'job', 'middleware' => ["can:Menu, 'JOB'"]], function () {
+        Route::controller(JobController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_job');
+            Route::get('/form/{id?}', 'form_job');
+            Route::get('/edit/{id}', 'edit_job');
+            Route::get('/delete/{id}', 'delete_job');
+            Route::post('/store', 'store_job');
+        });
     });
 });

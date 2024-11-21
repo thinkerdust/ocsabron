@@ -60,10 +60,10 @@ $('#form-data').submit(function(e) {
         async : true,
         contentType: false,
         processData: false,
-        beforeSend: function() {
-            btn.attr('disabled', true);
-            btn.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Loading ...</span>`);
-        },
+        // beforeSend: function() {
+        //     btn.attr('disabled', true);
+        //     btn.html(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Loading ...</span>`);
+        // },
         success: function(response) {
             if(response.status){
                 $('#form-data')[0].reset();
