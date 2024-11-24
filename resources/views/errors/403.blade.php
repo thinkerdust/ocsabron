@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="{{ config('app.name', 'Laravel') }}">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="{{ asset('images/logo-stemba.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/brand-logo.svg') }}">
     <!-- Page Title  -->
     <title>Error 403 | Forbidden</title>
     <!-- StyleSheets  -->

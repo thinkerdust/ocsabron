@@ -29,6 +29,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::middleware('ajax-request')->group(function() {
         Route::controller(MasterController::class)->group(function () {
             Route::get('/data-role', 'list_data_role');
+            Route::get('/data-divisi', 'list_data_divisi');
         });
     });
 

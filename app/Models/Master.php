@@ -15,4 +15,13 @@ class Master extends Model
         }
         return $data->get();
     }
+
+    public function listDataDivisi($q)
+    {
+        $data = DB::table('divisi')->where('status', 1)->select('uid as id', 'nama');
+        if($q) {
+            $data = $data->where('nama', 'like', '%'.$q.'%');
+        }
+        return $data->get();
+    }
 }

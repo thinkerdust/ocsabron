@@ -26,9 +26,9 @@
                                             <label class="form-label">Filter Tanggal</label>
                                             <div class="form-control-wrap">
                                                 <div class="input-daterange date-picker-range input-group">
-                                                    <input type="text" class="form-control" name="start_date" id="start_date" autocomplete="off" value="{{ date('d/m/Y') }}" readonly /> 
+                                                    <input type="text" class="form-control" name="start_date" id="start_date" value="{{ date('01/m/Y') }}" readonly /> 
                                                     <div class="input-group-addon">TO</div>
-                                                    <input type="text" class="form-control" name="end_date" id="end_date" autocomplete="off" value="{{ date('t/m/Y') }}" readonly />
+                                                    <input type="text" class="form-control" name="end_date" id="end_date" value="{{ date('d/m/Y') }}" readonly />
                                                 </div>
                                             </div>
                                         </div>
@@ -44,12 +44,13 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Job</th> 
                                             <th>Tanggal Order</th> 
+                                            <th>Nama Job</th> 
                                             <th>Deadline</th> 
                                             <th>Jenis Produk</th> 
-                                            <th>Jenis Kertas</th> 
+                                            <th>Ukuran</th> 
                                             <th>Jumlah</th>
+                                            <th>Progress</th>
                                             <th>Action</th> 
                                         </tr>
                                     </thead>
@@ -59,58 +60,6 @@
                         </div><!-- .card-preview -->
                     </div> <!-- nk-block -->
                 </div><!-- .components-preview -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Content Code -->
-<div class="modal fade" tabindex="-1" id="modalForm">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <em class="icon ni ni-cross"></em>
-            </a>
-            <div class="modal-header">
-                <h5 class="modal-title">Form Menu</h5>
-            </div>
-            <div class="modal-body">
-                <form class="form-validate is-alter" id="form-data">
-                    @csrf
-                    <input type="hidden" name="id_menu" id="id_menu">
-                    <div class="form-group">
-                        <label class="form-label">Menu</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="menu" id="menu" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Icon</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="icon" id="icon">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Kode Menu</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="kode" id="kode" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Kode Parent</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="parent" id="parent" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">URL</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="url" id="url">
-                        </div>
-                    </div>
-                    <hr class="preview-hr">
-                    <button type="submit" class="btn btn-theme-sml" id="btn-submit">Save</button>
-                </form>
             </div>
         </div>
     </div>
