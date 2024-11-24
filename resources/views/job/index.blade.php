@@ -33,6 +33,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="form-label">Status</label>
+                                            <div class="form-control-wrap">
+                                                <select class="form-control select2-js" name="filter_status" id="filter_status">
+                                                    <option value="">ALL</option>
+                                                    <option value="1">ON PROGRESS</option>
+                                                    <option value="3">PENDING</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="col-md-2" style="margin-top:30px">
                                         <button type="button" class="btn btn-info" id="btn-filter"><em class="icon ni ni-search"></em><span>Filter</span></button>
@@ -51,6 +63,7 @@
                                             <th>Ukuran</th> 
                                             <th>Jumlah</th>
                                             <th>Progress</th>
+                                            <th>Status</th>
                                             <th>Action</th> 
                                         </tr>
                                     </thead>
