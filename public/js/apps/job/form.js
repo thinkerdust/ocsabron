@@ -1,41 +1,45 @@
 $(document).ready(function() {
 
-    $('.number').keyup(function() {
+    $('.format-number').keyup(function() {
         $(this).val(function (index, value) {
             return value.replace(/\D/g, "");
         });
     });
 
+    $('.select2-js').select2({
+        minimumResultsForSearch: Infinity
+    });
+
     // Edit Form
     let id = $('#id').val();
     if(id) {
-        console.log('masuk', id)
         $.ajax({
             url: '/job/edit/'+id,
             dataType: 'json',
             success: function(response) {
+                let order = response.data.order;
                 if(response.status) {
-                    let data = response.data;
+                    $('#nama').val(order.nama);
+                    $('#tanggal').datepicker('setDate', order.tanggal);
+                    $('#deadline').datepicker('setDate', order.deadline);
+                    $('#jenis_produk').val(order.jenis_produk);
+                    $('#tambahan').val(order.tambahan);
+                    $('#ukuran').val(order.ukuran);
+                    $('#jumlah').val(order.jumlah);
+                    $('#jenis_kertas').val(order.jenis_kertas);
+                    $('#finishing_satu').val(order.finishing_satu);
+                    $('#finishing_dua').val(order.finishing_dua);
+                    $('#pengambilan').val(order.pengambilan).change();
+                    $('#order_by').val(order.order_by).change();
+                    $('#keterangan').val(order.keterangan);
+                }
 
-                    $('#nama').val(data[0].nama);
-                    $('#tanggal').datepicker('setDate', moment(data[0].tanggal).format('DD-MM-YYYY'));
-                    $('#deadline').datepicker('setDate', moment(data[0].deadline).format('DD-MM-YYYY'));
-                    $('#jenis_produk').val(data[0].jenis_produk);
-                    $('#tambahan').val(data[0].tambahan);
-                    $('#ukuran').val(data[0].ukuran);
-                    $('#jumlah').val(data[0].jumlah);
-                    $('#jenis_kertas').val(data[0].jenis_kertas);
-                    $('#finishing_satu').val(data[0].finishing_satu);
-                    $('#finishing_dua').val(data[0].finishing_dua);
-                    $('#pengambilan').val(data[0].pengambilan).change();
-                    $('#order_by').val(data[0].order_by).change();
-                    $('#keterangan').val(data[0].keterangan);
-
+                let detail = response.data.detail;
+                if(detail) {
                     // loop selected checkboxes divisi
-                    $.each(data, function(index, value) {
-                        $('#'+value.divisi).prop('checked', true);
+                    $.each(detail, function(index, value) {
+                        $('#'+value.uid_divisi).prop('checked', true);
                     });
-                    
                 }
             },
             error: function(error) {

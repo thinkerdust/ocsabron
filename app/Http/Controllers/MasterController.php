@@ -18,4 +18,11 @@ class MasterController extends Controller
         $data = $this->master->listDataRole($q);
         return response()->json($data);
     }
+
+    public function list_data_divisi(Request $request)
+    {
+        $q = $request->get('q');
+        $data = $this->master->listDataDivisi($q);
+        return response()->json($data);
+    }
 }
