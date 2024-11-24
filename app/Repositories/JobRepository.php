@@ -14,7 +14,7 @@ class JobRepository {
         $this->order = $order;
     }
 
-    public function dataTableJob($start_date, $end_date)
+    public function dataTableJob($start_date, $end_date, $status)
     {
         $start_date = Carbon::createFromFormat('d/m/Y', $start_date);
         $start_date = $start_date->format('Y-m-d');
@@ -24,15 +24,19 @@ class JobRepository {
 
         $query = DB::table('order as o')
                     ->join('divisi as d', 'o.uid_divisi', '=', 'd.uid')
+                    ->join('order_detail as od', function($join) {
+                        $join->on('o.uid', '=', 'od.uid_order')
+                            ->on('d.uid', '=', 'od.uid_divisi');
+                    })
                     ->where('o.status', 1)
+                    ->where('d.urutan', 0) // new job
                     ->whereBetween('o.tanggal', [$start_date, $end_date])
-                    ->select('o.uid', 'o.nama', 'o.jenis_produk', 'o.ukuran', 'o.jumlah', 'd.nama as progress',
+                    ->select('o.uid', 'o.nama', 'o.jenis_produk', 'o.ukuran', 'o.jumlah', 'd.nama as progress', 'od.status',
                         DB::raw("DATE_FORMAT(o.deadline, '%d/%m/%Y') as deadline, DATE_FORMAT(o.tanggal, '%d/%m/%Y') as tanggal")
                     );
 
-        $order = request('order')[0];
-        if ($order['column'] == '0') {
-            $query->orderBy('o.tanggal', 'DESC');
+        if($status) {
+            $query->where('od.status', $status);
         }
         
         return $query;
@@ -54,8 +58,8 @@ class JobRepository {
                     ->get();
 
         $data = [
-            'order' => $order,
-            'detail' => $detail
+            'order'     => $order,
+            'detail'    => $detail
         ];
 
         return $data;

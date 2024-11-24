@@ -76,6 +76,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/edit/{id}', 'edit_job');
             Route::get('/delete/{id}', 'delete_job');
             Route::post('/store', 'store_job');
+            Route::get('/approve/{id}', 'approve_job');
+            Route::get('/pending/{id}', 'pending_job');
         });
     });
 });
