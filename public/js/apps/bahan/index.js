@@ -6,7 +6,7 @@ var table = NioApp.DataTable('#dt-table', {
     scrollX: true,
     scrollY: '500px',
     ajax: {
-        url: '/job/datatable',
+        url: '/bahan/datatable',
         type: 'POST',
         data: function(d) {
             d._token        = token;
@@ -30,6 +30,7 @@ var table = NioApp.DataTable('#dt-table', {
         {data: 'nama', name: 'o.nama'},
         {data: 'deadline', name: 'o.deadline'},
         {data: 'jenis_produk', name: 'o.jenis_produk'},
+        {data: 'bahan', name: 'o.bahan'},
         {data: 'ukuran', name: 'o.ukuran'},
         {data: 'jumlah', name: 'o.jumlah', className: 'text-end', render: $.fn.dataTable.render.number( ',', '.', 0)},
         {data: 'progress', name: 'd.nama', className: 'fw-bold', orderable: false, searchable: false},
@@ -39,7 +40,7 @@ var table = NioApp.DataTable('#dt-table', {
     columnDefs: [
         {
             className: "nk-tb-col",
-            targets: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            targets: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         },
         {
             targets: -2,
@@ -68,35 +69,6 @@ $('#btn-filter').click(function() {
 $('.select2-js').select2({
     minimumResultsForSearch: Infinity
 });
-
-function hapus(id) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.value) {
-            $.ajax({
-                url: '/job/delete/'+id,
-                dataType: 'JSON',
-                success: function(response) {
-                    if(response.status){
-                        $("#dt-table").DataTable().ajax.reload(null, false);
-                        NioApp.Toast(response.message, 'success', {position: 'top-right'});
-                    }else{
-                        NioApp.Toast(response.message, 'warning', {position: 'top-right'});
-                    }
-                },
-                error: function(error) {
-                    console.log(error)
-                    NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
-                }
-            })
-        }
-    });
-}
 
 function approve(id) {
     Swal.fire({

@@ -16,6 +16,7 @@ use App\Repositories\JobRepository;
 use Carbon\Carbon;
 use Svg\Tag\Rect;
 use Yajra\DataTables\DataTables;
+use PDF;
 
 class JobController extends BaseController
 {
@@ -25,8 +26,8 @@ class JobController extends BaseController
 
     function __construct(JobRepository $jobrepo, Order $order, OrderDetail $order_detail)
     {
-        $this->job = $jobrepo;
-        $this->order = $order;
+        $this->job          = $jobrepo;
+        $this->order        = $order;
         $this->order_detail = $order_detail;
     }
 
@@ -48,12 +49,13 @@ class JobController extends BaseController
                 ->addColumn('action', function($row) {
                     $btn = '';
                     if(Gate::allows('crudAccess', 'JOB', $row)) {
-                        $btn_action = '';
-                        $btn_approve = '<li><a class="btn" onclick="approve(\'' . $row->uid . '\')"><em class="icon ni ni-check-round-cut"></em><span>Approve</span></a></li>';
-                        $btn_pending = '<li><a class="btn" onclick="pending(\'' . $row->uid . '\')"><em class="icon ni ni-na"></em><span>Pending</span></a></li>';
+                        $btn_action     = '';
+                        $btn_approve    = '<li><a class="btn" onclick="approve(\'' . $row->uid . '\')"><em class="icon ni ni-check-round-cut"></em><span>Approve</span></a></li>';
+                        $btn_pending    = '<li><a class="btn" onclick="pending(\'' . $row->uid . '\')"><em class="icon ni ni-na"></em><span>Pending</span></a></li>';
+                        
                         if($row->status == 1) {
-                            $btn_action = $btn_pending.$btn_approve;
-                        }elseif($row->status == 3) {
+                            $btn_action = $btn_approve.$btn_pending;
+                        } elseif($row->status == 3) {
                             $btn_action = $btn_approve;
                         }
 
@@ -64,6 +66,7 @@ class JobController extends BaseController
                                         <li><a href="/job/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         '.$btn_action.'
+                                        <li><a href="/job/cetak/'.$row->uid.'" target="_blank" class="btn"><em class="icon ni ni-file-pdf"></em><span>Cetak</span></a></li>
                                     </ul>
                                 </div>
                             </div>';
@@ -247,11 +250,20 @@ class JobController extends BaseController
             OrderDetail::where([['uid_order', $id], ['uid_divisi', $order->uid_divisi]])->update(['status' => 3, 'approve_at' => Carbon::now(), 'approve_by' => $user->username]);
 
             DB::commit();
-            return $this->ajaxResponse(true, 'Approve data berhasil');
+            return $this->ajaxResponse(true, 'Pending data berhasil');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             DB::rollback();
-            return $this->ajaxResponse(false, 'Approve data gagal', $e);
+            return $this->ajaxResponse(false, 'Pending data gagal', $e);
         }
+    }
+
+    public function cetak_job(Request $request) 
+    {
+        $id     = $request->id;
+        $data   = $this->job->cetakJob($id);
+
+        $pdf = PDF::loadView('job.cetak', compact('data'));
+        return $pdf->stream('job.pdf');
     }
 }

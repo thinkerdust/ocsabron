@@ -83,6 +83,7 @@
         {
             $messages = [
                 'required' => 'Field :attribute harus diisi.',
+                'required_with' => 'Field :attribute harus diisi.',
                 'unique' => 'Field :attribute sudah digunakan.',
                 'required_if' => 'Field :attribute harus diisi jika :other adalah :value.',
                 'email' => 'Field :attribute harus berupa alamat email yang valid.',
