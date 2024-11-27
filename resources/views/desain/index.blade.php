@@ -93,6 +93,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="form-label">Nama Customer</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="customer" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="form-label">Tanggal Order</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="tanggal" required>
@@ -168,6 +174,10 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="preview-hr">
+
+                <div class="row gy-4" id="order_detail"></div>
                 
             </div>
             <div class="modal-footer">

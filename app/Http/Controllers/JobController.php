@@ -67,7 +67,6 @@ class JobController extends BaseController
                                         <li><a href="/job/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         '.$btn_action.'
-                                        <li><a href="/job/cetak/'.$row->uid.'" target="_blank" class="btn"><em class="icon ni ni-file-pdf"></em><span>Cetak</span></a></li>
                                     </ul>
                                 </div>
                             </div>';
@@ -131,6 +130,7 @@ class JobController extends BaseController
 
         $validator = Validator::make($request->all(), [
             'nama'          => 'required|max:100',
+            'customer'      => 'required',
             'tanggal'       => 'required',
             'deadline'      => 'required',
             'jenis_produk'  => 'required',
@@ -154,6 +154,7 @@ class JobController extends BaseController
 
             $data = [
                 'nama'          => $request->nama,
+                'customer'      => $request->customer,
                 'tanggal'       => Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d'),
                 'deadline'      => Carbon::createFromFormat('d/m/Y', $request->deadline)->format('Y-m-d'),
                 'jenis_produk'  => $request->jenis_produk,
@@ -192,24 +193,33 @@ class JobController extends BaseController
             // insert order detail
             $data_detail = [];
 
-            // new job
-            $data_detail[] = [
-                'uid'           => 'OD'.Carbon::now()->format('YmdHisu'),
-                'uid_order'     => $id,
-                'uid_divisi'    => 'D20241117144239748170',
-                'insert_at'     => Carbon::now(),
-                'insert_by'     => $user->username,
+            // harus ada di setiap job
+            $divisi_manual = [
+                'D20241117144239748170', // New job 
+                'D20241117145737847863', // Administrasi
+                'D20241117150714774798'  // Ekspedisi
             ];
 
-            foreach ($request->divisi as $divisi) {
+            foreach ($divisi_manual as $dm) {
                 $data_detail[] = [
-                    'uid'           => 'OD'.Carbon::now()->format('YmdHisu'),
+                    'uid'           => 'OD' . Carbon::now()->format('YmdHisu'),
                     'uid_order'     => $id,
-                    'uid_divisi'    => $divisi,
+                    'uid_divisi'    => $dm,
                     'insert_at'     => Carbon::now(),
                     'insert_by'     => $user->username,
                 ];
             }
+
+            foreach ($request->divisi as $d) {
+                $data_detail[] = [
+                    'uid'           => 'OD'.Carbon::now()->format('YmdHisu'),
+                    'uid_order'     => $id,
+                    'uid_divisi'    => $d,
+                    'insert_at'     => Carbon::now(),
+                    'insert_by'     => $user->username,
+                ];
+            }
+
             DB::table('order_detail')->insert($data_detail);
 
             DB::commit();
@@ -265,14 +275,5 @@ class JobController extends BaseController
             DB::rollback();
             return $this->ajaxResponse(false, 'Pending data gagal', $e);
         }
-    }
-
-    public function cetak_job(Request $request) 
-    {
-        $id     = $request->id;
-        $data   = $this->job->cetakJob($id);
-
-        $pdf = PDF::loadView('job.cetak', compact('data'));
-        return $pdf->stream('job.pdf');
     }
 }

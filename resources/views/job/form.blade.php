@@ -31,6 +31,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label class="form-label">Nama Customer</label>
+                                                    <div class="form-control-wrap">
+                                                        <input type="text" class="form-control" id="customer" name="customer" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
                                                     <label class="form-label">Tanggal Order</label>
                                                     <div class="form-control-wrap">
                                                         <input type="text" class="form-control date-picker" id="tanggal" name="tanggal" data-date-format="dd/mm/yyyy" readonly required>
@@ -121,7 +127,7 @@
                                             @foreach ($divisi as $d)    
                                                 <div class="col-md-2">
                                                     <div class="custom-control custom-control-md custom-switch">
-                                                        <input type="checkbox" class="custom-control-input" name="divisi[]" id="{{ $d->uid }}" value="{{ $d->uid }}">
+                                                        <input type="checkbox" class="custom-control-input" name="divisi[]" id="{{ $d->uid }}" value="{{ $d->uid }}" {{ in_array($d->uid, ['D20241117150714774798', 'D20241117145737847863']) ? 'checked disabled' : '' }}>
                                                         <label class="custom-control-label" for="{{ $d->uid }}">{{ $d->nama }}</label>
                                                     </div>
                                                 </div>

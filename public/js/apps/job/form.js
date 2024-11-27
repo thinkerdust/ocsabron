@@ -20,6 +20,7 @@ $(document).ready(function() {
                 let order = response.data.order;
                 if(response.status) {
                     $('#nama').val(order.nama);
+                    $('#customer').val(order.customer);
                     $('#tanggal').datepicker('setDate', order.tanggal);
                     $('#deadline').datepicker('setDate', order.deadline);
                     $('#jenis_produk').val(order.jenis_produk);
