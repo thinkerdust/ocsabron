@@ -89,11 +89,18 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label">Nama Job</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="nama" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nama Customer</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="customer" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -126,14 +133,14 @@
                                 <input type="text" class="form-control" id="ukuran" required>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label">Jumlah</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="jumlah" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label">Jenis Kertas</label>
                             <div class="form-control-wrap">
@@ -172,6 +179,10 @@
                         </div>
                     </div>
                 </div>
+
+                <hr class="preview-hr">
+
+                <div class="row gy-4" id="order_detail"></div>
                 
             </div>
             <div class="modal-footer">

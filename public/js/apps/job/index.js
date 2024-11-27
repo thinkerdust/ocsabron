@@ -81,6 +81,7 @@ function detail(id) {
             let order = response.data.order;
             if(response.status) {
                 $('#nama').val(order.nama);
+                $('#customer').val(order.customer);
                 $('#tanggal').val(order.tanggal);
                 $('#deadline').val(order.deadline);
                 $('#jenis_produk').val(order.jenis_produk);
@@ -94,6 +95,24 @@ function detail(id) {
                 $('#order_by').val(order.order_by).change();
                 $('#keterangan').val(order.keterangan);
             }
+
+            let order_detail = response.data.detail;
+            if(order_detail) {
+                // loop add li to id = order_detail
+                let html = '';
+                order_detail.forEach(function(data) {
+                    html += `
+                        <div class="col-md-3">
+                            <div class="custom-control custom-control-md custom-switch">
+                                <input type="checkbox" class="custom-control-input" checked>
+                                <label class="custom-control-label">${data.nama_divisi}</label>
+                            </div>
+                        </div>
+                    `
+                });
+                $('#order_detail').html(html);
+            }
+
         },
         error: function(error) {
             console.log(error)
