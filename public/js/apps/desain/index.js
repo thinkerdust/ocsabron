@@ -1,0 +1,165 @@
+var table = NioApp.DataTable('#dt-table', {
+    serverSide: true,
+    processing: true,
+    responsive: false,
+    searchDelay: 500,
+    scrollX: true,
+    scrollY: '500px',
+    ajax: {
+        url: '/desain/datatable',
+        type: 'POST',
+        data: function(d) {
+            d._token        = token;
+            d.start_date    = $('#start_date').val();
+            d.end_date      = $('#end_date').val();
+            d.status        = $('#filter_status').val();
+        },
+        error: function (xhr) {
+            if (xhr.status === 401) { // Unauthorized error
+                NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
+                window.location.href = "/login"; 
+            } else {
+                NioApp.Toast('An error occurred while loading data. Please try again.', 'error', {position: 'top-right'});
+            }
+        }
+    },
+    order: [1, 'ASC'],
+    columns: [
+        {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+        {data: 'tanggal', name: 'o.tanggal'},
+        {data: 'nama', name: 'o.nama'},
+        {data: 'deadline', name: 'o.deadline'},
+        {data: 'jenis_produk', name: 'o.jenis_produk'},
+        {data: 'ukuran', name: 'o.ukuran'},
+        {data: 'jumlah', name: 'o.jumlah', className: 'text-end', render: $.fn.dataTable.render.number( ',', '.', 0)},
+        {data: 'progress', name: 'd.nama', className: 'fw-bold', orderable: false, searchable: false},
+        {data: 'status'},
+        {data: 'action', orderable: false, searchable: false},
+    ],
+    columnDefs: [
+        {
+            className: "nk-tb-col",
+            targets: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        {
+            targets: -2,
+            orderable: false,
+            searchable: false,
+            render: function(data, type, full, meta) {
+
+                var status = {
+                    1: {'title': 'ON PROGRESS', 'class': ' bg-info'},
+                    2: {'title': 'DONE', 'class': ' bg-success'},
+                    3: {'title': 'PENDING', 'class': ' bg-warning'},
+                };
+                if (typeof status[full['status']] === 'undefined') {
+                    return data;
+                }
+                return '<span class="badge badge-dot '+ status[full['status']].class +'">'+ status[full['status']].title +'</span>';
+            }
+        },
+    ]
+});
+
+$('#btn-filter').click(function() {
+    $("#dt-table").DataTable().ajax.reload();
+})
+
+$('.select2-js').select2({
+    minimumResultsForSearch: Infinity
+});
+
+function approve(id) {
+
+    $('#modalApprove').modal('show');
+    $('#uid_approve').val(id);
+
+}
+
+$('#form-approve').submit(function(e) {
+
+    e.preventDefault();
+    formData = new FormData($(this)[0]);
+
+    $.ajax({
+        url: '/desain/approve',
+        data : formData,
+        type : "POST",
+        dataType : "JSON",
+        cache:false,
+        async : true,
+        contentType: false,
+        processData: false,
+        beforeSend: function() {
+            Swal.fire({
+                title: 'Loading...',
+                text: 'Please wait while we load the data.',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        },
+        success: function(response) {
+            if(response.status){
+                $('#modalApprove').modal('hide');
+                $("#dt-table").DataTable().ajax.reload(null, false);
+                NioApp.Toast(response.message, 'success', {position: 'top-right'});
+            }else{
+                NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+            }
+            Swal.close();
+        },
+        error: function(error) {
+            console.log(error)
+            NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+        }
+    })
+
+})
+
+function pending(id) {
+
+    $('#modalPending').modal('show');
+    $('#uid_pending').val(id);
+
+}
+
+$('#form-pending').submit(function(e) {
+
+    e.preventDefault();
+
+    $.ajax({
+        url: '/desain/pending',
+        dataType: 'JSON',
+        type: 'POST',
+        data: $(this).serialize(),
+        beforeSend: function() {
+            Swal.fire({
+                title: 'Loading...',
+                text: 'Please wait while we load the data.',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        },
+        success: function(response) {
+            if(response.status){
+                $('#modalPending').modal('hide');
+                $("#dt-table").DataTable().ajax.reload(null, false);
+                NioApp.Toast(response.message, 'success', {position: 'top-right'});
+            }else{
+                NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+            }
+            Swal.close();
+        },
+        error: function(error) {
+            console.log(error)
+            NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+        }
+    })
+
+})

@@ -46,22 +46,22 @@ class Menu extends Model
 
                 if (empty($kode_role)) {
                     // Semua action, default-nya unchecked saat akan membuat role baru.
-                    $state_readOnly = '';
-                    $state_fullAccess = '';
-                    $state_noAccess = '';
+                    $state_readOnly     = '';
+                    $state_fullAccess   = '';
+                    $state_noAccess     = '';
                 } else {
-                    $state_readOnly = ($val->flag_access === 0) ? 'checked' : '';
-                    $state_fullAccess = ($val->flag_access === 1) ? 'checked' : '';
-                    $state_noAccess = ($val->flag_access === 9) ? 'checked' : '';
+                    $state_readOnly     = ($val->flag_access === 0) ? 'checked' : '';
+                    $state_fullAccess   = ($val->flag_access === 1) ? 'checked' : '';
+                    $state_noAccess     = ($val->flag_access === 9) ? 'checked' : '';
                 }
 
-                $id_readOnly = 'ro_' . $id_menu;
-                $id_fullAccess = 'fa_' . $id_menu;
-                $id_noAccess = 'na_' . $id_menu;
+                $id_readOnly    = 'ro_' . $id_menu;
+                $id_fullAccess  = 'fa_' . $id_menu;
+                $id_noAccess    = 'na_' . $id_menu;
 
-                $chk_readOnly = $this->custom_checkbox($id_readOnly, $id_menu, 0, $state_readOnly, 'Read Only');
+                $chk_readOnly   = $this->custom_checkbox($id_readOnly, $id_menu, 0, $state_readOnly, 'Read Only');
                 $chk_fullAccess = $this->custom_checkbox($id_fullAccess, $id_menu, 1, $state_fullAccess, 'Full Access');
-                $chk_noAccess = $this->custom_checkbox($id_noAccess, $id_menu, 9, $state_noAccess, 'No Access');
+                $chk_noAccess   = $this->custom_checkbox($id_noAccess, $id_menu, 9, $state_noAccess, 'No Access');
 
                 $action =  '<div class="g-3 align-center flex-wrap">' . $chk_readOnly . $chk_fullAccess . $chk_noAccess . '</div>';
 
@@ -118,7 +118,7 @@ class Menu extends Model
                         FROM menu
                         WHERE status = 1
                         GROUP BY parent
-                    ) AS jumlah_menu ON a.parent = jumlah_menu.parent
+                    ) AS jumlah_menu ON a.kode = jumlah_menu.parent
                 WHERE a.parent = '$parent' AND a.status = 1
                 ";
 

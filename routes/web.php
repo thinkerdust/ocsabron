@@ -7,6 +7,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\DesainController;
+use App\Http\Controllers\BahanController;
 
 Route::get('/', function () { return redirect('login'); });
 
@@ -78,6 +80,28 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::post('/store', 'store_job');
             Route::get('/approve/{id}', 'approve_job');
             Route::get('/pending/{id}', 'pending_job');
+            Route::get('/cetak/{id}', 'cetak_job');
+        });
+    });
+
+    // Desain
+    Route::group(['prefix' => 'desain', 'middleware' => ["can:Menu, 'DSN'"]], function () {
+        Route::controller(DesainController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_desain');
+            Route::post('/approve', 'approve_desain');
+            Route::post('/pending', 'pending_desain');
+            Route::get('/cetak/{id}', 'cetak_desain');
+        });
+    });
+
+    // Bahan
+    Route::group(['prefix' => 'bahan', 'middleware' => ["can:Menu, 'BAHAN'"]], function () {
+        Route::controller(BahanController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_bahan');
+            Route::get('/approve/{id}', 'approve_bahan');
+            Route::get('/pending/{id}', 'pending_bahan');
         });
     });
 });

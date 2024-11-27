@@ -24,13 +24,15 @@ class Order extends Model
         $query = DB::table('order as o')
                     ->join('order_detail as od', function($join) {
                         $join->on('o.uid', '=', 'od.uid_order')
-                            ->whereColumn('od.uid_divisi', '<>', 'o.uid_divisi');
+                            ->whereColumn('od.uid_divisi', '<>', 'o.uid_divisi')
+                            ->where('od.status', '<>', '2');
                     })
                     ->join('divisi as d', 'od.uid_divisi', '=', 'd.uid')
                     ->where('o.uid', $uid_order)
                     ->orderBy('d.urutan', 'asc')
                     ->select('d.uid as uid_divisi')
                     ->first();
+
         return $query;
     }
 }
