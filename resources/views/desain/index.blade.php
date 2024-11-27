@@ -74,6 +74,109 @@
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" id="modalDetail">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">Detail Job</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Nama Job</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="nama" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Order</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="tanggal" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Deadline</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="deadline" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Jenis Produk</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="jenis_produk" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tambahan</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="tambahan" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Ukuran</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="ukuran" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Jumlah</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="jumlah" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Jenis Kertas</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="jenis_kertas" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Finishing 1</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="finishing_satu" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Finishing 2</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="finishing_dua" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pengambilan</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="pengambilan" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Order By</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="order_by" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Keterangan</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="keterangan" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" tabindex="-1" id="modalApprove">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -63,6 +63,7 @@ class JobController extends BaseController
                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
+                                        <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
                                         <li><a href="/job/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         '.$btn_action.'
@@ -86,6 +87,14 @@ class JobController extends BaseController
         $divisi     = DB::table('divisi')->where([['status', 1], ['urutan', '<>', 0]])->orderBy('urutan', 'asc')->get();
 
         return view('job.form', compact('title', 'js', 'id', 'divisi'));
+    }
+
+    public function detail_job(Request $request) 
+    {
+        $id     = $request->id;
+        $user   = $this->order->getOrder($id);
+
+        return $this->ajaxResponse(true, 'Success!', $user);
     }
 
     public function edit_job(Request $request) 
