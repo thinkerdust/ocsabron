@@ -64,6 +64,7 @@ class DesainController extends BaseController
                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
+                                        <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
                                         '.$btn_action.'
                                         <li><a href="/desain/cetak/'.$row->uid.'" target="_blank" class="btn"><em class="icon ni ni-file-pdf"></em><span>Cetak</span></a></li>
                                     </ul>
@@ -75,6 +76,14 @@ class DesainController extends BaseController
                 })
                 ->rawColumns(['action'])
                 ->make(true);
+    }
+
+    public function detail_desain(Request $request) 
+    {
+        $id     = $request->id;
+        $user   = $this->order->getOrder($id);
+
+        return $this->ajaxResponse(true, 'Success!', $user);
     }
 
     public function approve_desain(Request $request)

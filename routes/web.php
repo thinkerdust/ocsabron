@@ -75,6 +75,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_job');
             Route::get('/form/{id?}', 'form_job');
+            Route::get('/detail/{id}', 'detail_job');
             Route::get('/edit/{id}', 'edit_job');
             Route::get('/delete/{id}', 'delete_job');
             Route::post('/store', 'store_job');
@@ -89,6 +90,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(DesainController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_desain');
+            Route::get('/detail/{id}', 'detail_desain');
             Route::post('/approve', 'approve_desain');
             Route::post('/pending', 'pending_desain');
             Route::get('/cetak/{id}', 'cetak_desain');

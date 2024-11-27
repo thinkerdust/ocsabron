@@ -69,6 +69,41 @@ $('.select2-js').select2({
     minimumResultsForSearch: Infinity
 });
 
+function detail(id) {
+
+    // open modal
+    $('#modalDetail').modal('show');
+
+    $.ajax({
+        url: '/desain/detail/'+id,
+        dataType: 'json',
+        success: function(response) {
+            let order = response.data.order;
+            console.log(order)
+            if(response.status) {
+                $('#nama').val(order.nama);
+                $('#tanggal').val(order.tanggal);
+                $('#deadline').val(order.deadline);
+                $('#jenis_produk').val(order.jenis_produk);
+                $('#tambahan').val(order.tambahan);
+                $('#ukuran').val(order.ukuran);
+                $('#jumlah').val(order.jumlah);
+                $('#jenis_kertas').val(order.jenis_kertas);
+                $('#finishing_satu').val(order.finishing_satu);
+                $('#finishing_dua').val(order.finishing_dua);
+                $('#pengambilan').val(order.pengambilan).change();
+                $('#order_by').val(order.order_by).change();
+                $('#keterangan').val(order.keterangan);
+            }
+        },
+        error: function(error) {
+            console.log(error)
+            NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+        }
+    })
+
+}
+
 function approve(id) {
 
     $('#modalApprove').modal('show');
