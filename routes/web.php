@@ -91,6 +91,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_desain');
             Route::get('/detail/{id}', 'detail_desain');
+            Route::get('/generate', 'generate_spk');
+            Route::post('/process-generate', 'process_generate_spk');
             Route::post('/approve', 'approve_desain');
             Route::post('/pending', 'pending_desain');
             Route::get('/cetak/{id}', 'cetak_desain');
