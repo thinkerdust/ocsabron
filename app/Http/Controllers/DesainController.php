@@ -196,12 +196,58 @@ class DesainController extends BaseController
         }
     }
 
-    public function cetak_desain(Request $request) 
-    {
-        $id     = $request->id;
-        $data   = $this->desain->cetakDesain($id);
+    public function generate_spk(Request $request) {
 
-        $pdf = PDF::loadView('job.cetak', compact('data'));
-        return $pdf->stream('job.pdf');
+        $title          = 'Generate SPK';
+        $js             = 'js/apps/desain/generate.js?_='.rand();
+        $js_library     = js_moment().js_bs_datetimepicker();
+        $css_library    = css_bs_datetimepicker();
+
+        return view('desain.generate', compact('title', 'js', 'js_library', 'css_library'));
+    }
+
+    public function process_generate_spk(Request $request) {
+
+        $data = [
+            'nama_job'            => $request->post('nama'),
+            'nama_customer'       => $request->post('customer'),
+            'tgl_order'           => $request->post('tanggal_order'),
+            'tgl_acc'             => $request->post('tanggal_acc'),
+            'jam'                 => $request->post('jam'),
+            'deadline'            => $request->post('deadline'),
+            'pengambilan'         => $request->post('pengambilan'),
+            'no_tanda_terima'     => $request->post('no_tanda_terima'),
+            'operator'            => $request->post('operator'),
+            'job_by'              => $request->post('job_by'),
+            'bahan'               => $request->post('bahan'),
+            'jenis_bahan'         => $request->post('jenis_bahan'),
+            'foto_bahan'          => $request->file('foto_bahan'),
+            'jumlah_bahan'        => $request->post('jumlah_bahan'),
+            'jumlah_kertas'       => $request->post('jumlah_kertas'),
+            'dipotong_jadi'       => $request->post('dipotong_jadi'),
+            'ukuran_jadi'         => $request->post('ukuran'),
+            'ukuran_file'         => $request->post('ukuran_file'),
+            'cetakan'             => $request->post('cetakan'),
+            'struk'               => $request->post('struk'),
+            'mesin'               => $request->post('mesin') ?? [],
+            'set'                 => $request->post('set'),
+            'model_cetak'         => $request->post('model_cetak'),
+            'order'               => $request->post('order'),
+            'insheet'             => $request->post('insheet'),
+            'jumlah_plat'         => $request->post('jumlah_plat'),
+            'keterangan'          => $request->post('keterangan'),
+            'jenis_laminasi'      => $request->post('jenis_laminasi'),
+            'tipe_laminasi'       => $request->post('tipe_laminasi'),
+            'keterangan_laminasi' => $request->post('keterangan_laminasi'),
+            'foil_warna'          => $request->post('foil_warna'),
+            'keterangan_foil'     => $request->post('keterangan_foil'),
+            'keterangan_mika'     => $request->post('keterangan_mika'),
+            'keterangan_lem'      => $request->post('keterangan_lem'),
+            'keterangan_lipat'    => $request->post('keterangan_lipat'),
+            'keterangan_lain'     => $request->post('keterangan_lain'),
+        ];    
+                
+        $pdf = PDF::loadView('desain.cetak', compact('data'));
+        return $pdf->stream('desain.pdf');
     }
 }

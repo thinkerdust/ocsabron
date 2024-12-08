@@ -557,14 +557,14 @@
                             <th class="text-left">NAMA PELANGGAN</th>
                         </tr>
                         <tr>
-                            <th class="text-left text-danger" style="font-size: 18px"><?= $data['nama_pelanggan'] ?? '' ?></th>
+                            <th class="text-left text-danger" style="font-size: 18px"><?= $data['nama_customer'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">NAMA JOB</th>
                         </tr>
                         <tr>
                             <th class="text-left text-danger" style="font-size: 18px">
-                            <?= strtoupper($data['nama']) ?? 'MOCHIKIN x K PATATS Bowl 650ml (OCSAPACK)' ?>
+                            <?= strtoupper($data['nama_job']) ?? 'MOCHIKIN x K PATATS Bowl 650ml (OCSAPACK)' ?>
                             </th>
                         </tr>
                     </table>
@@ -574,17 +574,17 @@
                         <tr>
                             <th class="text-left" style="width: 40%">Tanggal Order</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['tanggal'] ? date('d/m/Y', strtotime($data['tanggal'])) : '' ?></th>
+                            <th class="text-left text-danger"><?= $data['tgl_order'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Tanggal ACC</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['tanggal_acc'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['tgl_acc'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Jam</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['jam_order'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['jam'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Deadline</th>
@@ -599,17 +599,17 @@
                         <tr>
                             <th class="text-left">No Tanda Terima</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['nomor_resi'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['no_tanda_terima'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Operator</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['nama_operator'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['operator'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Job By</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['order_by'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['job_by'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
@@ -629,9 +629,8 @@
                             <th class="text-senter" colspan="3" rowspan="6">
                                 @php
                                     $base64Image = '';
-                                    if($data['gambar_bahan'] ?? '') {
-                                        // get image path
-                                        $img = ($data['gambar_bahan'] ?? '') ? 'assets/upload_gambar/' . $data['gambar'] : $img;
+                                    if($data['foto_bahan'] ?? '') {
+                                        $img = $data['foto_bahan'];
     
                                         $base64Image = 'data:image/' . pathinfo($img, PATHINFO_EXTENSION) . ';base64,' . base64_encode(
                                             file_get_contents($img, false, stream_context_create([
@@ -652,22 +651,22 @@
                         <tr>
                             <th class="text-left" style="width: 40%">Bahan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['dipotong_jadi'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['bahan'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Jenis Bahan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['dipotong_jadi'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['jenis_bahan'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Jumlah Bahan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['dipotong_jadi'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['jumlah_bahan'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Jumlah Kertas</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['dipotong_jadi'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['jumlah_kertas'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Dipotong jadi</th>
@@ -687,7 +686,7 @@
                         <tr>
                             <th class="text-left">Untuk cetakan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left text-danger"><?= $data['untuk_cetakan'] ?? '' ?></th>
+                            <th class="text-left text-danger"><?= $data['cetakan'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left">Struk</th>
@@ -716,20 +715,18 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($order_detail)) : ?>
-                    <?php foreach ($order_detail as $idx => $detail) : ?>
-                        <tr class="bg-grey">
-                            <td class="text-center"><?= $idx + 1 ?></td>
-                            <td class="text-center"> <?= $detail['mesin_cetak'] ?? '' ?></td>
-                            <td class="text-center"> <?= $detail['set_cetak'] ?? '' ?></td>
-                            <td class="text-center"> <?= $detail['model_cetak'] ?? '' ?></td>
-                            <td class="text-center"> <?= $detail['order_cetak'] ?? '' ?></td>
-                            <td class="text-center"> <?= $detail['insheet_cetak'] ?? '' ?></td>
-                            <td class="text-center"> <?= $detail['jumlah_plat_cetak'] ?? '' ?></td>
-                            <td class="text-center"> <?= $detail['keterangan_cetak'] ?? '' ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+                <?php for ($i = 0; $i < count($data['mesin']); $i++) : ?>
+                    <tr>
+                        <td class="text-center"><?= (int) $i + 1 ?></td>
+                        <td class="text-center"> <?= $data['mesin'][$i] ?></td>
+                        <td class="text-center"> <?= $data['set'][$i] ?></td>
+                        <td class="text-center"> <?= $data['model_cetak'][$i] ?></td>
+                        <td class="text-center"> <?= $data['order'][$i] ?></td>
+                        <td class="text-center"> <?= $data['insheet'][$i] ?></td>
+                        <td class="text-center"> <?= $data['jumlah_plat'][$i] ?></td>
+                        <td class="text-center"> <?= $data['keterangan'][$i] ?></td>
+                    </tr>
+                <?php endfor; ?>
             </tbody>
         </table>
         <table style="width:100%; margin-top: 2rem; margin-bottom: 1rem;">
@@ -750,17 +747,17 @@
                         <tr>
                             <th class="text-left" style="width: 20%;">Jenis Laminasi</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['jenis_liminasi'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['jenis_laminasi'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left" style="width: 20%;">Tipe Laminasi</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['tipe_liminasi'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['tipe_laminasi'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left" style="width: 20%;">Keterangan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['keterangan_liminasi'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['keterangan_laminasi'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
@@ -777,12 +774,12 @@
                         <tr>
                             <th class="text-left" style="width: 20%;">Foil Warna</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['tipe_uv_spot'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['foil_warna'] ?? '' ?></th>
                         </tr>
                         <tr>
                             <th class="text-left" style="width: 20%;">Keterangan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['keterangan_uv_spot'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['keterangan_foil'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
@@ -797,14 +794,9 @@
                 <th>
                     <table style="width:100%">
                         <tr>
-                            <th class="text-left" style="width: 20%;">Ketebalan</th>
-                            <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['keterangan_potong'] ?? '' ?></th>
-                        </tr>
-                        <tr>
                             <th class="text-left" style="width: 20%;">Keterangan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['keterangan_potong'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['keterangan_mika'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
@@ -821,7 +813,7 @@
                         <tr>
                             <th class="text-left" style="width: 10%;">Keterangan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['jenis_packing'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['keterangan_lem'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
@@ -838,7 +830,7 @@
                         <tr>
                             <th class="text-left" style="width: 10%;">Keterangan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['jenis_packing'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['keterangan_lipat'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
@@ -855,7 +847,7 @@
                         <tr>
                             <th class="text-left" style="width: 10%;">Keterangan</th>
                             <th style="width: 1%;">:</th>
-                            <th class="text-left"><?= $data['jenis_packing'] ?? '' ?></th>
+                            <th class="text-left"><?= $data['keterangan_lain'] ?? '' ?></th>
                         </tr>
                     </table>
                 </th>
