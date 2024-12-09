@@ -11,41 +11,41 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use App\Models\OrderDetail;
-use App\Repositories\BahanRepository;
+use App\Repositories\EkspedisiRepository;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
-class BahanController extends BaseController
+class EkspedisiController extends BaseController
 {
-    protected $bahanrepo;
+    protected $ekspedisirepo;
     protected $order;
     protected $order_detail;
 
-    function __construct(BahanRepository $bahanrepo, Order $order, OrderDetail $order_detail)
+    function __construct(EkspedisiRepository $ekspedisirepo, Order $order, OrderDetail $order_detail)
     {
-        $this->bahan        = $bahanrepo;
+        $this->ekspedisi    = $ekspedisirepo;
         $this->order        = $order;
         $this->order_detail = $order_detail;
     }
 
     public function index()
     {
-        $title  = 'Bahan';
-        $js     = 'js/apps/bahan/index.js?_='.rand();
-        return view('bahan.index', compact('js', 'title'));
+        $title  = 'Ekspedisi';
+        $js     = 'js/apps/ekspedisi/index.js?_='.rand();
+        return view('ekspedisi.index', compact('js', 'title'));
     }
 
-    public function datatable_bahan(Request $request)
+    public function datatable_ekspedisi(Request $request)
     {
         $start_date = $request->start_date;
         $end_date   = $request->end_date;
         $status     = $request->status;
 
-        $data = $this->bahan->dataTableBahan($start_date, $end_date, $status); 
+        $data = $this->ekspedisi->dataTableEkspedisi($start_date, $end_date, $status); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
                     $btn = '';
-                    if(Gate::allows('crudAccess', 'BAHAN', $row)) {
+                    if(Gate::allows('crudAccess', 'EPD', $row)) {
                         $btn_action     = '';
                         $btn_approve    = '<li><a class="btn" onclick="approve(\'' . $row->uid . '\')"><em class="icon ni ni-check-round-cut"></em><span>Approve</span></a></li>';
                         $btn_pending    = '<li><a class="btn" onclick="pending(\'' . $row->uid . '\')"><em class="icon ni ni-na"></em><span>Pending</span></a></li>';
@@ -73,7 +73,7 @@ class BahanController extends BaseController
                 ->make(true);
     }
 
-    public function detail_bahan(Request $request) 
+    public function detail_ekspedisi(Request $request) 
     {
         $id     = $request->id;
         $user   = $this->order->getOrder($id);
@@ -81,16 +81,17 @@ class BahanController extends BaseController
         return $this->ajaxResponse(true, 'Success!', $user);
     }
 
-    public function datatable_detail_bahan(Request $request)
+    public function datatable_detail_ekspedisi(Request $request)
     {
         $uid    = $request->uid;
         $data   = $this->order->dataTableDetailOrder($uid); 
         return Datatables::of($data)->addIndexColumn()->make(true);
     }
 
-    public function approve_bahan(Request $request)
+    public function approve_ekspedisi(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'nomor_resi'            => 'required',
             'keterangan_approve'    => 'required',
         ], validation_message());
 
@@ -101,9 +102,10 @@ class BahanController extends BaseController
         try {
             DB::beginTransaction();
 
-            $id         = $request->post('uid_approve');
-            $ket        = $request->post('keterangan_approve');
-            $user       = Auth::user();
+            $id             = $request->post('uid_approve');
+            $nomor_resi     = $request->post('nomor_resi');
+            $ket            = $request->post('keterangan_approve');
+            $user           = Auth::user();
 
             $order = Order::where('uid', $id)->first();
             $this->logs($id, $order->uid_divisi, 2);
@@ -118,6 +120,7 @@ class BahanController extends BaseController
             $step = $this->order->getNextStep($id);
             Order::where('uid', $id)->update([
                     'uid_divisi'    => $step->uid_divisi,
+                    'nomor_resi'    => $nomor_resi,
                     'update_at'     => Carbon::now(), 
                     'update_by'     => $user->username
                 ]);
@@ -132,7 +135,7 @@ class BahanController extends BaseController
         }
     }
 
-    public function pending_bahan(Request $request)
+    public function pending_ekspedisi(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'keterangan_pending'    => 'required',
@@ -167,5 +170,4 @@ class BahanController extends BaseController
             return $this->ajaxResponse(false, 'Pending data gagal', $e);
         }
     }
-
 }

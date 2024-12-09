@@ -6,7 +6,7 @@ var table = NioApp.DataTable('#dt-table', {
     scrollX: true,
     scrollY: '500px',
     ajax: {
-        url: '/desain/datatable',
+        url: '/packing/datatable',
         type: 'POST',
         data: function(d) {
             d._token        = token;
@@ -75,13 +75,24 @@ const thousandView = (number = 0) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+const keyUpThousandView = (evt) => {
+    let currentValue = (evt.currentTarget.value != '') ? evt.currentTarget.value.replaceAll('.','') : '0';
+    let iNumber = parseInt(currentValue);
+    let result = isNaN(iNumber) == false ? thousandView(iNumber) : '0';
+    evt.currentTarget.value = result;
+}
+
+$('.format-currency').on('keyup', (evt) => {
+    keyUpThousandView(evt)
+})
+
 function detail(id) {
 
     // open modal
     $('#modalDetail').modal('show');
 
     $.ajax({
-        url: '/desain/detail/'+id,
+        url: '/packing/detail/'+id,
         dataType: 'json',
         success: function(response) {
             let data = response.data;
@@ -120,7 +131,7 @@ var table = NioApp.DataTable('#dt-table-detail', {
     searchDelay: 500,
     scrollX: true,
     ajax: {
-        url: '/desain/detail/datatable',
+        url: '/packing/detail/datatable',
         type: 'POST',
         data: function(d) {
             d._token    = token;
@@ -172,9 +183,9 @@ var table = NioApp.DataTable('#dt-table-detail', {
 function approve(id) {
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
-    $('#tgl_acc_approve').val('');
-    $('#ketarangan_approve').val('');
-    $('#upload_spk').val('');
+    $('#hasil_jadi').val(0);
+    $('#jumlah_koli').val(0);
+    $('#keterangan_approve').val('');
 }
 
 $('#form-approve').submit(function(e) {
@@ -183,7 +194,7 @@ $('#form-approve').submit(function(e) {
     formData = new FormData($(this)[0]);
 
     $.ajax({
-        url: '/desain/approve',
+        url: '/packing/approve',
         data : formData,
         type : "POST",
         dataType : "JSON",
@@ -230,7 +241,7 @@ $('#form-pending').submit(function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: '/desain/pending',
+        url: '/packing/pending',
         dataType: 'JSON',
         type: 'POST',
         data: $(this).serialize(),

@@ -1,10 +1,19 @@
 $(document).ready(function() {
 
-    $('.format-number').keyup(function() {
-        $(this).val(function (index, value) {
-            return value.replace(/\D/g, "");
-        });
-    });
+    const thousandView = (number = 0) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+    
+    const keyUpThousandView = (evt) => {
+        let currentValue = (evt.currentTarget.value != '') ? evt.currentTarget.value.replaceAll('.','') : '0';
+        let iNumber = parseInt(currentValue);
+        let result = isNaN(iNumber) == false ? thousandView(iNumber) : '0';
+        evt.currentTarget.value = result;
+    }
+    
+    $('.format-currency').on('keyup', (evt) => {
+        keyUpThousandView(evt)
+    })
 
     $('.select2-js').select2({
         minimumResultsForSearch: Infinity
@@ -26,7 +35,7 @@ $(document).ready(function() {
                     $('#jenis_produk').val(order.jenis_produk);
                     $('#tambahan').val(order.tambahan);
                     $('#ukuran').val(order.ukuran);
-                    $('#jumlah').val(order.jumlah);
+                    $('#jumlah').val(thousandView(order.jumlah));
                     $('#jenis_kertas').val(order.jenis_kertas);
                     $('#finishing_satu').val(order.finishing_satu);
                     $('#finishing_dua').val(order.finishing_dua);

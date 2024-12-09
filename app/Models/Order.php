@@ -13,6 +13,20 @@ class Order extends Model
     protected $fillable = [
         'uid',
         'uid_divisi',
+        'nama',
+        'customer',
+        'tanggal',
+        'deadline',
+        'jenis_produk',
+        'tambahan',
+        'ukuran',
+        'jumlah',
+        'jenis_kertas',
+        'nomor_nota',
+        'nomor_resi',
+        'uid_divisi',
+        'file_spk',
+        'tanggal_approve',
         'insert_at',
         'insert_by',
         'update_at',
@@ -38,24 +52,25 @@ class Order extends Model
 
     public function getOrder($uid)
     {
-        $order = DB::table('order')
+        $query = DB::table('order')
                     ->where('uid', $uid)
                     ->select('uid', 'nama', 'customer', 'jenis_produk', 'ukuran', 'jumlah', 'tambahan', 'jenis_kertas', 'finishing_satu', 'finishing_dua', 'pengambilan', 'order_by', 'keterangan',
                         DB::raw("DATE_FORMAT(deadline, '%d/%m/%Y') as deadline, DATE_FORMAT(tanggal, '%d/%m/%Y') as tanggal")
                     )
                     ->first();
 
-        $detail = DB::table('order_detail as od')
-                    ->join('divisi as d', 'od.uid_divisi', '=', 'd.uid')
-                    ->where('od.uid_order', $uid)
-                    ->select('od.uid_divisi', 'd.nama as nama_divisi')
-                    ->get();
+        return $query;
+    }
 
-        $data = [
-            'order'     => $order,
-            'detail'    => $detail
-        ];
+    public function dataTableDetailOrder($uid)
+    {
+        $query = DB::table('order as o')
+                    ->join('order_detail as od', 'o.uid', '=', 'od.uid_order')
+                    ->join('divisi as d', 'd.uid', '=', 'od.uid_divisi')
+                    ->where('o.uid', $uid)
+                    ->select('d.nama as nama_divisi', 'od.keterangan', 'od.approve_at', 'od.approve_by', 'od.status')
+                    ->orderBy('d.urutan', 'asc');
 
-        return $data;
+        return $query;
     }
 }

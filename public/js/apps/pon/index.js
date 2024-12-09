@@ -6,7 +6,7 @@ var table = NioApp.DataTable('#dt-table', {
     scrollX: true,
     scrollY: '500px',
     ajax: {
-        url: '/desain/datatable',
+        url: '/pon/datatable',
         type: 'POST',
         data: function(d) {
             d._token        = token;
@@ -81,7 +81,7 @@ function detail(id) {
     $('#modalDetail').modal('show');
 
     $.ajax({
-        url: '/desain/detail/'+id,
+        url: '/pon/detail/'+id,
         dataType: 'json',
         success: function(response) {
             let data = response.data;
@@ -120,7 +120,7 @@ var table = NioApp.DataTable('#dt-table-detail', {
     searchDelay: 500,
     scrollX: true,
     ajax: {
-        url: '/desain/detail/datatable',
+        url: '/pon/detail/datatable',
         type: 'POST',
         data: function(d) {
             d._token    = token;
@@ -172,9 +172,9 @@ var table = NioApp.DataTable('#dt-table-detail', {
 function approve(id) {
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
-    $('#tgl_acc_approve').val('');
-    $('#ketarangan_approve').val('');
-    $('#upload_spk').val('');
+    $('#rusak_mesin').val('');
+    $('#rusak_cetakan').val('');
+    $('#keterangan_approve').val('');
 }
 
 $('#form-approve').submit(function(e) {
@@ -183,7 +183,7 @@ $('#form-approve').submit(function(e) {
     formData = new FormData($(this)[0]);
 
     $.ajax({
-        url: '/desain/approve',
+        url: '/pon/approve',
         data : formData,
         type : "POST",
         dataType : "JSON",
@@ -230,7 +230,7 @@ $('#form-pending').submit(function(e) {
     e.preventDefault();
 
     $.ajax({
-        url: '/desain/pending',
+        url: '/pon/pending',
         dataType: 'JSON',
         type: 'POST',
         data: $(this).serialize(),

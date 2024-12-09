@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 use Carbon\Carbon;
 
-class BahanRepository {
+class PackingRepository {
 
     protected $order;
 
@@ -14,7 +14,7 @@ class BahanRepository {
         $this->order = $order;
     }
 
-    public function dataTableBahan($start_date, $end_date, $status)
+    public function dataTablePacking($start_date, $end_date, $status)
     {
         $start_date = Carbon::createFromFormat('d/m/Y', $start_date);
         $start_date = $start_date->format('Y-m-d');
@@ -29,7 +29,7 @@ class BahanRepository {
                             ->on('d.uid', '=', 'od.uid_divisi');
                     })
                     ->where('o.status', 1)
-                    ->where('d.urutan', 2) // bahan
+                    ->where('d.urutan', 8) // packing 
                     ->whereBetween('o.tanggal', [$start_date, $end_date])
                     ->select('o.uid', 'o.nama', 'o.customer', 'o.jenis_produk', 'o.jenis_kertas', 'o.ukuran', 'o.jumlah', 'd.nama as progress', 'od.status',
                         DB::raw("DATE_FORMAT(o.deadline, '%d/%m/%Y') as deadline, DATE_FORMAT(o.tanggal, '%d/%m/%Y') as tanggal")

@@ -69,7 +69,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Jumlah</label>
                                                     <div class="form-control-wrap">
-                                                        <input type="text" class="form-control format-number text-end" id="jumlah" name="jumlah" required>
+                                                        <input type="text" class="form-control format-currency text-end" id="jumlah" name="jumlah" required>
                                                     </div>
                                                 </div>
                                             </div>

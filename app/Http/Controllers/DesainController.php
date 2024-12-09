@@ -34,7 +34,7 @@ class DesainController extends BaseController
 
     public function index()
     {
-        $title  = 'Desain Management';
+        $title  = 'Desain';
         $js     = 'js/apps/desain/index.js?_='.rand();
         return view('desain.index', compact('js', 'title'));
     }
@@ -86,14 +86,19 @@ class DesainController extends BaseController
         return $this->ajaxResponse(true, 'Success!', $user);
     }
 
+    public function datatable_detail_desain(Request $request)
+    {
+        $uid    = $request->uid;
+        $data   = $this->order->dataTableDetailOrder($uid); 
+        return Datatables::of($data)->addIndexColumn()->make(true);
+    }
+
     public function approve_desain(Request $request)
     {
-
-        // validation
         $validator = Validator::make($request->all(), [
             'tgl_acc_approve'       => 'required',
             'keterangan_approve'    => 'required',
-            'spk_approve'           => 'required|mimes:pdf|max:2048'
+            'upload_spk'            => 'required|mimes:pdf|max:2048'
         ], validation_message());
 
         if($validator->stopOnFirstFailure()->fails()){
@@ -111,18 +116,19 @@ class DesainController extends BaseController
 
             $order = Order::where('uid', $id)->first();
             $this->logs($id, $order->uid_divisi, 2);
-            OrderDetail::where([['uid_order', $id], ['uid_divisi', $order->uid_divisi]])->update(['status' => 2, 'tgl_acc' => $tgl_acc, 'keterangan' => $ket, 'approve_at' => Carbon::now(), 'approve_by' => $user->username]);
+            OrderDetail::where([['uid_order', $id], ['uid_divisi', $order->uid_divisi]])->update(['status' => 2, 'keterangan' => $ket, 'approve_at' => Carbon::now(), 'approve_by' => $user->username]);
 
             $step = $this->order->getNextStep($id);
 
             $dataOrder = [
-                'uid_divisi'    => $step->uid_divisi, 
-                'update_at'     => Carbon::now(), 
-                'update_by'     => $user->username
+                'uid_divisi'        => $step->uid_divisi,
+                'tanggal_approve'   => $tgl_acc,
+                'update_at'         => Carbon::now(), 
+                'update_by'         => $user->username
             ];
 
             // remove old file
-            if(!empty($uid) && $request->file('spk_approve')) {
+            if(!empty($uid) && $request->file('upload_spk')) {
                 $data_order = Order::where('id', $uid)->first();
                 $oldFile    = $data_order->file_spk;
 
@@ -136,14 +142,14 @@ class DesainController extends BaseController
             }
 
             // upload gambar
-            if($request->file('spk_approve')) {
+            if($request->file('upload_spk')) {
 
-                $file       = $request->file('spk_approve');
+                $file       = $request->file('upload_spk');
                 $fileName   = $file->getClientOriginalName();
                 $fileName   = str_replace(' ', '', $fileName);
 
                 // Define a file path
-                $filePath = 'uploads/' . uniqid() . '_' . $fileName;
+                $filePath = 'uploads/' . time() . '_SPK.pdf';
 
                 // Store the file in the local storage
                 $upload = Storage::disk('public')->put($filePath, file_get_contents($file));
@@ -167,7 +173,6 @@ class DesainController extends BaseController
     public function pending_desain(Request $request)
     {
 
-        // validation
         $validator = Validator::make($request->all(), [
             'keterangan_pending'    => 'required',
         ], validation_message());
@@ -185,7 +190,13 @@ class DesainController extends BaseController
 
             $order = Order::where('uid', $id)->first();
             $this->logs($id, $order->uid_divisi, 3);
-            OrderDetail::where([['uid_order', $id], ['uid_divisi', $order->uid_divisi]])->update(['status' => 3, 'keterangan' => $ket, 'approve_at' => Carbon::now(), 'approve_by' => $user->username]);
+            OrderDetail::where([['uid_order', $id], ['uid_divisi', $order->uid_divisi]])
+                ->update([
+                    'status'    => 3, 
+                    'keterangan' => $ket, 
+                    'approve_at' => Carbon::now(), 
+                    'approve_by' => $user->username
+                ]);
 
             DB::commit();
             return $this->ajaxResponse(true, 'Pending data berhasil');
