@@ -213,7 +213,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-1">
-                                                            <label class="form-label">Jumlah Plat</label>
+                                                            <label class="form-label">Plat</label>
                                                             <div class="form-control-wrap">
                                                                 <input type="text" class="form-control" id="jumlah_plat" autocomplete="false">
                                                             </div>
