@@ -15,11 +15,6 @@
                     <div class="nk-block nk-block-lg">
                         <div class="card card-bordered card-preview">
                             <div class="card-inner">
-
-                                @can("crudAccess", "DSN")
-                                    <a href="/desain/generate" class="btn btn-theme-sml btn-sm"><em class="icon ni ni-upload"></em><span>Generate SPK</span></a>
-                                    <hr class="preview-hr">
-                                @endcan
                                 
                                 <div class="row">
                                     <div class="col-md-4">
@@ -67,7 +62,7 @@
                                             <th>Jumlah</th>
                                             <th>Progress</th>
                                             <th>Status</th>
-                                            <th>Action</th>   
+                                            <th>Action</th> 
                                         </tr>
                                     </thead>
 
@@ -215,28 +210,16 @@
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title">Approve Job</h5>
+                <h5 class="modal-title">Approve Cetak</h5>
             </div>
             <div class="modal-body">
                 <form class="form-validate is-alter" id="form-approve">
                     @csrf
                     <input type="hidden" name="uid_approve" id="uid_approve">
                     <div class="form-group">
-                        <label class="form-label">Tanggal Diterima (ACC)</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control date-picker" name="tgl_acc_approve" id="tgl_acc_approve" data-date-format="dd/mm/yyyy" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="form-label">Keterangan</label>
                         <div class="form-control-wrap">
                             <textarea class="form-control" name="keterangan_approve" id="keterangan_approve" cols="30" rows="10"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Upload SPK</label>
-                        <div class="form-control-wrap">
-                            <input type="file" class="form-control" name="upload_spk" id="upload_spk" accept=".pdf">
                         </div>
                     </div>
                     
@@ -255,7 +238,7 @@
                 <em class="icon ni ni-cross"></em>
             </a>
             <div class="modal-header">
-                <h5 class="modal-title">Pending Job</h5>
+                <h5 class="modal-title">Pending Cetak</h5>
             </div>
             <div class="modal-body">
                 <form class="form-validate is-alter" id="form-pending">
@@ -275,6 +258,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection

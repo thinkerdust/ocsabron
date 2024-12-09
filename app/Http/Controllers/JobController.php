@@ -14,9 +14,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Repositories\JobRepository;
 use Carbon\Carbon;
-use Svg\Tag\Rect;
 use Yajra\DataTables\DataTables;
-use PDF;
 
 class JobController extends BaseController
 {
@@ -96,6 +94,13 @@ class JobController extends BaseController
         return $this->ajaxResponse(true, 'Success!', $user);
     }
 
+    public function datatable_detail_job(Request $request)
+    {
+        $uid    = $request->uid;
+        $data   = $this->order->dataTableDetailOrder($uid); 
+        return Datatables::of($data)->addIndexColumn()->make(true);
+    }
+
     public function edit_job(Request $request) 
     {
         $id     = $request->id;
@@ -151,6 +156,7 @@ class JobController extends BaseController
 
         try {
             DB::beginTransaction();
+            $jumlah = Str::replace('.', '', $request->jumlah);
 
             $data = [
                 'nama'          => $request->nama,
@@ -160,7 +166,7 @@ class JobController extends BaseController
                 'jenis_produk'  => $request->jenis_produk,
                 'jenis_kertas'  => $request->jenis_kertas,
                 'tambahan'      => $request->tambahan,
-                'jumlah'        => $request->jumlah,
+                'jumlah'        => $jumlah,
                 'ukuran'        => $request->ukuran,
                 'finishing_satu'=> $request->finishing_satu,
                 'finishing_dua' => $request->finishing_dua,
@@ -190,9 +196,8 @@ class JobController extends BaseController
             // reset order detail
             DB::table('order_detail')->where('uid_order', $id)->delete();
 
-            // insert order detail
             $data_detail = [];
-
+            
             // harus ada di setiap job
             $divisi_manual = [
                 'D20241117144239748170', // New job 
@@ -200,21 +205,13 @@ class JobController extends BaseController
                 'D20241117150714774798'  // Ekspedisi
             ];
 
-            foreach ($divisi_manual as $dm) {
+            $all_divisi = array_merge($divisi_manual, $request->divisi);
+
+            foreach ($all_divisi as $divisi) {
                 $data_detail[] = [
                     'uid'           => 'OD' . Carbon::now()->format('YmdHisu'),
                     'uid_order'     => $id,
-                    'uid_divisi'    => $dm,
-                    'insert_at'     => Carbon::now(),
-                    'insert_by'     => $user->username,
-                ];
-            }
-
-            foreach ($request->divisi as $d) {
-                $data_detail[] = [
-                    'uid'           => 'OD'.Carbon::now()->format('YmdHisu'),
-                    'uid_order'     => $id,
-                    'uid_divisi'    => $d,
+                    'uid_divisi'    => $divisi,
                     'insert_at'     => Carbon::now(),
                     'insert_by'     => $user->username,
                 ];

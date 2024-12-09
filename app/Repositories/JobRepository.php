@@ -31,7 +31,7 @@ class JobRepository {
                     ->where('o.status', 1)
                     ->where('d.urutan', 0) // new job
                     ->whereBetween('o.tanggal', [$start_date, $end_date])
-                    ->select('o.uid', 'o.nama', 'o.jenis_produk', 'o.ukuran', 'o.jumlah', 'd.nama as progress', 'od.status',
+                    ->select('o.uid', 'o.nama', 'o.customer', 'o.jenis_produk', 'o.jenis_kertas', 'o.ukuran', 'o.jumlah', 'd.nama as progress', 'od.status',
                         DB::raw("DATE_FORMAT(o.deadline, '%d/%m/%Y') as deadline, DATE_FORMAT(o.tanggal, '%d/%m/%Y') as tanggal")
                     );
 
@@ -63,14 +63,5 @@ class JobRepository {
         ];
 
         return $data;
-    }
-
-    public function cetakJob($uid) 
-    {
-        $query = collect(DB::table('order as o')
-                    ->where('o.uid', $uid)
-                    ->first())->toArray();
-
-        return $query;
     }
 }

@@ -2,13 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AdministrasiController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MasterController;
-use App\Http\Controllers\UserManagementController;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\DesainController;
 use App\Http\Controllers\BahanController;
+use App\Http\Controllers\CetakController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DesainController;
+use App\Http\Controllers\EkspedisiController;
+use App\Http\Controllers\FinishingDuaController;
+use App\Http\Controllers\FinishingSatuController;
+use App\Http\Controllers\FormingController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\MasterController;
+use App\Http\Controllers\MonitorController;
+use App\Http\Controllers\PackingController;
+use App\Http\Controllers\PONController;
+use App\Http\Controllers\TambahanController;
+use App\Http\Controllers\UserManagementController;
 
 Route::get('/', function () { return redirect('login'); });
 
@@ -75,13 +85,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_job');
             Route::get('/form/{id?}', 'form_job');
-            Route::get('/detail/{id}', 'detail_job');
             Route::get('/edit/{id}', 'edit_job');
             Route::get('/delete/{id}', 'delete_job');
             Route::post('/store', 'store_job');
             Route::get('/approve/{id}', 'approve_job');
             Route::get('/pending/{id}', 'pending_job');
-            Route::get('/cetak/{id}', 'cetak_job');
+            Route::get('/detail/{id}', 'detail_job');
+            Route::post('/detail/datatable', 'datatable_detail_job');
         });
     });
 
@@ -90,12 +100,13 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(DesainController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_desain');
-            Route::get('/detail/{id}', 'detail_desain');
-            Route::get('/generate', 'generate_spk');
-            Route::post('/process-generate', 'process_generate_spk');
             Route::post('/approve', 'approve_desain');
             Route::post('/pending', 'pending_desain');
             Route::get('/cetak/{id}', 'cetak_desain');
+            Route::get('/detail/{id}', 'detail_desain');
+            Route::post('/detail/datatable', 'datatable_detail_desain');
+            Route::get('/generate', 'generate_spk');
+            Route::post('/process-generate', 'process_generate_spk');
         });
     });
 
@@ -104,8 +115,117 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(BahanController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_bahan');
-            Route::get('/approve/{id}', 'approve_bahan');
-            Route::get('/pending/{id}', 'pending_bahan');
+            Route::post('/approve', 'approve_bahan');
+            Route::post('/pending', 'pending_bahan');
+            Route::get('/detail/{id}', 'detail_bahan');
+            Route::post('/detail/datatable', 'datatable_detail_bahan');
+        });
+    });
+
+    // Cetak
+    Route::group(['prefix' => 'cetak', 'middleware' => ["can:Menu, 'CETAK'"]], function () {
+        Route::controller(CetakController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_cetak');
+            Route::post('/approve', 'approve_cetak');
+            Route::post('/pending', 'pending_cetak');
+            Route::get('/detail/{id}', 'detail_cetak');
+            Route::post('/detail/datatable', 'datatable_detail_cetak');
+        });
+    });
+
+    Route::group(['prefix' => 'finishing-satu', 'middleware' => ["can:Menu, 'FS1'"]], function () {
+        Route::controller(FinishingSatuController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_finishing_satu');
+            Route::post('/approve', 'approve_finishing_satu');
+            Route::post('/pending', 'pending_finishing_satu');
+            Route::get('/detail/{id}', 'detail_finishing_satu');
+            Route::post('/detail/datatable', 'datatable_detail_finishing_satu');
+        });
+    });
+
+    Route::group(['prefix' => 'pon', 'middleware' => ["can:Menu, 'PON'"]], function () {
+        Route::controller(PONController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_pon');
+            Route::post('/approve', 'approve_pon');
+            Route::post('/pending', 'pending_pon');
+            Route::get('/detail/{id}', 'detail_pon');
+            Route::post('/detail/datatable', 'datatable_detail_pon');
+        });
+    });
+
+    Route::group(['prefix' => 'finishing-dua', 'middleware' => ["can:Menu, 'FS2'"]], function () {
+        Route::controller(FinishingDuaController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_finishing_dua');
+            Route::post('/approve', 'approve_finishing_dua');
+            Route::post('/pending', 'pending_finishing_dua');
+            Route::get('/detail/{id}', 'detail_finishing_dua');
+            Route::post('/detail/datatable', 'datatable_detail_finishing_dua');
+        });
+    });
+
+    Route::group(['prefix' => 'forming', 'middleware' => ["can:Menu, 'FORM'"]], function () {
+        Route::controller(FormingController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_forming');
+            Route::post('/approve', 'approve_forming');
+            Route::post('/pending', 'pending_forming');
+            Route::get('/detail/{id}', 'detail_forming');
+            Route::post('/detail/datatable', 'datatable_detail_forming');
+        });
+    });
+
+    Route::group(['prefix' => 'packing', 'middleware' => ["can:Menu, 'PACK'"]], function () {
+        Route::controller(PackingController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_packing');
+            Route::post('/approve', 'approve_packing');
+            Route::post('/pending', 'pending_packing');
+            Route::get('/detail/{id}', 'detail_packing');
+            Route::post('/detail/datatable', 'datatable_detail_packing');
+        });
+    });
+
+    Route::group(['prefix' => 'administrasi', 'middleware' => ["can:Menu, 'ADM'"]], function () {
+        Route::controller(AdministrasiController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_administrasi');
+            Route::post('/approve', 'approve_administrasi');
+            Route::post('/pending', 'pending_administrasi');
+            Route::get('/detail/{id}', 'detail_administrasi');
+            Route::post('/detail/datatable', 'datatable_detail_administrasi');
+        });
+    });
+
+    Route::group(['prefix' => 'tambahan', 'middleware' => ["can:Menu, 'PACK1'"]], function () {
+        Route::controller(TambahanController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_tambahan');
+            Route::post('/approve', 'approve_tambahan');
+            Route::post('/pending', 'pending_tambahan');
+            Route::get('/detail/{id}', 'detail_tambahan');
+            Route::post('/detail/datatable', 'datatable_detail_tambahan');
+        });
+    });
+
+    Route::group(['prefix' => 'ekspedisi', 'middleware' => ["can:Menu, 'EPD'"]], function () {
+        Route::controller(EkspedisiController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_ekspedisi');
+            Route::post('/approve', 'approve_ekspedisi');
+            Route::post('/pending', 'pending_ekspedisi');
+            Route::get('/detail/{id}', 'detail_ekspedisi');
+            Route::post('/detail/datatable', 'datatable_detail_ekspedisi');
+        });
+    });
+
+    Route::group(['prefix' => 'monitor', 'middleware' => ["can:Menu, 'MR'"]], function () {
+        Route::controller(MonitorController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_monitor');
         });
     });
 });

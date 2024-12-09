@@ -34,8 +34,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('Menu', function ($user, $kd_parent) {
             $db = DB::table('akses_role as ar')
                     ->join('users as u', 'ar.id_role', '=', 'u.id_role')
-                    ->where([['ar.flag_access', '<>', 9], ['u.id_role', $user->id_role]])
-                    ->whereRaw("REGEXP_REPLACE(ar.kode_menu, '[0-9]', '') = ?", [$kd_parent])
+                    ->join('menu as m', 'ar.kode_menu', '=', 'm.kode')
+                    ->where([['ar.flag_access', '<>', 9], ['u.id_role', $user->id_role], ['m.parent', 0], ['ar.kode_menu', $kd_parent]])
                     ->select('ar.kode_menu')
                     ->first();
             return $db;
