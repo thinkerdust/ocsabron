@@ -217,6 +217,12 @@
                     @csrf
                     <input type="hidden" name="uid_approve" id="uid_approve">
                     <div class="form-group">
+                        <label class="form-label">Nomor Nota</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control" name="nomor_nota" id="nomor_nota">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label">Keterangan</label>
                         <div class="form-control-wrap">
                             <textarea class="form-control" name="keterangan_approve" id="keterangan_approve" cols="30" rows="10"></textarea>
