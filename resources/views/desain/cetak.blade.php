@@ -1,5 +1,5 @@
 <head>
-    <title> Cetak Order</title>
+    <title>SPK</title>
     <style>
 
         /* Bootstrap */
@@ -480,7 +480,7 @@
 
         @font-face {
             font-family: 'Poppins';
-            src: url('{{ asset('assets/fonts/Poppins-Regular.ttf') }}') format('truetype');
+            src: url("{{ asset('assets/fonts/Poppins-Regular.ttf') }}") format('truetype');
         }
 
         * {
