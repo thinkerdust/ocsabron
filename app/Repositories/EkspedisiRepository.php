@@ -30,6 +30,7 @@ class EkspedisiRepository {
                     })
                     ->where('o.status', 1)
                     ->where('d.urutan', 11) // ekspedisi 
+                    ->whereNull('o.nomor_resi')
                     ->whereBetween('o.tanggal', [$start_date, $end_date])
                     ->select('o.uid', 'o.nama', 'o.customer', 'o.jenis_produk', 'o.jenis_kertas', 'o.ukuran', 'o.jumlah', 'd.nama as progress', 'od.status',
                         DB::raw("DATE_FORMAT(o.deadline, '%d/%m/%Y') as deadline, DATE_FORMAT(o.tanggal, '%d/%m/%Y') as tanggal")
