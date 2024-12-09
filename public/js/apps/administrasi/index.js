@@ -172,6 +172,8 @@ var table = NioApp.DataTable('#dt-table-detail', {
 function approve(id) {
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
+    $('#keterangan_approve').val('');
+    $('#nomor_nota').val('');
 }
 
 $('#form-approve').submit(function(e) {
@@ -220,6 +222,7 @@ $('#form-approve').submit(function(e) {
 function pending(id) {
     $('#modalPending').modal('show');
     $('#uid_pending').val(id);
+    $('#keterangan_pending').val('');
 }
 
 $('#form-pending').submit(function(e) {
