@@ -117,14 +117,11 @@ class EkspedisiController extends BaseController
                     'approve_by' => $user->username
                 ]);
 
-            $step = $this->order->getNextStep($id);
             Order::where('uid', $id)->update([
-                    'uid_divisi'    => $step->uid_divisi,
                     'nomor_resi'    => $nomor_resi,
                     'update_at'     => Carbon::now(), 
                     'update_by'     => $user->username
                 ]);
-            $this->logs($id, $step->uid_divisi, 1);
 
             DB::commit();
             return $this->ajaxResponse(true, 'Approve data berhasil');
