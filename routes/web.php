@@ -105,6 +105,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/cetak/{id}', 'cetak_desain');
             Route::get('/detail/{id}', 'detail_desain');
             Route::post('/detail/datatable', 'datatable_detail_desain');
+            Route::get('/generate', 'generate_spk');
+            Route::post('/process-generate', 'process_generate_spk');
         });
     });
 

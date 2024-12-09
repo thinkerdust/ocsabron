@@ -29,6 +29,8 @@
         }
     </style>
 
+    @yield('css')
+
 </head>
 
 <body class="nk-body bg-lighter npc-default has-sidebar ">
