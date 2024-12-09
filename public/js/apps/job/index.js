@@ -171,11 +171,10 @@ var table = NioApp.DataTable('#dt-table-detail', {
 
 function hapus(id) {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Apakah anda yakin akan hapus data?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Ya, saya yakin!'
     }).then((result) => {
         if (result.value) {
             $.ajax({

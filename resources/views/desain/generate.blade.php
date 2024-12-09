@@ -127,7 +127,7 @@
                                                     <div class="form-group">
                                                         <label class="form-label">Foto Bahan</label>
                                                         <div class="form-control-wrap">
-                                                            <input type="file" class="form-control" id="foto_bahan" name="foto_bahan" required>
+                                                            <input type="file" class="form-control" id="foto_bahan" name="foto_bahan" accept=".png, .jpg, .jpeg" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">

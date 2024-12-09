@@ -102,7 +102,6 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::post('/datatable', 'datatable_desain');
             Route::post('/approve', 'approve_desain');
             Route::post('/pending', 'pending_desain');
-            Route::get('/cetak/{id}', 'cetak_desain');
             Route::get('/detail/{id}', 'detail_desain');
             Route::post('/detail/datatable', 'datatable_detail_desain');
             Route::get('/generate', 'generate_spk');
