@@ -12,6 +12,7 @@ use App\Http\Controllers\EkspedisiController;
 use App\Http\Controllers\FinishingDuaController;
 use App\Http\Controllers\FinishingSatuController;
 use App\Http\Controllers\FormingController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MonitorController;
@@ -222,6 +223,15 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(MonitorController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_monitor');
+        });
+    });
+
+    Route::group(['prefix' => 'history', 'middleware' => ["can:Menu, 'HSTRY'"]], function () {
+        Route::controller(HistoryController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::post('/datatable', 'datatable_history');
+            Route::get('/detail/{id}', 'detail_history');
+            Route::post('/detail/datatable', 'datatable_detail_history');
         });
     });
 });
