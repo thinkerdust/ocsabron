@@ -133,6 +133,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Finishing Satu
     Route::group(['prefix' => 'finishing-satu', 'middleware' => ["can:Menu, 'FS1'"]], function () {
         Route::controller(FinishingSatuController::class)->group(function () {
             Route::get('/', 'index');
@@ -144,6 +145,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // PON
     Route::group(['prefix' => 'pon', 'middleware' => ["can:Menu, 'PON'"]], function () {
         Route::controller(PONController::class)->group(function () {
             Route::get('/', 'index');
@@ -155,6 +157,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Finishing Dua
     Route::group(['prefix' => 'finishing-dua', 'middleware' => ["can:Menu, 'FS2'"]], function () {
         Route::controller(FinishingDuaController::class)->group(function () {
             Route::get('/', 'index');
@@ -166,6 +169,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Forming
     Route::group(['prefix' => 'forming', 'middleware' => ["can:Menu, 'FORM'"]], function () {
         Route::controller(FormingController::class)->group(function () {
             Route::get('/', 'index');
@@ -177,6 +181,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Packing
     Route::group(['prefix' => 'packing', 'middleware' => ["can:Menu, 'PACK'"]], function () {
         Route::controller(PackingController::class)->group(function () {
             Route::get('/', 'index');
@@ -188,6 +193,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Administrasi
     Route::group(['prefix' => 'administrasi', 'middleware' => ["can:Menu, 'ADM'"]], function () {
         Route::controller(AdministrasiController::class)->group(function () {
             Route::get('/', 'index');
@@ -199,6 +205,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Tambahan
     Route::group(['prefix' => 'tambahan', 'middleware' => ["can:Menu, 'PACK1'"]], function () {
         Route::controller(TambahanController::class)->group(function () {
             Route::get('/', 'index');
@@ -210,6 +217,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
+    // Ekspedisi
     Route::group(['prefix' => 'ekspedisi', 'middleware' => ["can:Menu, 'EPD'"]], function () {
         Route::controller(EkspedisiController::class)->group(function () {
             Route::get('/', 'index');
@@ -221,8 +229,9 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         });
     });
 
-    Route::group(['prefix' => 'monitor', 'middleware' => ["can:Menu, 'MR'"]], function () {
-        Route::controller(MonitorController::class)->group(function () {
+    // Monitoring
+    Route::group(['prefix' => 'monitoring', 'middleware' => ["can:Menu, 'MR'"]], function () {
+        Route::controller(MonitoringController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_monitor');
         });
