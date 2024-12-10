@@ -61,6 +61,7 @@ class EkspedisiController extends BaseController
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
+                                        <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
@@ -119,6 +120,7 @@ class EkspedisiController extends BaseController
 
             Order::where('uid', $id)->update([
                     'nomor_resi'    => $nomor_resi,
+                    'status'        => 2, // done
                     'update_at'     => Carbon::now(), 
                     'update_by'     => $user->username
                 ]);

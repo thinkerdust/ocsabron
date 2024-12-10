@@ -144,16 +144,15 @@ class DesainController extends BaseController
             if($request->file('upload_spk')) {
 
                 $file       = $request->file('upload_spk');
-                $fileName   = $file->getClientOriginalName();
-                $fileName   = str_replace(' ', '', $fileName);
+                $fileName   = time() . '_SPK.pdf';
 
                 // Define a file path
-                $filePath = 'uploads/' . time() . '_SPK.pdf';
+                $filePath = 'uploads/' . $fileName;
 
                 // Store the file in the local storage
                 $upload = Storage::disk('public')->put($filePath, file_get_contents($file));
                 if ($upload) {
-                    $dataOrder['file_spk'] = $filePath;
+                    $dataOrder['file_spk'] = $fileName;
                 } 
             }
 
