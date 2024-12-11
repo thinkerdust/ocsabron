@@ -28,38 +28,196 @@ var table = NioApp.DataTable('#dt-table', {
         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
         {data: 'tanggal', name: 'o.tanggal'},
         {data: 'customer', name: 'o.customer'},
-        {data: 'nama', name: 'o.nama'},
+        {data: 'tanggal_approve', name: 'o.tanggal_approve'},
         {data: 'deadline', name: 'o.deadline'},
         {data: 'jenis_produk', name: 'o.jenis_produk'},
-        {data: 'jenis_kertas', name: 'o.jenis_kertas'},
-        {data: 'ukuran', name: 'o.ukuran'},
+        {data: 'ukuran', name: 'o.ukuran', orderable: false, searchable: false},
         {data: 'jumlah', name: 'o.jumlah', className: 'text-end', render: $.fn.dataTable.render.number( ',', '.', 0)},
-        {data: 'progress', name: 'd.nama', className: 'fw-bold', orderable: false, searchable: false},
-        {data: 'status'},
+
+        {
+            data: 'desain',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'bahan',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'cetak',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'finishing_satu',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'pon',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'finishing_dua',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'forming',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'packing',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'administrasi',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'tambahan',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+        {
+            data: 'ekspedisi',
+            orderable: false, 
+            searchable: false,
+            render: function(data) {
+                if (data === 1) {
+                    return '<span class="badge bg-info">On-Progress</span>';
+                } else if (data === 2) {
+                    return '<span class="badge bg-success">Done</span>';
+                } else if (data === 3) {
+                    return '<span class="badge bg-danger">Pending</span>';
+                } else {
+                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                }
+            }
+        },
+
         {data: 'action', orderable: false, searchable: false},
     ],
     columnDefs: [
         {
             className: "nk-tb-col",
             targets: "_all"
-        },
-        {
-            targets: -2,
-            orderable: false,
-            searchable: false,
-            render: function(data, type, full, meta) {
-
-                var status = {
-                    1: {'title': 'ON PROGRESS', 'class': ' bg-info'},
-                    2: {'title': 'DONE', 'class': ' bg-success'},
-                    3: {'title': 'PENDING', 'class': ' bg-warning'},
-                };
-                if (typeof status[full['status']] === 'undefined') {
-                    return data;
-                }
-                return '<span class="badge badge-dot '+ status[full['status']].class +'">'+ status[full['status']].title +'</span>';
-            }
-        },
+        }
     ]
 });
 
@@ -161,7 +319,7 @@ var table = NioApp.DataTable('#dt-table-detail', {
                     3: {'title': 'PENDING', 'class': ' bg-warning'},
                 };
                 if (typeof status[full['status']] === 'undefined') {
-                    return data;
+                    
                 }
                 return '<span class="badge badge-dot '+ status[full['status']].class +'">'+ status[full['status']].title +'</span>';
             }

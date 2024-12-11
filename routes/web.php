@@ -15,7 +15,7 @@ use App\Http\Controllers\FormingController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\MasterController;
-use App\Http\Controllers\MonitorController;
+use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\PackingController;
 use App\Http\Controllers\PONController;
 use App\Http\Controllers\TambahanController;
@@ -231,10 +231,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::group(['prefix' => 'monitoring', 'middleware' => ["can:Menu, 'MR'"]], function () {
         Route::controller(MonitoringController::class)->group(function () {
             Route::get('/', 'index');
-            Route::post('/datatable', 'datatable_monitor');
+            Route::post('/datatable', 'datatable_monitoring');
         });
     });
 
+    // History
     Route::group(['prefix' => 'history', 'middleware' => ["can:Menu, 'HSTRY'"]], function () {
         Route::controller(HistoryController::class)->group(function () {
             Route::get('/', 'index');

@@ -60,7 +60,6 @@
                                             <th>Tambahan</th>
                                             <th>Ekspedisi</th>
 
-                                            <th>Status</th>
                                             <th>Action</th> 
                                         </tr>
                                     </thead>
