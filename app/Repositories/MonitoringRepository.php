@@ -80,8 +80,7 @@ class MonitoringRepository {
                                 WHEN d.nama = 'EKSPEDISI' AND od.status = 3 THEN 3
                             ELSE 0 END) as ekspedisi"),
             )
-            ->groupBy('o.uid')
-            ->get();
+            ->groupBy('o.uid');
         
         return $query;
     }

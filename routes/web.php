@@ -244,13 +244,4 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::post('/detail/datatable', 'datatable_detail_history');
         });
     });
-
-    Route::group(['prefix' => 'history', 'middleware' => ["can:Menu, 'HSTRY'"]], function () {
-        Route::controller(HistoryController::class)->group(function () {
-            Route::get('/', 'index');
-            Route::post('/datatable', 'datatable_history');
-            Route::get('/detail/{id}', 'detail_history');
-            Route::post('/detail/datatable', 'datatable_detail_history');
-        });
-    });
 });
