@@ -17,6 +17,11 @@
                             <div class="card-inner">
                                 <h4 class="card-title title">Active Job</h4>
 
+                                @can("crudAccess", "DSN")
+                                    <a href="/desain/generate" class="btn btn-theme-sml btn-sm"><em class="icon ni ni-upload"></em><span>Generate SPK</span></a>
+                                    <hr class="preview-hr">
+                                @endcan
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
