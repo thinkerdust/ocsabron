@@ -178,12 +178,36 @@ var table = NioApp.DataTable('#dt-table-detail', {
     ]
 });
 
+function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
+    $('#uid_generate').val(uid);
+    $('#generate_hasil_jadi').val(hasil_jadi);
+    $('#generate_jumlah_koli').val(jumlah_koli);
+    $('#generate_isi').val(isi);
+    $('#modalGenerate').modal('show');
+}
+
 function approve(id) {
-    $('#modalApprove').modal('show');
+
     $('#uid_approve').val(id);
-    $('#hasil_jadi').val(0);
-    $('#jumlah_koli').val(0);
-    $('#keterangan_approve').val('');
+
+    // get data by ajax
+    $.ajax({
+        url: '/tambahan/detail/'+id,
+        dataType: 'json',
+        success: function(response) {
+            let data = response.data;
+            if(response.status) {
+                $('#hasil_jadi_approve').val(data.hasil_jadi_tambahan);
+                $('#jumlah_koli_approve').val(data.jumlah_koli_tambahan);
+                $('#keterangan_approve').val('');
+                $('#modalApprove').modal('show');
+            }
+        },
+        error: function(error) {
+            console.log(error)
+            NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+        }
+    })
 }
 
 $('#form-approve').submit(function(e) {

@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Repositories\TambahanRepository;
 use Carbon\Carbon;
+use PDF;
 use Yajra\DataTables\DataTables;
 
 class TambahanController extends BaseController
@@ -63,6 +64,7 @@ class TambahanController extends BaseController
                                     <ul class="link-list-opt no-bdr">
                                         <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
                                         <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
+                                        <li><a class="btn" onclick="generate_label(\'' . $row->uid . '\', ' . $row->jumlah_koli_tambahan . ', ' . $row->hasil_jadi_tambahan . ', ' . $row->isi_tambahan . ')"><em class="icon ni ni-plus"></em><span>Generate Label</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
@@ -93,8 +95,8 @@ class TambahanController extends BaseController
     public function approve_tambahan(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'hasil_jadi'            => 'required',
-            'jumlah_koli'           => 'required',
+            'hasil_jadi_approve'    => 'required',
+            'jumlah_koli_approve'   => 'required',
             'keterangan_approve'    => 'required',
         ], validation_message());
 
@@ -106,9 +108,9 @@ class TambahanController extends BaseController
             DB::beginTransaction();
 
             $id         = $request->post('uid_approve');
-            $hasil_jadi = $request->post('hasil_jadi');
+            $hasil_jadi = $request->post('hasil_jadi_approve');
             $hasil_jadi = Str::replace('.', '', $hasil_jadi);
-            $jumlah_koli= $request->post('jumlah_koli');
+            $jumlah_koli= $request->post('jumlah_koli_approve');
             $jumlah_koli= Str::replace('.', '', $jumlah_koli);
             $ket        = $request->post('keterangan_approve');
             $user       = Auth::user();
@@ -140,6 +142,42 @@ class TambahanController extends BaseController
             DB::rollback();
             return $this->ajaxResponse(false, 'Approve data gagal', $e);
         }
+    }
+
+    public function generate_label_tambahan(Request $request)
+    {
+
+        $hasil_jadi     = $request->post('generate_hasil_jadi');   
+        $jumlah_koli    = $request->post('generate_jumlah_koli');
+        $isi            = $request->post('generate_isi');
+        $uid            = $request->post('uid_generate');
+
+        // insert to order
+        DB::table('order')->where('uid', $uid)->update([
+            'hasil_jadi_tambahan'    => $hasil_jadi,
+            'jumlah_koli_tambahan'   => $jumlah_koli,
+            'isi_tambahan'           => $isi
+        ]);
+
+        // data order
+        $order = Order::where('uid', 'O20241214145613361753')->first();
+
+        $data = [
+            'customer'         => $order->customer,
+            'jenis_produk'     => $order->jenis_produk,
+            'ukuran'           => $order->ukuran,
+            'isi'              => $isi,
+            'keterangan'       => $order->keterangan,
+            'operator'         => $order->order_by,
+            'tanggal'          => date('d/m/Y', strtotime($order->tanggal)),
+            'jam'              => date('H:i', strtotime($order->update_at)),
+            'jumlah_koli'      => $jumlah_koli,
+            'hasil_jadi'       => $hasil_jadi,
+        ];
+
+        $pdf = PDF::loadView('packing.label', compact('data'))
+              ->setPaper('a4', 'portrait');
+        return $pdf->stream('label.pdf');
     }
 
     public function pending_tambahan(Request $request)

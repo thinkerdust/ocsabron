@@ -301,13 +301,13 @@
                     <div class="form-group">
                         <label class="form-label">Hasil Jadi</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control format-currency text-end" name="hasil_jadi" id="hasil_jadi">
+                            <input type="text" class="form-control format-currency text-end" name="hasil_jadi_approve" id="hasil_jadi_approve">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Jumlah Koli</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control format-currency text-end" name="jumlah_koli" id="jumlah_koli">
+                            <input type="text" class="form-control format-currency text-end" name="jumlah_koli_approve" id="jumlah_koli_approve">
                         </div>
                     </div>
                     <div class="form-group">
@@ -319,6 +319,46 @@
                     
                     <hr class="preview-hr">
                     <button type="submit" class="btn btn-theme-sml" id="btn-submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalGenerate">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <em class="icon ni ni-cross"></em>
+            </a>
+            <div class="modal-header">
+                <h5 class="modal-title">Generate Label</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-validate is-alter" id="form-generate"  method="POST" action="/packing/generate-label" target="_blank">
+                    @csrf
+                    <input type="hidden" name="uid_generate" id="uid_generate">
+                    <div class="form-group">
+                        <label class="form-label">Hasil Jadi</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control format-currency text-end" name="generate_hasil_jadi" id="generate_hasil_jadi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Jumlah Koli</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control format-currency text-end" name="generate_jumlah_koli" id="generate_jumlah_koli">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Isi</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control format-currency text-end" name="generate_isi" id="generate_isi">
+                        </div>
+                    </div>
+                    
+                    <hr class="preview-hr">
+                    <button type="submit" class="btn btn-theme-sml" id="btn-submit">Generate</button>
                 </form>
             </div>
         </div>
