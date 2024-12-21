@@ -61,9 +61,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -77,9 +77,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -93,9 +93,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -109,9 +109,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -125,9 +125,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -141,9 +141,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -157,9 +157,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -173,9 +173,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -189,9 +189,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -205,9 +205,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -221,9 +221,9 @@ var table = NioApp.DataTable('#dt-table', {
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
-                    return '<span class="badge bg-danger">Pending</span>';
+                    return '<span class="badge bg-warning">Pending</span>';
                 } else {
-                    return '<span class="badge bg-dark">Tidak Ada</span>';
+                    return '<span class="badge bg-dark">None</span>';
                 }
             }
         },
@@ -235,7 +235,130 @@ var table = NioApp.DataTable('#dt-table', {
             className: "nk-tb-col",
             targets: "_all"
         }
-    ]
+    ],
+    createdRow: function(row, data, dataIndex) {
+        console.log(data);
+        // Access the specific cell and apply styles
+        if (data.desain === 1) {
+            $('td', row).eq(3).addClass('border border-white bg-info');
+        } else if (data.desain === 2) {
+            $('td', row).eq(3).addClass('border border-white bg-success');
+        } else if (data.desain === 3) {
+            $('td', row).eq(3).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(3).addClass('border border-white bg-dark');
+        }
+
+        if (data.bahan === 1) {
+            $('td', row).eq(4).addClass('border border-white bg-info');
+        } else if (data.bahan === 2) {
+            $('td', row).eq(4).addClass('border border-white bg-success');
+        } else if (data.bahan === 3) {
+            $('td', row).eq(4).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(4).addClass('border border-white bg-dark');
+        }
+
+        if (data.bahan === 1) {
+            $('td', row).eq(4).addClass('border border-white bg-info');
+        } else if (data.bahan === 2) {
+            $('td', row).eq(4).addClass('border border-white bg-success');
+        } else if (data.bahan === 3) {
+            $('td', row).eq(4).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(4).addClass('border border-white bg-dark');
+        }
+
+        if (data.cetak === 1) {
+            $('td', row).eq(5).addClass('border border-white bg-info');
+        } else if (data.cetak === 2) {
+            $('td', row).eq(5).addClass('border border-white bg-success');
+        } else if (data.cetak === 3) {
+            $('td', row).eq(5).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(5).addClass('border border-white bg-dark');
+        }
+
+        if (data.finishing_satu === 1) {
+            $('td', row).eq(6).addClass('border border-white bg-info');
+        } else if (data.finishing_satu === 2) {
+            $('td', row).eq(6).addClass('border border-white bg-success');
+        } else if (data.finishing_satu === 3) {
+            $('td', row).eq(6).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(6).addClass('border border-white bg-dark');
+        }
+
+        if (data.pon === 1) {
+            $('td', row).eq(7).addClass('border border-white bg-info');
+        } else if (data.pon === 2) {
+            $('td', row).eq(7).addClass('border border-white bg-success');
+        } else if (data.pon === 3) {
+            $('td', row).eq(7).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(7).addClass('border border-white bg-dark');
+        }
+
+        if (data.finishing_dua === 1) {
+            $('td', row).eq(8).addClass('border border-white bg-info');
+        } else if (data.finishing_dua === 2) {
+            $('td', row).eq(8).addClass('border border-white bg-success');
+        } else if (data.finishing_dua === 3) {
+            $('td', row).eq(8).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(8).addClass('border border-white bg-dark');
+        }
+
+        if (data.forming === 1) {
+            $('td', row).eq(9).addClass('border border-white bg-info');
+        } else if (data.forming === 2) {
+            $('td', row).eq(9).addClass('border border-white bg-success');
+        } else if (data.forming === 3) {
+            $('td', row).eq(9).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(9).addClass('border border-white bg-dark');
+        }
+
+        if (data.packing === 1) {
+            $('td', row).eq(10).addClass('border border-white bg-info');
+        } else if (data.packing === 2) {
+            $('td', row).eq(10).addClass('border border-white bg-success');
+        } else if (data.packing === 3) {
+            $('td', row).eq(10).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(10).addClass('border border-white bg-dark');
+        }
+
+        if (data.administrasi === 1) {
+            $('td', row).eq(11).addClass('border border-white bg-info');
+        } else if (data.administrasi === 2) {
+            $('td', row).eq(11).addClass('border border-white bg-success');
+        } else if (data.administrasi === 3) {
+            $('td', row).eq(11).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(11).addClass('border border-white bg-dark');
+        }
+
+        if (data.tambahan === 1) {
+            $('td', row).eq(12).addClass('border border-white bg-info');
+        } else if (data.tambahan === 2) {
+            $('td', row).eq(12).addClass('border border-white bg-success');
+        } else if (data.tambahan === 3) {
+            $('td', row).eq(12).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(12).addClass('border border-white bg-dark');
+        }
+
+        if (data.ekspedisi === 1) {
+            $('td', row).eq(13).addClass('border border-white bg-info');
+        } else if (data.ekspedisi === 2) {
+            $('td', row).eq(13).addClass('border border-white bg-success');
+        } else if (data.ekspedisi === 3) {
+            $('td', row).eq(13).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(13).addClass('border border-white bg-dark');
+        }
+    }
 });
 
 $('#btn-filter').click(function() {
