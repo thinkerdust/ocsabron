@@ -31,9 +31,10 @@ class HistoryController extends BaseController
 
     public function index()
     {
-        $title  = 'History';
-        $js     = 'js/apps/history/index.js?_='.rand();
-        return view('history.index', compact('js', 'title'));
+        $title      = 'History';
+        $js_library = js_datatable_button();
+        $js         = 'js/apps/history/index.js?_='.rand();
+        return view('history.index', compact('js', 'js_library', 'title'));
     }
 
     public function datatable_history(Request $request)

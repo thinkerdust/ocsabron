@@ -57,7 +57,8 @@ var table = NioApp.DataTable('#dt-table', {
                 return '<span class="badge badge-dot '+ status[full['status']].class +'">'+ status[full['status']].title +'</span>';
             }
         },
-    ]
+    ],
+    buttons: ['copy', 'excel', 'csv', 'pdf']
 });
 
 $('#btn-filter').click(function() {
