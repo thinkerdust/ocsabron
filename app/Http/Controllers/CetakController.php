@@ -170,4 +170,10 @@ class CetakController extends BaseController
         }
     }
 
+    public function datatable_incoming_job(Request $request)
+    {
+        $data = $this->cetak->dataTableIncomingJob(); 
+        return Datatables::of($data)->addIndexColumn()->make(true);
+    }
+
 }

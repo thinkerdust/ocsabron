@@ -172,4 +172,10 @@ class AdministrasiController extends BaseController
             return $this->ajaxResponse(false, 'Pending data gagal', $e);
         }
     }
+
+    public function datatable_incoming_job(Request $request)
+    {
+        $data = $this->administrasi->dataTableIncomingJob(); 
+        return Datatables::of($data)->addIndexColumn()->make(true);
+    }
 }

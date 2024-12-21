@@ -15,12 +15,8 @@
                     <div class="nk-block nk-block-lg">
                         <div class="card card-bordered card-preview">
                             <div class="card-inner">
+                                <h4 class="card-title title">Active Job</h4>
 
-                                @can("crudAccess", "DSN")
-                                    <a href="/desain/generate" class="btn btn-theme-sml btn-sm"><em class="icon ni ni-upload"></em><span>Generate SPK</span></a>
-                                    <hr class="preview-hr">
-                                @endcan
-                                
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -67,7 +63,32 @@
                                             <th>Jumlah</th>
                                             <th>Progress</th>
                                             <th>Status</th>
-                                            <th>Action</th>   
+                                            <th>Action</th> 
+                                        </tr>
+                                    </thead>
+
+                                </table>
+
+                            </div>
+                        </div><!-- .card-preview -->
+
+                        <div class="card card-bordered card-preview">
+                            <div class="card-inner">
+                                <h4 class="card-title title">Incoming Job</h4>
+
+                                <table class="table table-striped nowrap" id="dt-table-incoming">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tanggal Order</th> 
+                                            <th>Customer</th> 
+                                            <th>Nama Job</th> 
+                                            <th>Deadline</th> 
+                                            <th>Produk</th> 
+                                            <th>Bahan</th> 
+                                            <th>Ukuran</th> 
+                                            <th>Jumlah</th>
+                                            <th>Progress</th>
                                         </tr>
                                     </thead>
 
@@ -94,7 +115,7 @@
                 <input type="hidden" id="uid_order">
                 <div class="row">
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Nama Job</label>
                             <div class="form-control-wrap">
@@ -138,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Jumlah</label>
                             <div class="form-control-wrap">
@@ -178,7 +199,63 @@
                         <div class="form-group">
                             <label class="form-label">Keterangan</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="keterangan" readonly>
+                                <textarea class="form-control" rows="5" id="keterangan" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Hasil Jadi</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control text-end" id="hasil_jadi" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Jumlah Koli</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control text-end" id="jumlah_koli" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Hasil Jadi (Packing Tambahan)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control text-end" id="hasil_jadi_tambahan" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Jumlah Koli (Packing Tambahan)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control text-end" id="jumlah_koli_tambahan" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nomor Nota</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="nomor_nota" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nomor Resi</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="nomor_resi" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rusak Mesin</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="rusak_mesin" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rusak Cetakan</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="rusak_cetakan" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Approve</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="tanggal_approve" readonly>
                             </div>
                         </div>
                     </div>

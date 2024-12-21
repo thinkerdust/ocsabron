@@ -259,3 +259,46 @@ $('#form-pending').submit(function(e) {
         }
     })
 })
+
+var table = NioApp.DataTable('#dt-table-incoming', {
+    serverSide: true,
+    processing: true,
+    responsive: false,
+    searchDelay: 500,
+    scrollX: true,
+    scrollY: '500px',
+    ajax: {
+        url: '/cetak/datatable-incoming',
+        type: 'POST',
+        data: function(d) {
+            d._token        = token;
+        },
+        error: function (xhr) {
+            if (xhr.status === 401) { // Unauthorized error
+                NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
+                window.location.href = "/login"; 
+            } else {
+                NioApp.Toast('An error occurred while loading data. Please try again.', 'error', {position: 'top-right'});
+            }
+        }
+    },
+    order: [1, 'ASC'],
+    columns: [
+        {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+        {data: 'tanggal', name: 'o.tanggal'},
+        {data: 'customer', name: 'o.customer'},
+        {data: 'nama', name: 'o.nama'},
+        {data: 'deadline', name: 'o.deadline'},
+        {data: 'jenis_produk', name: 'o.jenis_produk'},
+        {data: 'jenis_kertas', name: 'o.jenis_kertas'},
+        {data: 'ukuran', name: 'o.ukuran'},
+        {data: 'jumlah', name: 'o.jumlah', className: 'text-end', render: $.fn.dataTable.render.number( ',', '.', 0)},
+        {data: 'progress', name: 'd.nama', className: 'fw-bold', orderable: false, searchable: false},
+    ],
+    columnDefs: [
+        {
+            className: "nk-tb-col",
+            targets: "_all"
+        }
+    ]
+});
