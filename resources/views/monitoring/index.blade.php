@@ -43,7 +43,7 @@
                                             <th>Tanggal</th> 
                                             <th>Customer</th> 
 
-                                            <th>Design</th>
+                                            <th>Desain</th>
                                             <th>Bahan</th>
                                             <th>Cetak</th>
                                             <th>Finishing 1</th>
