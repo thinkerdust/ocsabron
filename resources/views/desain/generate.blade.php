@@ -39,137 +39,150 @@
                                                     <h4>1. SPK</h4>
                                                     <hr class="preview-hr">
 
-                                                    <div class="form-group">
-                                                        <label class="form-label">Nama Job</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="nama" name="nama" required>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Nama Job</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="nama" name="nama" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Nama Customer</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="customer" name="customer" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Tanggal Order</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control date-picker" id="tanggal_order" name="tanggal_order" data-date-format="dd/mm/yyyy" readonly required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Tanggal ACC</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control date-picker" id="tanggal_acc" name="tanggal_acc" data-date-format="dd/mm/yyyy" readonly required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Jam</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control timepicker" id="jam" name="jam" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Nama Customer</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="customer" name="customer" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Tanggal Order</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control date-picker" id="tanggal_order" name="tanggal_order" data-date-format="dd/mm/yyyy" readonly required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Tanggal ACC</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control date-picker" id="tanggal_acc" name="tanggal_acc" data-date-format="dd/mm/yyyy" readonly required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Jam</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control timepicker" id="jam" name="jam" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Deadline</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control date-picker" id="deadline" name="deadline" data-date-format="dd/mm/yyyy" readonly required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Pengambilan</label>
-                                                        <div class="form-control-wrap">
-                                                            <select name="pengambilan" class="select2-js" id="pengambilan">
-                                                                <option value="DIAMBIL">DIAMBIL</option>
-                                                                <option value="DIKIRIM EKSPEDISI">DIKIRIM EKSPEDISI</option>
-                                                                <option value="DIKIRIM LOKAL">DIKIRIM LOKAL</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">No. Tanda Terima</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="no_tanda_terima" name="no_tanda_terima" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Operator</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="operator" name="operator" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Job By</label>
-                                                        <div class="form-control-wrap">
-                                                            <select name="job_by" class="select2-js" id="job_by">
-                                                                <option value="OCSAPACK">OCSAPACK</option>
-                                                                <option value="BRONPACK">BRONPACK</option>
-                                                            </select>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Deadline</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control date-picker" id="deadline" name="deadline" data-date-format="dd/mm/yyyy" readonly required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Pengambilan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <select name="pengambilan" class="select2-js" id="pengambilan">
+                                                                        <option value="DIAMBIL">DIAMBIL</option>
+                                                                        <option value="DIKIRIM EKSPEDISI">DIKIRIM EKSPEDISI</option>
+                                                                        <option value="DIKIRIM LOKAL">DIKIRIM LOKAL</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">No. Tanda Terima</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="no_tanda_terima" name="no_tanda_terima" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Operator</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="operator" name="operator" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Job By</label>
+                                                                <div class="form-control-wrap">
+                                                                    <select name="job_by" class="select2-js" id="job_by">
+                                                                        <option value="OCSAPACK">OCSAPACK</option>
+                                                                        <option value="BRONPACK">BRONPACK</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-md-6">
 
                                                     <h4>2. Bahan</h4>
                                                     <hr class="preview-hr">
 
-                                                    <div class="form-group">
-                                                        <label class="form-label">Bahan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="bahan" name="bahan" required>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Bahan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="bahan" name="bahan" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Jenis Bahan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="jenis_bahan" name="jenis_bahan" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Foto Bahan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="file" class="form-control" id="foto_bahan" name="foto_bahan" accept=".png, .jpg, .jpeg" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Jumlah Bahan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="number" class="form-control" id="jumlah_bahan" name="jumlah_bahan" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Jumlah Kertas</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="jumlah_kertas" name="jumlah_kertas" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Jenis Bahan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="jenis_bahan" name="jenis_bahan" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Foto Bahan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="file" class="form-control" id="foto_bahan" name="foto_bahan" accept=".png, .jpg, .jpeg" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Jumlah Bahan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="number" class="form-control" id="jumlah_bahan" name="jumlah_bahan" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Jumlah Kertas</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="jumlah_kertas" name="jumlah_kertas" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Dipotong Jadi</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="number" class="form-control" id="dipotong_jadi" name="dipotong_jadi" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Ukuran Jadi</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="ukuran" name="ukuran" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Ukuran File</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="ukuran_file" name="ukuran_file" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Untuk Cetakan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="cetakan" name="cetakan" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Struk</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="struk" name="struk" required>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Dipotong Jadi</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="number" class="form-control" id="dipotong_jadi" name="dipotong_jadi" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Ukuran Jadi</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="ukuran" name="ukuran" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Ukuran File</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="ukuran_file" name="ukuran_file" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Untuk Cetakan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="cetakan" name="cetakan" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Struk</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="struk" name="struk" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -257,22 +270,28 @@
                                                     <h4>4. Laminasi</h4>
                                                     <hr class="preview-hr">
 
-                                                    <div class="form-group">
-                                                        <label class="form-label">Jenis Laminasi</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="jenis_laminasi" name="jenis_laminasi" required>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Jenis Laminasi</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="jenis_laminasi" name="jenis_laminasi" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="form-label">Tipe Laminasi</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="tipe_laminasi" name="tipe_laminasi" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Tipe Laminasi</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="tipe_laminasi" name="tipe_laminasi" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Keterangan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="keterangan_laminasi" name="keterangan_laminasi" required>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Keterangan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="keterangan_laminasi" name="keterangan_laminasi" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -282,16 +301,22 @@
                                                     <h4>5. Foil</h4>
                                                     <hr class="preview-hr">
 
-                                                    <div class="form-group">
-                                                        <label class="form-label">Foil Warna</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="foil_warna" name="foil_warna" required>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Foil Warna</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="foil_warna" name="foil_warna" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="form-label">Keterangan</label>
-                                                        <div class="form-control-wrap">
-                                                            <input type="text" class="form-control" id="keterangan_foil" name="keterangan_foil" required>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Keterangan</label>
+                                                                <div class="form-control-wrap">
+                                                                    <input type="text" class="form-control" id="keterangan_foil" name="keterangan_foil" required>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -299,7 +324,7 @@
                                             </div>
 
                                             <div class="row mt-5">
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
 
                                                     <h4>6. Mika</h4>
                                                     <hr class="preview-hr">
@@ -312,7 +337,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
 
                                                     <h4>7. Lem</h4>
                                                     <hr class="preview-hr">
@@ -325,10 +350,7 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
-
-                                            <div class="row mt-5">
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
 
                                                     <h4>8. Lipat</h4>
                                                     <hr class="preview-hr">
@@ -341,7 +363,7 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
 
                                                     <h4>9. Lain-lain</h4>
                                                     <hr class="preview-hr">
