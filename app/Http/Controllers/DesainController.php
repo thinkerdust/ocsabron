@@ -259,4 +259,10 @@ class DesainController extends BaseController
         $pdf = PDF::loadView('desain.cetak', compact('data'));
         return $pdf->stream('spk.pdf');
     }
+
+    public function datatable_incoming_job(Request $request)
+    {
+        $data = $this->desain->dataTableIncomingJob(); 
+        return Datatables::of($data)->addIndexColumn()->make(true);
+    }
 }

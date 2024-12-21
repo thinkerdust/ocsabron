@@ -93,6 +93,15 @@ function detail(id) {
                 $('#pengambilan').val(data.pengambilan).change();
                 $('#order_by').val(data.order_by).change();
                 $('#keterangan').val(data.keterangan);
+                $('#hasil_jadi').val(thousandView(data.hasil_jadi));
+                $('#jumlah_koli').val(thousandView(data.jumlah_koli));
+                $('#hasil_jadi_tambahan').val(thousandView(data.hasil_jadi_tambahan));
+                $('#jumlah_koli_tambahan').val(thousandView(data.jumlah_koli_tambahan));
+                $('#nomor_nota').val(data.nomor_nota);
+                $('#nomor_resi').val(data.nomor_resi);
+                $('#rusak_mesin').val(data.rusak_mesin);
+                $('#rusak_cetakan').val(data.rusak_cetakan);
+                $('#tanggal_approve').val(data.tanggal_approve);
             }
 
             $('#uid_order').val(id);
