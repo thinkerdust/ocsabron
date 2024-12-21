@@ -40,13 +40,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Tanggal Order</th> 
+                                            <th>Tanggal</th> 
                                             <th>Customer</th> 
-                                            <th>Tanggal ACC</th> 
-                                            <th>Deadline</th> 
-                                            <th>Produk</th> 
-                                            <th>Ukuran</th> 
-                                            <th>Jumlah</th>
 
                                             <th>Design</th>
                                             <th>Bahan</th>

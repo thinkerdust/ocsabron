@@ -26,14 +26,31 @@ var table = NioApp.DataTable('#dt-table', {
     order: [1, 'ASC'],
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-        {data: 'tanggal', name: 'o.tanggal'},
-        {data: 'customer', name: 'o.customer'},
-        {data: 'tanggal_approve', name: 'o.tanggal_approve'},
-        {data: 'deadline', name: 'o.deadline'},
-        {data: 'jenis_produk', name: 'o.jenis_produk'},
-        {data: 'ukuran', name: 'o.ukuran', orderable: false, searchable: false},
-        {data: 'jumlah', name: 'o.jumlah', className: 'text-end', render: $.fn.dataTable.render.number( ',', '.', 0)},
-
+        {
+            data: null, // Render multiple fields in a single cell
+            render: function (data, type, row) {
+                return `
+                    <div class="info">
+                        <div class="tanggal">Order: ${row.tanggal}</div>
+                        <div class="tanggal-approve">Acc: ${row.tanggal_approve}</div>
+                        <div class="deadline">Deadline: ${row.deadline}</div>
+                    </div>
+                `;
+            },
+            name: 'o.tanggal'
+        },
+        {
+            data: null, // Render multiple fields in a single cell
+            render: function (data, type, row) {
+                return `
+                    <div class="info">
+                        <div class="customer fw-bold" style="text-transform: capitalize; word-wrap: break-word;">${row.customer}</div>
+                        <div class="jenis_produk" style="text-transform: capitalize; word-wrap: break-word;">Produk: ${row.jenis_produk}</div>
+                    </div>
+                `;
+            },
+            name: 'o.customer'
+        },
         {
             data: 'desain',
             orderable: false, 
