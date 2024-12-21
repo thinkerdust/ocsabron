@@ -181,6 +181,8 @@ var table = NioApp.DataTable('#dt-table-detail', {
 function approve(id) {
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
+    $('#hasil_jadi').val(0);
+    $('#jumlah_koli').val(0);
     $('#keterangan_approve').val('');
 }
 

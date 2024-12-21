@@ -93,6 +93,8 @@ class TambahanController extends BaseController
     public function approve_tambahan(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'hasil_jadi'            => 'required',
+            'jumlah_koli'           => 'required',
             'keterangan_approve'    => 'required',
         ], validation_message());
 
@@ -104,6 +106,10 @@ class TambahanController extends BaseController
             DB::beginTransaction();
 
             $id         = $request->post('uid_approve');
+            $hasil_jadi = $request->post('hasil_jadi');
+            $hasil_jadi = Str::replace('.', '', $hasil_jadi);
+            $jumlah_koli= $request->post('jumlah_koli');
+            $jumlah_koli= Str::replace('.', '', $jumlah_koli);
             $ket        = $request->post('keterangan_approve');
             $user       = Auth::user();
 
@@ -119,9 +125,11 @@ class TambahanController extends BaseController
 
             $step = $this->order->getNextStep($id);
             Order::where('uid', $id)->update([
-                    'uid_divisi'    => $step->uid_divisi,
-                    'update_at'     => Carbon::now(), 
-                    'update_by'     => $user->username
+                    'uid_divisi'            => $step->uid_divisi,
+                    'hasil_jadi_tambahan'   => $hasil_jadi,
+                    'jumlah_koli_tambahan'  => $jumlah_koli,
+                    'update_at'             => Carbon::now(), 
+                    'update_by'             => $user->username
                 ]);
             $this->logs($id, $step->uid_divisi, 1);
 
