@@ -189,11 +189,20 @@ var table = NioApp.DataTable('#dt-table-detail', {
     ]
 });
 
-function approve(id) {
+function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
+    $('#uid_generate').val(uid);
+    $('#generate_hasil_jadi').val(hasil_jadi);
+    $('#generate_jumlah_koli').val(jumlah_koli);
+    $('#generate_isi').val(isi);
+    $('#modalGenerate').modal('show');
+}
+
+function approve(id, jumlah_koli, hasil_jadi) {
+    console.log(id, jumlah_koli, hasil_jadi)
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
-    $('#hasil_jadi').val(0);
-    $('#jumlah_koli').val(0);
+    $('#hasil_jadi_approve').val(hasil_jadi);
+    $('#jumlah_koli_approve').val(jumlah_koli);
     $('#keterangan_approve').val('');
 }
 

@@ -192,6 +192,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_packing');
             Route::post('/approve', 'approve_packing');
+            Route::post('/generate-label', 'generate_label_packing');
             Route::post('/pending', 'pending_packing');
             Route::get('/detail/{id}', 'detail_packing');
             Route::post('/detail/datatable', 'datatable_detail_packing');
