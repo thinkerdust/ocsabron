@@ -197,13 +197,28 @@ function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
     $('#modalGenerate').modal('show');
 }
 
-function approve(id, jumlah_koli, hasil_jadi) {
-    console.log(id, jumlah_koli, hasil_jadi)
-    $('#modalApprove').modal('show');
+function approve(id) {
+
     $('#uid_approve').val(id);
-    $('#hasil_jadi_approve').val(hasil_jadi);
-    $('#jumlah_koli_approve').val(jumlah_koli);
-    $('#keterangan_approve').val('');
+
+    // get data by ajax
+    $.ajax({
+        url: '/packing/detail/'+id,
+        dataType: 'json',
+        success: function(response) {
+            let data = response.data;
+            if(response.status) {
+                $('#hasil_jadi_approve').val(data.hasil_jadi);
+                $('#jumlah_koli_approve').val(data.jumlah_koli);
+                $('#keterangan_approve').val('');
+                $('#modalApprove').modal('show');
+            }
+        },
+        error: function(error) {
+            console.log(error)
+            NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+        }
+    })
 }
 
 $('#form-approve').submit(function(e) {

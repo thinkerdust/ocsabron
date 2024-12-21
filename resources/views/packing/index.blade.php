@@ -319,7 +319,6 @@
                     
                     <hr class="preview-hr">
                     <button type="submit" class="btn btn-theme-sml" id="btn-submit">Save</button>
-                    <button type="submit" class="btn btn-theme-sml" id="preview-label">Preview</button>
                 </form>
             </div>
         </div>

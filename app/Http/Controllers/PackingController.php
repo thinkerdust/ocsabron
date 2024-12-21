@@ -135,10 +135,6 @@ class PackingController extends BaseController
                 ]);
             $this->logs($id, $step->uid_divisi, 1);
 
-            // generate label packing
-            $pdf = PDF::loadView('packing.label', ['hasil_jadi' => $hasil_jadi, 'jumlah_koli' => $jumlah_koli]);
-            return $pdf->stream('label.pdf');
-
             DB::commit();
 
             return $this->ajaxResponse(true, 'Approve data berhasil');

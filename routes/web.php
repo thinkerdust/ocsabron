@@ -219,6 +219,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_tambahan');
             Route::post('/approve', 'approve_tambahan');
+            Route::post('/generate-label', 'generate_label_tambahan');
             Route::post('/pending', 'pending_tambahan');
             Route::get('/detail/{id}', 'detail_tambahan');
             Route::post('/detail/datatable', 'datatable_detail_tambahan');
