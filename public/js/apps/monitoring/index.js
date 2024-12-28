@@ -31,13 +31,33 @@ var table = NioApp.DataTable('#dt-table', {
             render: function (data, type, row) {
                 return `
                     <div class="info">
-                        <div class="tanggal">Order: ${row.tanggal}</div>
-                        <div class="tanggal-approve">Acc: ${row.tanggal_approve}</div>
-                        <div class="deadline">Deadline: ${row.deadline}</div>
+                        <div class="tanggal">${row.tanggal}</div>
                     </div>
                 `;
             },
             name: 'o.tanggal'
+        },
+        {
+            data: null, // Render multiple fields in a single cell
+            render: function (data, type, row) {
+                return `
+                    <div class="info">
+                        <div class="tanggal-approve">${row.tanggal_approve}</div>
+                    </div>
+                `;
+            },
+            name: 'o.tanggal_approve'
+        },
+        {
+            data: null, // Render multiple fields in a single cell
+            render: function (data, type, row) {
+                return `
+                    <div class="info">
+                        <div class="deadline">${row.deadline}</div>
+                    </div>
+                `;
+            },
+            name: 'o.deadline'
         },
         {
             data: null, // Render multiple fields in a single cell
@@ -240,123 +260,123 @@ var table = NioApp.DataTable('#dt-table', {
         console.log(data);
         // Access the specific cell and apply styles
         if (data.desain === 1) {
-            $('td', row).eq(3).addClass('border border-white bg-info');
-        } else if (data.desain === 2) {
-            $('td', row).eq(3).addClass('border border-white bg-success');
-        } else if (data.desain === 3) {
-            $('td', row).eq(3).addClass('border border-white bg-warning');
-        } else {
-            $('td', row).eq(3).addClass('border border-white bg-dark');
-        }
-
-        if (data.bahan === 1) {
-            $('td', row).eq(4).addClass('border border-white bg-info');
-        } else if (data.bahan === 2) {
-            $('td', row).eq(4).addClass('border border-white bg-success');
-        } else if (data.bahan === 3) {
-            $('td', row).eq(4).addClass('border border-white bg-warning');
-        } else {
-            $('td', row).eq(4).addClass('border border-white bg-dark');
-        }
-
-        if (data.bahan === 1) {
-            $('td', row).eq(4).addClass('border border-white bg-info');
-        } else if (data.bahan === 2) {
-            $('td', row).eq(4).addClass('border border-white bg-success');
-        } else if (data.bahan === 3) {
-            $('td', row).eq(4).addClass('border border-white bg-warning');
-        } else {
-            $('td', row).eq(4).addClass('border border-white bg-dark');
-        }
-
-        if (data.cetak === 1) {
             $('td', row).eq(5).addClass('border border-white bg-info');
-        } else if (data.cetak === 2) {
+        } else if (data.desain === 2) {
             $('td', row).eq(5).addClass('border border-white bg-success');
-        } else if (data.cetak === 3) {
+        } else if (data.desain === 3) {
             $('td', row).eq(5).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(5).addClass('border border-white bg-dark');
         }
 
-        if (data.finishing_satu === 1) {
+        if (data.bahan === 1) {
             $('td', row).eq(6).addClass('border border-white bg-info');
-        } else if (data.finishing_satu === 2) {
+        } else if (data.bahan === 2) {
             $('td', row).eq(6).addClass('border border-white bg-success');
-        } else if (data.finishing_satu === 3) {
+        } else if (data.bahan === 3) {
             $('td', row).eq(6).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(6).addClass('border border-white bg-dark');
         }
 
-        if (data.pon === 1) {
+        if (data.bahan === 1) {
+            $('td', row).eq(6).addClass('border border-white bg-info');
+        } else if (data.bahan === 2) {
+            $('td', row).eq(6).addClass('border border-white bg-success');
+        } else if (data.bahan === 3) {
+            $('td', row).eq(6).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(6).addClass('border border-white bg-dark');
+        }
+
+        if (data.cetak === 1) {
             $('td', row).eq(7).addClass('border border-white bg-info');
-        } else if (data.pon === 2) {
+        } else if (data.cetak === 2) {
             $('td', row).eq(7).addClass('border border-white bg-success');
-        } else if (data.pon === 3) {
+        } else if (data.cetak === 3) {
             $('td', row).eq(7).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(7).addClass('border border-white bg-dark');
         }
 
-        if (data.finishing_dua === 1) {
+        if (data.finishing_satu === 1) {
             $('td', row).eq(8).addClass('border border-white bg-info');
-        } else if (data.finishing_dua === 2) {
+        } else if (data.finishing_satu === 2) {
             $('td', row).eq(8).addClass('border border-white bg-success');
-        } else if (data.finishing_dua === 3) {
+        } else if (data.finishing_satu === 3) {
             $('td', row).eq(8).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(8).addClass('border border-white bg-dark');
         }
 
-        if (data.forming === 1) {
+        if (data.pon === 1) {
             $('td', row).eq(9).addClass('border border-white bg-info');
-        } else if (data.forming === 2) {
+        } else if (data.pon === 2) {
             $('td', row).eq(9).addClass('border border-white bg-success');
-        } else if (data.forming === 3) {
+        } else if (data.pon === 3) {
             $('td', row).eq(9).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(9).addClass('border border-white bg-dark');
         }
 
-        if (data.packing === 1) {
+        if (data.finishing_dua === 1) {
             $('td', row).eq(10).addClass('border border-white bg-info');
-        } else if (data.packing === 2) {
+        } else if (data.finishing_dua === 2) {
             $('td', row).eq(10).addClass('border border-white bg-success');
-        } else if (data.packing === 3) {
+        } else if (data.finishing_dua === 3) {
             $('td', row).eq(10).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(10).addClass('border border-white bg-dark');
         }
 
-        if (data.administrasi === 1) {
+        if (data.forming === 1) {
             $('td', row).eq(11).addClass('border border-white bg-info');
-        } else if (data.administrasi === 2) {
+        } else if (data.forming === 2) {
             $('td', row).eq(11).addClass('border border-white bg-success');
-        } else if (data.administrasi === 3) {
+        } else if (data.forming === 3) {
             $('td', row).eq(11).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(11).addClass('border border-white bg-dark');
         }
 
-        if (data.tambahan === 1) {
+        if (data.packing === 1) {
             $('td', row).eq(12).addClass('border border-white bg-info');
-        } else if (data.tambahan === 2) {
+        } else if (data.packing === 2) {
             $('td', row).eq(12).addClass('border border-white bg-success');
-        } else if (data.tambahan === 3) {
+        } else if (data.packing === 3) {
             $('td', row).eq(12).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(12).addClass('border border-white bg-dark');
         }
 
-        if (data.ekspedisi === 1) {
+        if (data.administrasi === 1) {
             $('td', row).eq(13).addClass('border border-white bg-info');
-        } else if (data.ekspedisi === 2) {
+        } else if (data.administrasi === 2) {
             $('td', row).eq(13).addClass('border border-white bg-success');
-        } else if (data.ekspedisi === 3) {
+        } else if (data.administrasi === 3) {
             $('td', row).eq(13).addClass('border border-white bg-warning');
         } else {
             $('td', row).eq(13).addClass('border border-white bg-dark');
+        }
+
+        if (data.tambahan === 1) {
+            $('td', row).eq(14).addClass('border border-white bg-info');
+        } else if (data.tambahan === 2) {
+            $('td', row).eq(14).addClass('border border-white bg-success');
+        } else if (data.tambahan === 3) {
+            $('td', row).eq(14).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(14).addClass('border border-white bg-dark');
+        }
+
+        if (data.ekspedisi === 1) {
+            $('td', row).eq(15).addClass('border border-white bg-info');
+        } else if (data.ekspedisi === 2) {
+            $('td', row).eq(15).addClass('border border-white bg-success');
+        } else if (data.ekspedisi === 3) {
+            $('td', row).eq(15).addClass('border border-white bg-warning');
+        } else {
+            $('td', row).eq(15).addClass('border border-white bg-dark');
         }
     }
 });

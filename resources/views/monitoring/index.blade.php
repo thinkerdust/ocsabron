@@ -40,7 +40,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Tanggal</th> 
+                                            <th>Order</th> 
+                                            <th>Approve</th> 
+                                            <th>Deadline</th> 
                                             <th>Customer</th> 
 
                                             <th>Desain</th>
