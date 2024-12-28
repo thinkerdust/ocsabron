@@ -76,16 +76,6 @@ class JobController extends BaseController
                 ->make(true);
     }
 
-    public function form_job(Request $request)
-    {
-        $title      = 'Form Job';
-        $id         = $request->id;
-        $js         = 'js/apps/job/form.js?_='.rand();
-        $divisi     = DB::table('divisi')->where([['status', 1], ['urutan', '<>', 0]])->orderBy('urutan', 'asc')->get();
-
-        return view('job.form', compact('title', 'js', 'id', 'divisi'));
-    }
-
     public function detail_job(Request $request) 
     {
         $id     = $request->id;
@@ -101,10 +91,20 @@ class JobController extends BaseController
         return Datatables::of($data)->addIndexColumn()->make(true);
     }
 
+    public function form_job(Request $request)
+    {
+        $title      = 'Form Job';
+        $id         = $request->id;
+        $js         = 'js/apps/job/form.js?_='.rand();
+        $divisi     = DB::table('divisi')->where([['status', 1], ['urutan', '<>', 0]])->orderBy('urutan', 'asc')->get();
+
+        return view('job.form', compact('title', 'js', 'id', 'divisi'));
+    }
+
     public function edit_job(Request $request) 
     {
         $id     = $request->id;
-        $user   = $this->job->editJob($id);
+        $user   = $this->order->getOrder($id);
 
         return $this->ajaxResponse(true, 'Success!', $user);
     }

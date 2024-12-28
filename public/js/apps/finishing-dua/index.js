@@ -84,7 +84,7 @@ function detail(id) {
         url: '/finishing-dua/detail/'+id,
         dataType: 'json',
         success: function(response) {
-            let data = response.data;
+            let data = response.data.order;
             if(response.status) {
                 $('#nama').val(data.nama);
                 $('#customer').val(data.customer);
@@ -177,6 +177,34 @@ var table = NioApp.DataTable('#dt-table-detail', {
         },
     ]
 });
+
+function hapus(id) {
+    Swal.fire({
+        title: 'Apakah anda yakin akan hapus data?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, saya yakin!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '/finishing-dua/delete/'+id,
+                dataType: 'JSON',
+                success: function(response) {
+                    if(response.status){
+                        $("#dt-table").DataTable().ajax.reload(null, false);
+                        NioApp.Toast(response.message, 'success', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+                    }
+                },
+                error: function(error) {
+                    console.log(error)
+                    NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+                }
+            })
+        }
+    });
+}
 
 function approve(id) {
     $('#modalApprove').modal('show');

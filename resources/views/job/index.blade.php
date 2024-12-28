@@ -59,7 +59,6 @@
                                             <th>Tanggal Order</th> 
                                             <th>Customer</th> 
                                             <th>Nama Job</th> 
-                                            <th>Deadline</th> 
                                             <th>Produk</th> 
                                             <th>Bahan</th> 
                                             <th>Ukuran</th> 

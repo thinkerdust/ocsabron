@@ -84,7 +84,7 @@ function detail(id) {
         url: '/tambahan/detail/'+id,
         dataType: 'json',
         success: function(response) {
-            let data = response.data;
+            let data = response.data.order;
             if(response.status) {
                 $('#nama').val(data.nama);
                 $('#customer').val(data.customer);
@@ -184,6 +184,34 @@ function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
     $('#generate_jumlah_koli').val(jumlah_koli);
     $('#generate_isi').val(isi);
     $('#modalGenerate').modal('show');
+}
+
+function hapus(id) {
+    Swal.fire({
+        title: 'Apakah anda yakin akan hapus data?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, saya yakin!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '/tambahan/delete/'+id,
+                dataType: 'JSON',
+                success: function(response) {
+                    if(response.status){
+                        $("#dt-table").DataTable().ajax.reload(null, false);
+                        NioApp.Toast(response.message, 'success', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+                    }
+                },
+                error: function(error) {
+                    console.log(error)
+                    NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+                }
+            })
+        }
+    });
 }
 
 function approve(id) {

@@ -62,6 +62,8 @@ class FinishingDuaController extends BaseController
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
+                                        <li><a href="/finishing-dua/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                                        <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
                                         '.$btn_action.'
                                     </ul>
@@ -88,6 +90,117 @@ class FinishingDuaController extends BaseController
         $uid    = $request->uid;
         $data   = $this->order->dataTableDetailOrder($uid); 
         return Datatables::of($data)->addIndexColumn()->make(true);
+    }
+
+    public function form_finishing_dua(Request $request)
+    {
+        $title      = 'Form Job';
+        $id         = $request->id;
+        $js         = 'js/apps/finishing-dua/form.js?_='.rand();
+        $divisi     = DB::table('divisi')->where([['status', 1], ['urutan', '<>', 0]])->orderBy('urutan', 'asc')->get();
+
+        return view('finishing-dua.form', compact('title', 'js', 'id', 'divisi'));
+    }
+
+    public function edit_finishing_dua(Request $request) 
+    {
+        $id     = $request->id;
+        $user   = $this->order->getOrder($id);
+
+        return $this->ajaxResponse(true, 'Success!', $user);
+    }
+
+    public function delete_finishing_dua(Request $request)
+    {
+        $id     = $request->id;
+        $user   = Auth::user();
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('order')->where('uid', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
+            DB::table('order_detail')->where('uid_order', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
+
+            DB::commit();
+            return $this->ajaxResponse(true, 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollback();
+            return $this->ajaxResponse(false, 'Data gagal dihapus', $e);
+        }
+    }
+
+    public function store_finishing_dua(Request $request)
+    {
+        $id = $request->input('id');
+
+        $validator = Validator::make($request->all(), [
+            'nama'          => 'required|max:100',
+            'customer'      => 'required',
+            'tanggal'       => 'required',
+            'deadline'      => 'required',
+            'jenis_produk'  => 'required',
+            'jenis_kertas'  => 'required',
+            'jumlah'        => 'required',
+            'ukuran'        => 'required',
+            'finishing_satu'=> 'required',
+            'finishing_dua' => 'required',
+            'pengambilan'   => 'required',
+            'order_by'      => 'required',
+        ], validation_message());
+
+        if($validator->stopOnFirstFailure()->fails()){
+            return $this->ajaxResponse(false, $validator->errors()->first());        
+        }
+
+        $user = Auth::user();
+
+        try {
+            DB::beginTransaction();
+            $jumlah = Str::replace('.', '', $request->jumlah);
+
+            $data = [
+                'nama'          => $request->nama,
+                'customer'      => $request->customer,
+                'tanggal'       => Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d'),
+                'deadline'      => Carbon::createFromFormat('d/m/Y', $request->deadline)->format('Y-m-d'),
+                'jenis_produk'  => $request->jenis_produk,
+                'jenis_kertas'  => $request->jenis_kertas,
+                'tambahan'      => $request->tambahan,
+                'jumlah'        => $jumlah,
+                'ukuran'        => $request->ukuran,
+                'finishing_satu'=> $request->finishing_satu,
+                'finishing_dua' => $request->finishing_dua,
+                'pengambilan'   => $request->pengambilan,
+                'order_by'      => $request->order_by,
+                'keterangan'    => $request->keterangan,
+            ];
+
+            // insert order
+            if(!empty($id)) {
+                $data['update_at']  = Carbon::now();
+                $data['update_by']  = $user->username;
+            } else {
+                $id                 = 'O'.Carbon::now()->format('YmdHisu');
+                $data['uid']        = $id;
+                $data['insert_at']  = Carbon::now();
+                $data['insert_by']  = $user->username;
+            }
+
+            DB::table('order')->updateOrInsert(
+                ['uid' => $id],
+                $data
+            );
+
+            $this->logs($id, 'D20241117144239748170');
+
+            DB::commit();
+            return $this->ajaxResponse(true, 'Data berhasil disimpan');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollback();
+            return $this->ajaxResponse(false, 'Data gagal disimpan', $e);
+        }
     }
 
     public function approve_finishing_dua(Request $request)

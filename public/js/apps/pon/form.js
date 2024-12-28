@@ -23,7 +23,7 @@ $(document).ready(function() {
     let id = $('#id').val();
     if(id) {
         $.ajax({
-            url: '/job/edit/'+id,
+            url: '/pon/edit/'+id,
             dataType: 'json',
             success: function(response) {
                 let order = response.data.order;
@@ -42,14 +42,6 @@ $(document).ready(function() {
                     $('#order_by').val(order.order_by).change();
                     $('#keterangan').val(order.keterangan);
                 }
-
-                let detail = response.data.detail;
-                if(detail) {
-                    // loop selected checkboxes divisi
-                    $.each(detail, function(index, value) {
-                        $('#'+value.uid_divisi).prop('checked', true);
-                    });
-                }
             },
             error: function(error) {
                 console.log(error)
@@ -64,7 +56,7 @@ $(document).ready(function() {
         var btn = $('#btn-submit');
 
         $.ajax({
-            url : "/job/store",  
+            url : "/pon/store",  
             data : formData,
             type : "POST",
             dataType : "JSON",
