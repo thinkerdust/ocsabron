@@ -273,7 +273,7 @@ class TambahanController extends BaseController
         ]);
 
         // data order
-        $order = Order::where('uid', 'O20241214145613361753')->first();
+        $order = Order::where('uid', $uid)->first();
 
         $data = [
             'customer'         => $order->customer,

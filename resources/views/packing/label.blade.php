@@ -1,5 +1,5 @@
 <head>
-    <title>SPK</title>
+    <title>Label</title>
     <style>
 
         /* Bootstrap */
