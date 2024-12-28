@@ -114,20 +114,6 @@
 
                                             </div>
                                         </div>
-                                        <hr class="preview-hr">
-                                        <h4>2. TASK</h4>
-                                        <hr class="preview-hr">
-                                        <div class="row gy-4">
-                                            @foreach ($divisi as $d)    
-                                                <div class="col-md-2">
-                                                    <div class="custom-control custom-control-md custom-switch">
-                                                        <input type="checkbox" class="custom-control-input" name="divisi[]" id="{{ $d->uid }}" value="{{ $d->uid }}" {{ in_array($d->uid, ['D20241117150714774798', 'D20241117145737847863']) ? 'checked disabled' : '' }}>
-                                                        <label class="custom-control-label" for="{{ $d->uid }}">{{ $d->nama }}</label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            
-                                        </div>
                                     
                                         <hr class="preview-hr">
                                         <button type="submit" class="btn btn-theme-sml" id="btn-submit">Save</button>

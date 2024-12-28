@@ -554,10 +554,7 @@
     <div class="pages" style="display: inline-block; width: 100%;">
     
         <table style="width: 100%;">
-            @php
-                $sisa  = $data['hasil_jadi'] % $data['isi'];
-            @endphp
-            @for ($i = 1; $i <= $data['jumlah_koli']; $i++)                
+            @for ($i = 0; $i < $data['jumlah_koli']; $i++)                
                 <tr>
                     <td>
                         <div class="label" style="margin: 20px auto;">
@@ -573,7 +570,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span>{{ $i == $data['jumlah_koli'] && $sisa > 0 ? $sisa : $data['isi'] }}</span>
+                                        <span>{{ $data['isi'][$i] }}</span>
                                     </td>
                                 </tr>
                                 <tr>

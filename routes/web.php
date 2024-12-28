@@ -98,6 +98,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(DesainController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_desain');
+            Route::get('/form/{id?}', 'form_desain');
+            Route::get('/edit/{id}', 'edit_desain');
+            Route::get('/delete/{id}', 'delete_desain');
+            Route::post('/store', 'store_desain');
             Route::post('/approve', 'approve_desain');
             Route::post('/pending', 'pending_desain');
             Route::get('/detail/{id}', 'detail_desain');
@@ -113,6 +117,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(BahanController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_bahan');
+            Route::get('/form/{id?}', 'form_bahan');
+            Route::get('/edit/{id}', 'edit_bahan');
+            Route::get('/delete/{id}', 'delete_bahan');
+            Route::post('/store', 'store_bahan');
             Route::post('/approve', 'approve_bahan');
             Route::post('/pending', 'pending_bahan');
             Route::get('/detail/{id}', 'detail_bahan');
@@ -126,6 +134,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(CetakController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_cetak');
+            Route::get('/form/{id?}', 'form_cetak');
+            Route::get('/edit/{id}', 'edit_cetak');
+            Route::get('/delete/{id}', 'delete_cetak');
+            Route::post('/store', 'store_cetak');
             Route::post('/approve', 'approve_cetak');
             Route::post('/pending', 'pending_cetak');
             Route::get('/detail/{id}', 'detail_cetak');
@@ -139,6 +151,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(FinishingSatuController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_finishing_satu');
+            Route::get('/form/{id?}', 'form_finishing_satu');
+            Route::get('/edit/{id}', 'edit_finishing_satu');
+            Route::get('/delete/{id}', 'delete_finishing_satu');
+            Route::post('/store', 'store_finishing_satu');
             Route::post('/approve', 'approve_finishing_satu');
             Route::post('/pending', 'pending_finishing_satu');
             Route::get('/detail/{id}', 'detail_finishing_satu');
@@ -152,6 +168,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(PONController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_pon');
+            Route::get('/form/{id?}', 'form_pon');
+            Route::get('/edit/{id}', 'edit_pon');
+            Route::get('/delete/{id}', 'delete_pon');
+            Route::post('/store', 'store_pon');
             Route::post('/approve', 'approve_pon');
             Route::post('/pending', 'pending_pon');
             Route::get('/detail/{id}', 'detail_pon');
@@ -165,6 +185,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(FinishingDuaController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_finishing_dua');
+            Route::get('/form/{id?}', 'form_finishing_dua');
+            Route::get('/edit/{id}', 'edit_finishing_dua');
+            Route::get('/delete/{id}', 'delete_finishing_dua');
+            Route::post('/store', 'store_finishing_dua');
             Route::post('/approve', 'approve_finishing_dua');
             Route::post('/pending', 'pending_finishing_dua');
             Route::get('/detail/{id}', 'detail_finishing_dua');
@@ -178,6 +202,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(FormingController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_forming');
+            Route::get('/form/{id?}', 'form_forming');
+            Route::get('/edit/{id}', 'edit_forming');
+            Route::get('/delete/{id}', 'delete_forming');
+            Route::post('/store', 'store_forming');
             Route::post('/approve', 'approve_forming');
             Route::post('/pending', 'pending_forming');
             Route::get('/detail/{id}', 'detail_forming');
@@ -191,6 +219,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(PackingController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_packing');
+            Route::get('/form/{id?}', 'form_packing');
+            Route::get('/edit/{id}', 'edit_packing');
+            Route::get('/delete/{id}', 'delete_packing');
+            Route::post('/store', 'store_packing');
             Route::post('/approve', 'approve_packing');
             Route::post('/generate-label', 'generate_label_packing');
             Route::post('/pending', 'pending_packing');
@@ -205,6 +237,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(AdministrasiController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_administrasi');
+            Route::get('/form/{id?}', 'form_administrasi');
+            Route::get('/edit/{id}', 'edit_administrasi');
+            Route::get('/delete/{id}', 'delete_administrasi');
+            Route::post('/store', 'store_administrasi');
             Route::post('/approve', 'approve_administrasi');
             Route::post('/pending', 'pending_administrasi');
             Route::get('/detail/{id}', 'detail_administrasi');
@@ -218,6 +254,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(TambahanController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_tambahan');
+            Route::get('/form/{id?}', 'form_tambahan');
+            Route::get('/edit/{id}', 'edit_tambahan');
+            Route::get('/delete/{id}', 'delete_tambahan');
+            Route::post('/store', 'store_tambahan');
             Route::post('/approve', 'approve_tambahan');
             Route::post('/generate-label', 'generate_label_tambahan');
             Route::post('/pending', 'pending_tambahan');
@@ -232,6 +272,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(EkspedisiController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_ekspedisi');
+            Route::get('/form/{id?}', 'form_ekspedisi');
+            Route::get('/edit/{id}', 'edit_ekspedisi');
+            Route::get('/delete/{id}', 'delete_ekspedisi');
+            Route::post('/store', 'store_ekspedisi');
             Route::post('/approve', 'approve_ekspedisi');
             Route::post('/pending', 'pending_ekspedisi');
             Route::get('/detail/{id}', 'detail_ekspedisi');

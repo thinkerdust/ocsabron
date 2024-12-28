@@ -382,7 +382,7 @@ function detail(id) {
         url: '/tambahan/detail/'+id,
         dataType: 'json',
         success: function(response) {
-            let data = response.data;
+            let data = response.data.order;
             if(response.status) {
                 $('#nama').val(data.nama);
                 $('#customer').val(data.customer);

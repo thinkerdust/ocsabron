@@ -29,7 +29,6 @@ var table = NioApp.DataTable('#dt-table', {
         {data: 'tanggal', name: 'o.tanggal'},
         {data: 'customer', name: 'o.customer'},
         {data: 'nama', name: 'o.nama'},
-        {data: 'deadline', name: 'o.deadline'},
         {data: 'jenis_produk', name: 'o.jenis_produk'},
         {data: 'jenis_kertas', name: 'o.jenis_kertas'},
         {data: 'ukuran', name: 'o.ukuran'},
@@ -84,7 +83,7 @@ function detail(id) {
         url: '/job/detail/'+id,
         dataType: 'json',
         success: function(response) {
-            let data = response.data;
+            let data = response.data.order;
             if(response.status) {
                 $('#nama').val(data.nama);
                 $('#customer').val(data.customer);

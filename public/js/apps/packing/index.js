@@ -193,8 +193,59 @@ function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
     $('#uid_generate').val(uid);
     $('#generate_hasil_jadi').val(hasil_jadi);
     $('#generate_jumlah_koli').val(jumlah_koli);
-    $('#generate_isi').val(isi);
     $('#modalGenerate').modal('show');
+}
+
+$('#btn-generate-form-isi').click(function(e) {
+
+    e.preventDefault();
+
+    // generate form isi based on jumlah koli
+    let jumlah_koli = $('#generate_jumlah_koli').val();
+
+    if(jumlah_koli == '') {
+        NioApp.Toast('Jumlah koli harus diisi', 'warning', {position: 'top-right'});
+        return;
+    }
+
+    let html = '';
+    for(let i = 1; i <= jumlah_koli; i++) {
+        html += '<div class="form-group col-md-6">';
+        html += '<label class="form-label" for="generate_isi_'+i+'">Isi Koli '+i+'</label>';
+        html += '<input type="text" class="form-control" id="generate_isi_'+i+'" name="generate_isi[]" required>';
+        html += '</div>';
+    }
+
+    $('#form-isi').html(html);
+
+})
+
+function hapus(id) {
+    Swal.fire({
+        title: 'Apakah anda yakin akan hapus data?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, saya yakin!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '/packing/delete/'+id,
+                dataType: 'JSON',
+                success: function(response) {
+                    if(response.status){
+                        $("#dt-table").DataTable().ajax.reload(null, false);
+                        NioApp.Toast(response.message, 'success', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+                    }
+                },
+                error: function(error) {
+                    console.log(error)
+                    NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+                }
+            })
+        }
+    });
 }
 
 function approve(id) {
@@ -206,7 +257,7 @@ function approve(id) {
         url: '/packing/detail/'+id,
         dataType: 'json',
         success: function(response) {
-            let data = response.data;
+            let data = response.data.order;
             if(response.status) {
                 $('#hasil_jadi_approve').val(data.hasil_jadi);
                 $('#jumlah_koli_approve').val(data.jumlah_koli);
