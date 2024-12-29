@@ -71,7 +71,7 @@ class Order extends Model
     {
         $order = DB::table('order')
                 ->where('uid', $uid)
-                ->select('uid', 'nama', 'customer', 'jenis_produk', 'ukuran', 'jumlah', 'tambahan', 'jenis_kertas', 'finishing_satu', 'finishing_dua', 'pengambilan', 'order_by', 'keterangan', 'hasil_jadi', 'jumlah_koli', 'hasil_jadi_tambahan', 'jumlah_koli_tambahan', 'nomor_nota', 'nomor_resi', 'rusak_mesin', 'rusak_cetakan',
+                ->select('uid', 'nama', 'customer', 'jenis_produk', 'ukuran', 'jumlah', 'tambahan', 'jenis_kertas', 'finishing_satu', 'finishing_dua', 'pengambilan', 'order_by', 'keterangan', 'hasil_jadi', 'jumlah_koli', 'isi', 'hasil_jadi_tambahan', 'jumlah_koli_tambahan', 'isi_tambahan', 'nomor_nota', 'nomor_resi', 'rusak_mesin', 'rusak_cetakan',
                     DB::raw("DATE_FORMAT(deadline, '%d/%m/%Y') as deadline, DATE_FORMAT(tanggal, '%d/%m/%Y') as tanggal, DATE_FORMAT(tanggal_approve, '%d/%m/%Y') as tanggal_approve")
                 )
                 ->first();

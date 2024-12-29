@@ -66,7 +66,7 @@ class PackingController extends BaseController
                                         <li><a href="/packing/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
-                                        <li><a class="btn" onclick="generate_label(\'' . $row->uid . '\', ' . $row->jumlah_koli . ', ' . $row->hasil_jadi . ', ' . $row->isi . ')"><em class="icon ni ni-plus"></em><span>Generate Label</span></a></li>
+                                        <li><a class="btn" onclick="generate_label(\'' . $row->uid . '\')"><em class="icon ni ni-plus"></em><span>Generate Label</span></a></li>
                                         <li><a class="btn" onclick="cancel(\'' . $row->uid . '\')"><em class="icon ni ni-undo"></em><span>Cancel</span></a></li>
                                         ' . $btn_action . '
                                     </ul>
