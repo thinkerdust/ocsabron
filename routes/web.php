@@ -109,6 +109,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/generate', 'generate_spk');
             Route::post('/process-generate', 'process_generate_spk');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -126,6 +127,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_bahan');
             Route::post('/detail/datatable', 'datatable_detail_bahan');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -143,6 +145,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_cetak');
             Route::post('/detail/datatable', 'datatable_detail_cetak');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -160,6 +163,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_finishing_satu');
             Route::post('/detail/datatable', 'datatable_detail_finishing_satu');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -177,6 +181,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_pon');
             Route::post('/detail/datatable', 'datatable_detail_pon');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -194,6 +199,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_finishing_dua');
             Route::post('/detail/datatable', 'datatable_detail_finishing_dua');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -211,6 +217,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_forming');
             Route::post('/detail/datatable', 'datatable_detail_forming');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -229,6 +236,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_packing');
             Route::post('/detail/datatable', 'datatable_detail_packing');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -246,6 +254,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_administrasi');
             Route::post('/detail/datatable', 'datatable_detail_administrasi');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -264,6 +273,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_tambahan');
             Route::post('/detail/datatable', 'datatable_detail_tambahan');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
@@ -281,6 +291,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::get('/detail/{id}', 'detail_ekspedisi');
             Route::post('/detail/datatable', 'datatable_detail_ekspedisi');
             Route::post('/datatable-incoming', 'datatable_incoming_job');
+            Route::get('/cancel/{id}', 'cancel_job');
         });
     });
 
