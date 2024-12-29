@@ -178,26 +178,43 @@ var table = NioApp.DataTable('#dt-table-detail', {
     ]
 });
 
-function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
-    $('#uid_generate').val(uid);
-    $('#generate_hasil_jadi').val(hasil_jadi);
-    $('#generate_jumlah_koli').val(jumlah_koli);
+function generate_label(id) {
+
+    // open modal
     $('#modalGenerate').modal('show');
 
-    isi = isi.split(',');
+    $.ajax({
+        url: '/packing/detail/'+id,
+        dataType: 'json',
+        success: function(response) {
+            let data = response.data.order;
+            if(response.status) {
+                $('#uid_generate').val(id);
+                $('#generate_hasil_jadi').val(data.hasil_jadi);
+                $('#generate_jumlah_koli').val(data.jumlah_koli);
 
-    // foreach jumlah koli dan isi form-isi dengan loop dari data isi
-    let html = '';
-    for(let i = 0; i < jumlah_koli; i++) {
-        html += `
-            <div class="form-group col-md-6">
-            <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
-            <input type="text" class="form-control" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
-            </div>
-        `;
-    }
+                let isi = JSON.parse(data.isi)
 
-    $('#form-isi').html(html);
+                // foreach jumlah koli dan isi form-isi dengan loop dari data isi
+                let html = '';
+                for(let i = 0; i < data.jumlah_koli; i++) {
+                    html += `
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
+                            <input type="text" class="form-control" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
+                        </div>
+                    `;
+                }
+
+                $('#form-isi').html(html);
+            }
+        },
+        error: function(error) {
+            console.log(error)
+            NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+        }
+    })
+
 }
 
 $('#btn-generate-form-isi').click(function(e) {
@@ -289,7 +306,7 @@ function approve(id) {
         url: '/tambahan/detail/'+id,
         dataType: 'json',
         success: function(response) {
-            let data = response.data;
+            let data = response.data.order;
             if(response.status) {
                 $('#hasil_jadi_approve').val(data.hasil_jadi_tambahan);
                 $('#jumlah_koli_approve').val(data.jumlah_koli_tambahan);
