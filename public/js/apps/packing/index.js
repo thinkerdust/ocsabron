@@ -212,7 +212,7 @@ function generate_label(id) {
                     html += `
                         <div class="form-group col-md-6">
                             <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
-                            <input type="text" class="form-control" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
+                            <input type="text" class="form-control text-end" id="generate_isi_${i+1}" name="generate_isi[]" required>
                         </div>
                     `;
                 }
