@@ -50,6 +50,23 @@ class Order extends Model
         return $query;
     }
 
+    public function getBackStep($uid_order)
+    {
+        $query = DB::table('order as o')
+                    ->join('order_detail as od', function($join) {
+                        $join->on('o.uid', '=', 'od.uid_order')
+                            ->whereColumn('od.uid_divisi', '<>', 'o.uid_divisi')
+                            ->where('od.status', '2');
+                    })
+                    ->join('divisi as d', 'od.uid_divisi', '=', 'd.uid')
+                    ->where('o.uid', $uid_order)
+                    ->orderBy('d.urutan', 'desc')
+                    ->select('d.uid as uid_divisi')
+                    ->first();
+
+        return $query;
+    }
+
     public function getOrder($uid)
     {
         $order = DB::table('order')

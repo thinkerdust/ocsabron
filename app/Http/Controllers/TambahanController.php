@@ -67,6 +67,7 @@ class TambahanController extends BaseController
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
                                         <li><a class="btn" onclick="generate_label(\'' . $row->uid . '\', ' . $row->jumlah_koli_tambahan . ', ' . $row->hasil_jadi_tambahan . ', ' . $row->isi_tambahan . ')"><em class="icon ni ni-plus"></em><span>Generate Label</span></a></li>
+                                        <li><a class="btn" onclick="cancel(\'' . $row->uid . '\')"><em class="icon ni ni-undo"></em><span>Cancel</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
@@ -121,7 +122,6 @@ class TambahanController extends BaseController
             DB::beginTransaction();
 
             DB::table('order')->where('uid', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
-            DB::table('order_detail')->where('uid_order', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
 
             DB::commit();
             return $this->ajaxResponse(true, 'Data berhasil dihapus');
@@ -140,7 +140,6 @@ class TambahanController extends BaseController
             'nama'          => 'required|max:100',
             'customer'      => 'required',
             'tanggal'       => 'required',
-            'deadline'      => 'required',
             'jenis_produk'  => 'required',
             'jenis_kertas'  => 'required',
             'jumlah'        => 'required',
@@ -165,7 +164,6 @@ class TambahanController extends BaseController
                 'nama'          => $request->nama,
                 'customer'      => $request->customer,
                 'tanggal'       => Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d'),
-                'deadline'      => Carbon::createFromFormat('d/m/Y', $request->deadline)->format('Y-m-d'),
                 'jenis_produk'  => $request->jenis_produk,
                 'jenis_kertas'  => $request->jenis_kertas,
                 'tambahan'      => $request->tambahan,
@@ -193,8 +191,6 @@ class TambahanController extends BaseController
                 ['uid' => $id],
                 $data
             );
-
-            $this->logs($id, 'D20241117144239748170');
 
             DB::commit();
             return $this->ajaxResponse(true, 'Data berhasil disimpan');
@@ -333,5 +329,38 @@ class TambahanController extends BaseController
     {
         $data = $this->tambahan->dataTableIncomingJob(); 
         return Datatables::of($data)->addIndexColumn()->make(true);
+    }
+
+    public function cancel_job(Request $request)
+    {
+        
+        try {
+            DB::beginTransaction();
+            
+            $id     = $request->id;
+            $user   = Auth::user();
+
+            $order = Order::where('uid', $id)->first();
+            $this->logs($id, $order->uid_divisi, 4);
+
+            $step = $this->order->getBackStep($id);
+
+            OrderDetail::where([['uid_order', $id], ['uid_divisi', $step->uid_divisi]])->update(['status' => 1, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
+
+            Order::where('uid', $id)->update([
+                'uid_divisi'    => $step->uid_divisi,
+                'update_at'     => Carbon::now(), 
+                'update_by'     => $user->username
+            ]);
+
+            $this->logs($id, $step->uid_divisi, 1);
+            
+            DB::commit();
+            return $this->ajaxResponse(true, 'Back process berhasil');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollback();
+            return $this->ajaxResponse(false, 'Back process gagal', $e);
+        }
     }
 }

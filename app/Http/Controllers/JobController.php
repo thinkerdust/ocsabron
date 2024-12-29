@@ -118,7 +118,6 @@ class JobController extends BaseController
             DB::beginTransaction();
 
             DB::table('order')->where('uid', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
-            DB::table('order_detail')->where('uid_order', $id)->update(['status' => 0, 'update_at' => Carbon::now(), 'update_by' => $user->username]);
 
             DB::commit();
             return $this->ajaxResponse(true, 'Data berhasil dihapus');
@@ -137,7 +136,6 @@ class JobController extends BaseController
             'nama'          => 'required|max:100',
             'customer'      => 'required',
             'tanggal'       => 'required',
-            'deadline'      => 'required',
             'jenis_produk'  => 'required',
             'jenis_kertas'  => 'required',
             'jumlah'        => 'required',
@@ -162,7 +160,6 @@ class JobController extends BaseController
                 'nama'          => $request->nama,
                 'customer'      => $request->customer,
                 'tanggal'       => Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d'),
-                'deadline'      => Carbon::createFromFormat('d/m/Y', $request->deadline)->format('Y-m-d'),
                 'jenis_produk'  => $request->jenis_produk,
                 'jenis_kertas'  => $request->jenis_kertas,
                 'tambahan'      => $request->tambahan,

@@ -72,7 +72,7 @@ $(document).ready(function() {
                 if(response.status){
                     NioApp.Toast(response.message, 'success', {position: 'top-right'});
                     setTimeout(function(){
-                        window.location.href = '/job';
+                        window.location.href = '/finishing-dua';
                     }, 2000)
                 }else{
                     NioApp.Toast(response.message, 'warning', {position: 'top-right'});
