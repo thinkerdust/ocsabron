@@ -193,7 +193,7 @@ function generate_label(id) {
                 $('#generate_hasil_jadi').val(data.hasil_jadi_tambahan);
                 $('#generate_jumlah_koli').val(data.jumlah_koli_tambahan);
 
-                let isi = JSON.parse(data.isi)
+                let isi = JSON.parse(data.isi_tambahan)
 
                 // foreach jumlah koli dan isi form-isi dengan loop dari data isi
                 let html = '';
@@ -201,7 +201,7 @@ function generate_label(id) {
                     html += `
                         <div class="form-group col-md-6">
                             <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
-                            <input type="text" class="form-control text-end" id="generate_isi_${i+1}" name="generate_isi[]" required>
+                            <input type="text" class="form-control text-end" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
                         </div>
                     `;
                 }
