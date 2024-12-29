@@ -190,18 +190,18 @@ function generate_label(id) {
             let data = response.data.order;
             if(response.status) {
                 $('#uid_generate').val(id);
-                $('#generate_hasil_jadi').val(data.hasil_jadi);
-                $('#generate_jumlah_koli').val(data.jumlah_koli);
+                $('#generate_hasil_jadi').val(data.hasil_jadi_tambahan);
+                $('#generate_jumlah_koli').val(data.jumlah_koli_tambahan);
 
                 let isi = JSON.parse(data.isi)
 
                 // foreach jumlah koli dan isi form-isi dengan loop dari data isi
                 let html = '';
-                for(let i = 0; i < data.jumlah_koli; i++) {
+                for(let i = 0; i < data.jumlah_koli_tambahan; i++) {
                     html += `
                         <div class="form-group col-md-6">
                             <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
-                            <input type="text" class="form-control" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
+                            <input type="text" class="form-control text-end" id="generate_isi_${i+1}" name="generate_isi[]" required>
                         </div>
                     `;
                 }
@@ -233,7 +233,7 @@ $('#btn-generate-form-isi').click(function(e) {
     for(let i = 1; i <= jumlah_koli; i++) {
         html += '<div class="form-group col-md-6">';
         html += '<label class="form-label" for="generate_isi_'+i+'">Isi Koli '+i+'</label>';
-        html += '<input type="text" class="form-control" id="generate_isi_'+i+'" name="generate_isi[]" required>';
+        html += '<input type="text" class="form-control text-end" id="generate_isi_'+i+'" name="generate_isi[]" required>';
         html += '</div>';
     }
 
