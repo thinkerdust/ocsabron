@@ -66,7 +66,7 @@ class TambahanController extends BaseController
                                         <li><a href="/tambahan/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
-                                        <li><a class="btn" onclick="generate_label(\'' . $row->uid . '\', ' . $row->jumlah_koli_tambahan . ', ' . $row->hasil_jadi_tambahan . ', ' . $row->isi_tambahan . ')"><em class="icon ni ni-plus"></em><span>Generate Label</span></a></li>
+                                        <li><a class="btn" onclick="generate_label(\'' . $row->uid . '\', ' . $row->jumlah_koli_tambahan . ', ' . $row->hasil_jadi_tambahan . ', \'' . ($row->isi_tambahan != 0 ? implode(',', json_decode($row->isi_tambahan)) : '') . '\')"><em class="icon ni ni-plus"></em><span>Generate Label</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
