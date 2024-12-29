@@ -182,9 +182,47 @@ function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
     $('#uid_generate').val(uid);
     $('#generate_hasil_jadi').val(hasil_jadi);
     $('#generate_jumlah_koli').val(jumlah_koli);
-    $('#generate_isi').val(isi);
     $('#modalGenerate').modal('show');
+
+    isi = isi.split(',');
+
+    // foreach jumlah koli dan isi form-isi dengan loop dari data isi
+    let html = '';
+    for(let i = 0; i < jumlah_koli; i++) {
+        html += `
+            <div class="form-group col-md-6">
+            <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
+            <input type="text" class="form-control" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
+            </div>
+        `;
+    }
+
+    $('#form-isi').html(html);
 }
+
+$('#btn-generate-form-isi').click(function(e) {
+
+    e.preventDefault();
+
+    // generate form isi based on jumlah koli
+    let jumlah_koli = $('#generate_jumlah_koli').val();
+
+    if(jumlah_koli == '') {
+        NioApp.Toast('Jumlah koli harus diisi', 'warning', {position: 'top-right'});
+        return;
+    }
+
+    let html = '';
+    for(let i = 1; i <= jumlah_koli; i++) {
+        html += '<div class="form-group col-md-6">';
+        html += '<label class="form-label" for="generate_isi_'+i+'">Isi Koli '+i+'</label>';
+        html += '<input type="text" class="form-control" id="generate_isi_'+i+'" name="generate_isi[]" required>';
+        html += '</div>';
+    }
+
+    $('#form-isi').html(html);
+
+})
 
 function hapus(id) {
     Swal.fire({
