@@ -194,6 +194,22 @@ function generate_label(uid, jumlah_koli, hasil_jadi, isi) {
     $('#generate_hasil_jadi').val(hasil_jadi);
     $('#generate_jumlah_koli').val(jumlah_koli);
     $('#modalGenerate').modal('show');
+
+    isi = isi.split(',');
+
+    // foreach jumlah koli dan isi form-isi dengan loop dari data isi
+    let html = '';
+    for(let i = 0; i < jumlah_koli; i++) {
+        html += `
+            <div class="form-group col-md-6">
+            <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
+            <input type="text" class="form-control" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
+            </div>
+        `;
+    }
+
+    $('#form-isi').html(html);
+
 }
 
 $('#btn-generate-form-isi').click(function(e) {

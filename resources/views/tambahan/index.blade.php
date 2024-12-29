@@ -344,17 +344,23 @@
                             <input type="text" class="form-control format-currency text-end" name="generate_hasil_jadi" id="generate_hasil_jadi">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Jumlah Koli</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control format-currency text-end" name="generate_jumlah_koli" id="generate_jumlah_koli">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="form-label">Jumlah Koli</label>
+                                <div class="form-control-wrap">
+                                    <input type="text" class="form-control format-currency text-end" name="generate_jumlah_koli" id="generate_jumlah_koli">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-end">
+                            <button type="button" class="btn btn-info" id="btn-generate-form-isi"><span>Generate Form</span></button>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Isi</label>
-                        <div class="form-control-wrap">
-                            <input type="text" class="form-control format-currency text-end" name="generate_isi" id="generate_isi">
-                        </div>
+
+                    <div class="row mt-4" id="form-isi">
+
                     </div>
                     
                     <hr class="preview-hr">
