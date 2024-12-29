@@ -244,7 +244,7 @@ $('#btn-generate-form-isi').click(function(e) {
     for(let i = 1; i <= jumlah_koli; i++) {
         html += '<div class="form-group col-md-6">';
         html += '<label class="form-label" for="generate_isi_'+i+'">Isi Koli '+i+'</label>';
-        html += '<input type="text" class="form-control" id="generate_isi_'+i+'" name="generate_isi[]" required>';
+        html += '<input type="text" class="form-control text-end" id="generate_isi_'+i+'" name="generate_isi[]" required>';
         html += '</div>';
     }
 
@@ -262,6 +262,34 @@ function hapus(id) {
         if (result.value) {
             $.ajax({
                 url: '/packing/delete/'+id,
+                dataType: 'JSON',
+                success: function(response) {
+                    if(response.status){
+                        $("#dt-table").DataTable().ajax.reload(null, false);
+                        NioApp.Toast(response.message, 'success', {position: 'top-right'});
+                    }else{
+                        NioApp.Toast(response.message, 'warning', {position: 'top-right'});
+                    }
+                },
+                error: function(error) {
+                    console.log(error)
+                    NioApp.Toast('Error while fetching data', 'error', {position: 'top-right'});
+                }
+            })
+        }
+    });
+}
+
+function cancel(id) {
+    Swal.fire({
+        title: 'Apakah anda yakin akan back process job?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, saya yakin!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: '/packing/cancel/'+id,
                 dataType: 'JSON',
                 success: function(response) {
                     if(response.status){
