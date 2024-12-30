@@ -64,7 +64,8 @@ var table = NioApp.DataTable('#dt-table', {
                 return `
                     <div class="info">
                         <div class="customer fw-bold" style="text-transform: capitalize; word-wrap: break-word;">${row.customer}</div>
-                        <div class="jenis_produk" style="text-transform: capitalize; word-wrap: break-word;">Produk: ${row.jenis_produk}</div>
+                        <div class="jenis_produk" style="text-transform: capitalize; word-wrap: break-word;">${row.jenis_produk}</div>
+                        <div class="ukuran" style="text-transform: capitalize; word-wrap: break-word;">${row.ukuran}</div>
                     </div>
                 `;
             },
@@ -76,7 +77,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -92,7 +93,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -108,7 +109,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -124,7 +125,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -140,7 +141,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -156,7 +157,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -172,7 +173,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -188,7 +189,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -204,7 +205,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -220,7 +221,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -236,7 +237,7 @@ var table = NioApp.DataTable('#dt-table', {
             searchable: false,
             render: function(data) {
                 if (data === 1) {
-                    return '<span class="badge bg-info">On-Progress</span>';
+                    return '<span class="badge bg-danger">On-Progress</span>';
                 } else if (data === 2) {
                     return '<span class="badge bg-success">Done</span>';
                 } else if (data === 3) {
@@ -259,7 +260,7 @@ var table = NioApp.DataTable('#dt-table', {
         console.log(data);
         // Access the specific cell and apply styles
         if (data.desain === 1) {
-            $('td', row).eq(5).addClass('border border-white bg-info');
+            $('td', row).eq(5).addClass('border border-white bg-danger');
         } else if (data.desain === 2) {
             $('td', row).eq(5).addClass('border border-white bg-success');
         } else if (data.desain === 3) {
@@ -269,7 +270,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.bahan === 1) {
-            $('td', row).eq(6).addClass('border border-white bg-info');
+            $('td', row).eq(6).addClass('border border-white bg-danger');
         } else if (data.bahan === 2) {
             $('td', row).eq(6).addClass('border border-white bg-success');
         } else if (data.bahan === 3) {
@@ -279,7 +280,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.bahan === 1) {
-            $('td', row).eq(6).addClass('border border-white bg-info');
+            $('td', row).eq(6).addClass('border border-white bg-danger');
         } else if (data.bahan === 2) {
             $('td', row).eq(6).addClass('border border-white bg-success');
         } else if (data.bahan === 3) {
@@ -289,7 +290,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.cetak === 1) {
-            $('td', row).eq(7).addClass('border border-white bg-info');
+            $('td', row).eq(7).addClass('border border-white bg-danger');
         } else if (data.cetak === 2) {
             $('td', row).eq(7).addClass('border border-white bg-success');
         } else if (data.cetak === 3) {
@@ -299,7 +300,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.finishing_satu === 1) {
-            $('td', row).eq(8).addClass('border border-white bg-info');
+            $('td', row).eq(8).addClass('border border-white bg-danger');
         } else if (data.finishing_satu === 2) {
             $('td', row).eq(8).addClass('border border-white bg-success');
         } else if (data.finishing_satu === 3) {
@@ -309,7 +310,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.pon === 1) {
-            $('td', row).eq(9).addClass('border border-white bg-info');
+            $('td', row).eq(9).addClass('border border-white bg-danger');
         } else if (data.pon === 2) {
             $('td', row).eq(9).addClass('border border-white bg-success');
         } else if (data.pon === 3) {
@@ -319,7 +320,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.finishing_dua === 1) {
-            $('td', row).eq(10).addClass('border border-white bg-info');
+            $('td', row).eq(10).addClass('border border-white bg-danger');
         } else if (data.finishing_dua === 2) {
             $('td', row).eq(10).addClass('border border-white bg-success');
         } else if (data.finishing_dua === 3) {
@@ -329,7 +330,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.forming === 1) {
-            $('td', row).eq(11).addClass('border border-white bg-info');
+            $('td', row).eq(11).addClass('border border-white bg-danger');
         } else if (data.forming === 2) {
             $('td', row).eq(11).addClass('border border-white bg-success');
         } else if (data.forming === 3) {
@@ -339,7 +340,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.packing === 1) {
-            $('td', row).eq(12).addClass('border border-white bg-info');
+            $('td', row).eq(12).addClass('border border-white bg-danger');
         } else if (data.packing === 2) {
             $('td', row).eq(12).addClass('border border-white bg-success');
         } else if (data.packing === 3) {
@@ -349,7 +350,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.administrasi === 1) {
-            $('td', row).eq(13).addClass('border border-white bg-info');
+            $('td', row).eq(13).addClass('border border-white bg-danger');
         } else if (data.administrasi === 2) {
             $('td', row).eq(13).addClass('border border-white bg-success');
         } else if (data.administrasi === 3) {
@@ -359,7 +360,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.tambahan === 1) {
-            $('td', row).eq(14).addClass('border border-white bg-info');
+            $('td', row).eq(14).addClass('border border-white bg-danger');
         } else if (data.tambahan === 2) {
             $('td', row).eq(14).addClass('border border-white bg-success');
         } else if (data.tambahan === 3) {
@@ -369,7 +370,7 @@ var table = NioApp.DataTable('#dt-table', {
         }
 
         if (data.ekspedisi === 1) {
-            $('td', row).eq(15).addClass('border border-white bg-info');
+            $('td', row).eq(15).addClass('border border-white bg-danger');
         } else if (data.ekspedisi === 2) {
             $('td', row).eq(15).addClass('border border-white bg-success');
         } else if (data.ekspedisi === 3) {

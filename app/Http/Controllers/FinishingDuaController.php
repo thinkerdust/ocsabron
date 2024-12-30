@@ -47,14 +47,20 @@ class FinishingDuaController extends BaseController
                 ->addColumn('action', function($row) {
                     $btn = '';
                     if(Gate::allows('crudAccess', 'FS2', $row)) {
-                        $btn_action     = '';
+                        $user = Auth::user();
+                        if(in_array($user->id_role, [1,2])) {
+                            $btn_action = '<li><a href="/finishing-dua/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                                        <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
+                                        <li><a class="btn" onclick="cancel(\'' . $row->uid . '\')"><em class="icon ni ni-undo"></em><span>Cancel</span></a></li>';
+                        }
+
                         $btn_approve    = '<li><a class="btn" onclick="approve(\'' . $row->uid . '\')"><em class="icon ni ni-check-round-cut"></em><span>Approve</span></a></li>';
                         $btn_pending    = '<li><a class="btn" onclick="pending(\'' . $row->uid . '\')"><em class="icon ni ni-na"></em><span>Pending</span></a></li>';
                         
                         if($row->status == 1) {
-                            $btn_action = $btn_pending.$btn_approve;
+                            $btn_action .= $btn_pending.$btn_approve;
                         } elseif($row->status == 3) {
-                            $btn_action = $btn_approve;
+                            $btn_action .= $btn_approve;
                         }
 
                         $btn = '<div class="drodown">
@@ -62,10 +68,7 @@ class FinishingDuaController extends BaseController
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
-                                        <li><a href="/finishing-dua/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
-                                        <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
-                                        <li><a class="btn" onclick="cancel(\'' . $row->uid . '\')"><em class="icon ni ni-undo"></em><span>Cancel</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
