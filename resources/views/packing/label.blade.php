@@ -552,62 +552,66 @@
 
 <body>
     <div class="pages" style="display: inline-block; width: 100%;">
-    
-        <table style="width: 100%;">
-            
-            @foreach (array_chunk($data['isi'], 2) as $chunk)
+        @php 
+            $counter = 1;
+            $jml = sizeof($data['isi']);
+        @endphp 
+        @foreach($data['isi'] as $index => $val)
+            <table>
                 <tr>
-                    @foreach ($chunk as $index => $isi)
-                        <td style="width: 50%;">
-                            <div class="label" style="margin: 20px auto;">
-                                <table style="width: 100%; margin-bottom: 20px;">
-                                    <tr>
-                                        <td><span>{{ $data['customer'] ?? '' }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span>{{ $data['jenis_produk'] ?? '' }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span>{{ $data['ukuran'] ?? '' }}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>{{ $isi }}</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><span>{{ $data['keterangan'] ?? '' }}</span></td>
-                                    </tr>
-                                </table>
-            
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td style="width: 80%;">
-                                            <div>
-                                                <span>{{ $data['operator'] ?? '' }}</span>
-                                            </div>
-                                            <div>
-                                                <span>{{ $data['tanggal'] ?? '' }}</span>
-                                            </div>
-                                        </td>
-                                        <td style="width: 20%;">
-                                            <div>
-                                                <span>{{ $data['jumlah_koli'] ?? '' }}</span>
-                                                <span>Dus</span>
-                                            </div>
-                                            <div>
-                                                <span>{{ (($loop->parent->iteration - 1) * 2 + $index + 1) . '/' . $data['jumlah_koli'] ?? '' }}</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    @endforeach
-                </tr>
-            @endforeach
+                    <td style="width: 50%;">
+                        <div class="label" style="margin: 20px auto;">
+                            <table style="width: 100%; margin-bottom: 20px;">
+                                <tr>
+                                    <td><span>{{ $data['customer'] ?? '' }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>{{ $data['jenis_produk'] ?? '' }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>{{ $data['ukuran'] ?? '' }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span>{{ $val }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span>{{ $data['keterangan'] ?? '' }}</span></td>
+                                </tr>
+                            </table>
         
-        </table>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 80%;">
+                                        <div>
+                                            <span>{{ $data['operator'] ?? '' }}</span>
+                                        </div>
+                                        <div>
+                                            <span>{{ $data['tanggal'] ?? '' }}</span>
+                                        </div>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <div>
+                                            <span>{{ $data['jumlah_koli'] ?? '' }}</span>
+                                            <span>Dus</span>
+                                        </div>
+                                        <div>
+                                            <span>{{ ($index + 1) . '/' . $data['jumlah_koli'] ?? '' }}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            @if($counter < $jml)
+            <div style="page-break-before : always;"></div>
+            @php $counter++; @endphp
+            @endif
+        @endforeach            
     
     </div>
 </body>
