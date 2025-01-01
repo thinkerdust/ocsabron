@@ -289,7 +289,8 @@ class PackingController extends BaseController
         ];
 
         $pdf = PDF::loadView('packing.label', compact('data'))
-              ->setPaper('a4', 'portrait');
+                    ->setPaper([0, 0, 226.77, 141.73]);
+
         return $pdf->stream('label.pdf');
     }
 
