@@ -286,9 +286,10 @@ class TambahanController extends BaseController
             'jumlah_koli'      => $jumlah_koli,
             'hasil_jadi'       => $hasil_jadi,
         ];
-
+        
         $pdf = PDF::loadView('packing.label', compact('data'))
-              ->setPaper('a4', 'portrait');
+                    ->setPaper([0, 0, 226.77, 141.73]);
+
         return $pdf->stream('label.pdf');
     }
 
