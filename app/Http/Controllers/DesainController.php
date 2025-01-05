@@ -208,6 +208,7 @@ class DesainController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'tgl_acc_approve'       => 'required',
+            'tanggal_deadline'      => 'required',
             'keterangan_approve'    => 'required',
             'upload_spk'            => 'required|mimes:pdf|max:2048'
         ], validation_message());
@@ -222,6 +223,8 @@ class DesainController extends BaseController
             $id         = $request->post('uid_approve');
             $tgl_acc    = $request->post('tgl_acc_approve');
             $tgl_acc    = Carbon::createFromFormat('d/m/Y', $request->post('tgl_acc_approve'))->format('Y-m-d');
+            $deadline   = $request->post('tanggal_deadline');
+            $deadline   = Carbon::createFromFormat('d/m/Y', $request->post('tanggal_deadline'))->format('Y-m-d');
             $ket        = $request->post('keterangan_approve');
             $user       = Auth::user();
 
@@ -234,7 +237,7 @@ class DesainController extends BaseController
             $dataOrder = [
                 'uid_divisi'        => $step->uid_divisi,
                 'tanggal_approve'   => $tgl_acc,
-                'deadline'          => $tgl_acc,
+                'deadline'          => $deadline,
                 'update_at'         => Carbon::now(), 
                 'update_by'         => $user->username
             ];
