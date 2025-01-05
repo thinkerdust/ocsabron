@@ -285,11 +285,12 @@ class PackingController extends BaseController
             'isi'              => $isi,
             'keterangan'       => $keterangan,
             'operator'         => $order->order_by,
-            'tanggal'          => date('d-m-Y', strtotime($order->tanggal)),
-            'jam'              => date('H:i', strtotime($order->update_at)),
+            'tanggal'          => date('d-m-Y'),
+            'jam'              => date('H:i'),
             'jumlah_koli'      => $jumlah_koli,
             'hasil_jadi'       => $hasil_jadi,
             'order_by'         => $order->order_by,
+            'username'         => Auth::user()->username
         ];
 
         $pdf = PDF::loadView('packing.label', compact('data'))

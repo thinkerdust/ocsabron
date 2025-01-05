@@ -86,7 +86,7 @@
                                             <tr>
                                                 <td style="width: 50%;">
                                                     <div>
-                                                        <span>{{ $data['operator'] ?? '' }}</span>
+                                                        <span>{{ $data['username'] ?? '' }}</span>
                                                     </div>
                                                     <div>
                                                         <span>{{ $data['tanggal'] ?? '' }}</span>
