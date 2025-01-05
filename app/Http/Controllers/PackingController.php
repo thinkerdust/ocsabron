@@ -263,33 +263,37 @@ class PackingController extends BaseController
         $hasil_jadi     = $request->post('generate_hasil_jadi');   
         $jumlah_koli    = $request->post('generate_jumlah_koli');
         $isi            = $request->post('generate_isi');
+        $keterangan     = $request->post('generate_keterangan');
         $uid            = $request->post('uid_generate');
 
         // insert to order
         DB::table('order')->where('uid', $uid)->update([
-            'hasil_jadi'    => $hasil_jadi,
-            'jumlah_koli'   => $jumlah_koli,
-            'isi'           => $isi
+            'hasil_jadi'            => $hasil_jadi,
+            'jumlah_koli'           => $jumlah_koli,
+            'isi'                   => $isi,
+            'keterangan_packing'    => $keterangan
         ]);
 
         // data order
         $order = Order::where('uid', $uid)->first();
 
         $data = [
+            'nama'             => $order->nama,
             'customer'         => $order->customer,
             'jenis_produk'     => $order->jenis_produk,
             'ukuran'           => $order->ukuran,
             'isi'              => $isi,
-            'keterangan'       => $order->keterangan,
+            'keterangan'       => $keterangan,
             'operator'         => $order->order_by,
-            'tanggal'          => date('d/m/Y', strtotime($order->tanggal)),
+            'tanggal'          => date('d-m-Y', strtotime($order->tanggal)),
             'jam'              => date('H:i', strtotime($order->update_at)),
             'jumlah_koli'      => $jumlah_koli,
             'hasil_jadi'       => $hasil_jadi,
+            'order_by'         => $order->order_by,
         ];
 
         $pdf = PDF::loadView('packing.label', compact('data'))
-                    ->setPaper([0, 0, 226.77, 141.73]);
+                    ->setPaper([0, 0, 283.46, 212.6]);
 
         return $pdf->stream('label.pdf');
     }
