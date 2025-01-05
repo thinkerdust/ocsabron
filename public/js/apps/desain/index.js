@@ -238,6 +238,7 @@ function approve(id) {
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
     $('#tgl_acc_approve').val('');
+    $('#tanggal_deadline').val('');
     $('#ketarangan_approve').val('');
     $('#upload_spk').val('');
 }
@@ -333,7 +334,6 @@ var table = NioApp.DataTable('#dt-table-incoming', {
     responsive: false,
     searchDelay: 500,
     scrollX: true,
-    scrollY: '500px',
     ajax: {
         url: '/desain/datatable-incoming',
         type: 'POST',

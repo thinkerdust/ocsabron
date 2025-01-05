@@ -423,7 +423,6 @@ var table = NioApp.DataTable('#dt-table-incoming', {
     responsive: false,
     searchDelay: 500,
     scrollX: true,
-    scrollY: '500px',
     ajax: {
         url: '/packing/datatable-incoming',
         type: 'POST',
