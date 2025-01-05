@@ -21,15 +21,14 @@
     
         .label {
             margin: 0;
-            padding: 0;
-            width: 76mm;
-            height: 44mm;
+            width: 99mm;
+            height: 73mm;
             /* border: 1px solid black; */
-            overflow: hidden; /* Prevent content overflow */
+            overflow: hidden;
         }
     
         .label span {
-            font-size: 16px;
+            font-size: 18px;
             word-break: break-word;
         }
     </style>
@@ -41,52 +40,80 @@
         @foreach($data['isi'] as $index => $val)
             <table>
                 <tr>
-                    <td style="width: 50%; padding: 5px;">
-                        <div class="label">
-                            <table style="width: 100%; margin-bottom: 0px;">
+                    <td style="width: 50%;">
+                        <div class="label" style="position: relative;">
+                            <table style="width: 95%; margin: auto; margin-top: 4mm; border-spacing: 0; position: absolute; top:0;">
+                                <!-- Table 1 Row -->
                                 <tr>
-                                    <td><span>{{ $data['customer'] ?? '' }}</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span>{{ $data['jenis_produk'] ?? '' }}</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span>{{ $data['ukuran'] ?? '' }}</span></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span>{{ $val }}</span>
+                                    <td style="vertical-align: top;">
+                                        <table style="width: 100%; margin-bottom: 0;">
+                                            <tr>
+                                                <td style="width: 50%;">
+                                                    <div>
+                                                        <span>{{ $data['customer'] ?? '' }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $data['nama'] ?? '' }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $data['jenis_produk'] ?? '' }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $data['ukuran'] ?? '' }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $val }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $data['keterangan'][$index] ?? '' }}</span>
+                                                    </div>
+                                                </td>
+                                                <td style="width: 50%; text-align: right; vertical-align: top;">
+                                                    <div>
+                                                        <span style="font-size: 26px;">{{ $data['order_by'] ?? '' }}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td><span>{{ $data['keterangan'] ?? '' }}</span></td>
                                 </tr>
                             </table>
-        
-                            <table style="width: 100%; margin-top: {{ strlen($data['keterangan'] ?? '') > 35 ? '0px' : '15px' }};">
-                                <tr>
-                                    <td style="width: 80%;">
-                                        <div>
-                                            <span>{{ $data['operator'] ?? '' }}</span>
-                                        </div>
-                                        <div>
-                                            <span>{{ $data['tanggal'] ?? '' }}</span>
-                                        </div>
-                                    </td>
-                                    <td style="width: 20%;">
-                                        <div>
-                                            <span>{{ $data['jumlah_koli'] ?? '' }}</span>
-                                            <span>Dus</span>
-                                        </div>
-                                        <div>
-                                            <span>{{ ($index + 1) . '/' . $data['jumlah_koli'] ?? '' }}</span>
-                                        </div>
+                            <table style="width: 95%; margin: auto; border-spacing: 0; position: absolute; bottom: 22mm;">
+                                <!-- Table 2 Row -->
+                                <tr style="position: absolute; bottom: 0; left: 0;">
+                                    <td style="vertical-align: bottom;">
+                                        <table style="width: 100%; margin-top: 0;">
+                                            <tr>
+                                                <td style="width: 50%;">
+                                                    <div>
+                                                        <span>{{ $data['operator'] ?? '' }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $data['tanggal'] ?? '' }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span>{{ $data['jam'] ?? '' }}</span>
+                                                    </div>
+                                                </td>
+                                                <td style="width: 50%; text-align: right;">
+                                                    <div>
+                                                        <span style="font-size: 26px;">{{ $data['jumlah_koli'] ?? '' }}</span>
+                                                        <span style="font-size: 26px">Dus</span>
+                                                    </div>
+                                                    <div>
+                                                        <span style="font-size: 26px">{{ ($index + 1) . '/' . $data['jumlah_koli'] ?? '' }}</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </td>
+                    
                 </tr>
+                
             </table>
 
         @endforeach            

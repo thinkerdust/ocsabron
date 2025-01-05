@@ -193,7 +193,8 @@ function generate_label(id) {
                 $('#generate_hasil_jadi').val(data.hasil_jadi_tambahan);
                 $('#generate_jumlah_koli').val(data.jumlah_koli_tambahan);
 
-                let isi = JSON.parse(data.isi_tambahan)
+                let isi = data.isi ? JSON.parse(data.isi) : [];
+                let keterangan = data.keterangan ? JSON.parse(data.keterangan_packing) : [];
 
                 // foreach jumlah koli dan isi form-isi dengan loop dari data isi
                 let html = '';
@@ -202,6 +203,10 @@ function generate_label(id) {
                         <div class="form-group col-md-6">
                             <label class="form-label" for="generate_isi_${i+1}">Isi Koli ${i+1}</label>
                             <input type="text" class="form-control text-end" id="generate_isi_${i+1}" name="generate_isi[]" value="${isi[i]}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="generate_keterangan_${i+1}">Keterangan ${i+1}</label>
+                            <input type="text" class="form-control text-end" id="generate_keterangan_${i+1}" name="generate_keterangan[]" value="${keterangan[i]}" required>
                         </div>
                     `;
                 }
@@ -234,6 +239,12 @@ $('#btn-generate-form-isi').click(function(e) {
         html += '<div class="form-group col-md-6">';
         html += '<label class="form-label" for="generate_isi_'+i+'">Isi Koli '+i+'</label>';
         html += '<input type="text" class="form-control text-end" id="generate_isi_'+i+'" name="generate_isi[]" required>';
+        html += '</div>';
+
+        // keterangan
+        html += '<div class="form-group col-md-6">';
+        html += '<label class="form-label" for="generate_keterangan_'+i+'">Keterangan '+i+'</label>';
+        html += '<input type="text" class="form-control text-end" id="generate_keterangan_'+i+'" name="generate_keterangan[]" required>';
         html += '</div>';
     }
 
