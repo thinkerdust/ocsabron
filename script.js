@@ -1,8 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    // const countdown = new Date(Date.parse(new Date()) + 14 * 24 * 60 * 60 * 1000);
-    const countdown = new Date("January 1, 2025 00:00:00");
-    
+    const countdown = new Date("January 10, 2025 00:00:00");  
     const days = document.querySelector(".days").querySelector(".flip-card");
     const hours = document.querySelector(".hours").querySelector(".flip-card");
     const minutes = document.querySelector(".minutes").querySelector(".flip-card");
