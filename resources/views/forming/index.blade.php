@@ -158,8 +158,6 @@
                                 <input type="text" class="form-control" id="ukuran" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Jumlah</label>
                             <div class="form-control-wrap">
@@ -172,6 +170,8 @@
                                 <input type="text" class="form-control" id="jenis_kertas" readonly>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Finishing 1</label>
                             <div class="form-control-wrap">
@@ -199,7 +199,25 @@
                         <div class="form-group">
                             <label class="form-label">Keterangan</label>
                             <div class="form-control-wrap">
-                                <textarea class="form-control" rows="5" id="keterangan" readonly></textarea>
+                                <textarea class="form-control" id="keterangan" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Approve (Desain)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="tanggal_approve" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rusak Mesin (PON)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="rusak_mesin" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rusak Cetakan (PON)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="rusak_cetakan" readonly>
                             </div>
                         </div>
                     </div>
@@ -241,21 +259,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Rusak Mesin (PON)</label>
+                            <label class="form-label">Rusak Mesin (Forming)</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="rusak_mesin" readonly>
+                                <input type="text" class="form-control" id="rusak_mesin_forming" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Rusak Cetakan (PON)</label>
+                            <label class="form-label">Rusak Cetakan (Forming)</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="rusak_cetakan" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Tanggal Approve (Desain)</label>
-                            <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="tanggal_approve" readonly>
+                                <input type="text" class="form-control" id="rusak_cetakan_forming" readonly>
                             </div>
                         </div>
                     </div>
@@ -301,13 +313,13 @@
                     <div class="form-group">
                         <label class="form-label">Rusak Mesin</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="rusak_mesin" id="rusak_mesin">
+                            <input type="text" class="form-control" name="rusak_mesin_approve" id="rusak_mesin_approve">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Rusak Cetakan</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" name="rusak_cetakan" id="rusak_cetakan">
+                            <input type="text" class="form-control" name="rusak_cetakan_approve" id="rusak_cetakan_approve">
                         </div>
                     </div>
                     <div class="form-group">

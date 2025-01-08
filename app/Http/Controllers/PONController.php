@@ -204,8 +204,8 @@ class PONController extends BaseController
     public function approve_pon(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'rusak_mesin'           => 'required',
-            'rusak_cetakan'         => 'required',
+            'rusak_mesin_approve'   => 'required',
+            'rusak_cetakan_approve' => 'required',
             'keterangan_approve'    => 'required',
         ], validation_message());
 
@@ -217,8 +217,8 @@ class PONController extends BaseController
             DB::beginTransaction();
 
             $id             = $request->post('uid_approve');
-            $rusak_mesin    = $request->post('rusak_mesin');
-            $rusak_cetakan  = $request->post('rusak_cetakan');
+            $rusak_mesin    = $request->post('rusak_mesin_approve');
+            $rusak_cetakan  = $request->post('rusak_cetakan_approve');
             $ket            = $request->post('keterangan_approve');
             $user           = Auth::user();
 
