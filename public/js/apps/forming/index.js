@@ -108,6 +108,8 @@ function detail(id) {
                 $('#nomor_resi').val(data.nomor_resi);
                 $('#rusak_mesin').val(data.rusak_mesin);
                 $('#rusak_cetakan').val(data.rusak_cetakan);
+                $('#rusak_mesin_forming').val(data.rusak_mesin_forming);
+                $('#rusak_cetakan_forming').val(data.rusak_cetakan_forming);
                 $('#tanggal_approve').val(data.tanggal_approve);
             }
 
@@ -237,8 +239,8 @@ function cancel(id) {
 function approve(id) {
     $('#modalApprove').modal('show');
     $('#uid_approve').val(id);
-    $('#rusak_mesin').val('');
-    $('#rusak_cetakan').val('');
+    $('#rusak_mesin_approve').val('');
+    $('#rusak_cetakan_approve').val('');
     $('#keterangan_approve').val('');
 }
 

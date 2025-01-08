@@ -119,8 +119,6 @@
                                 <input type="text" class="form-control" id="ukuran" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Jumlah</label>
                             <div class="form-control-wrap">
@@ -133,6 +131,8 @@
                                 <input type="text" class="form-control" id="jenis_kertas" readonly>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label class="form-label">Finishing 1</label>
                             <div class="form-control-wrap">
@@ -160,19 +160,37 @@
                         <div class="form-group">
                             <label class="form-label">Keterangan</label>
                             <div class="form-control-wrap">
-                                <textarea class="form-control" rows="5" id="keterangan" readonly></textarea>
+                                <textarea class="form-control" id="keterangan" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tanggal Approve (Desain)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="tanggal_approve" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rusak Mesin (PON)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="rusak_mesin" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rusak Cetakan (PON)</label>
+                            <div class="form-control-wrap">
+                                <input type="text" class="form-control" id="rusak_cetakan" readonly>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="form-label">Hasil Jadi</label>
+                            <label class="form-label">Hasil Jadi (Packing)</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control text-end" id="hasil_jadi" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Jumlah Koli</label>
+                            <label class="form-label">Jumlah Koli (Packing)</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control text-end" id="jumlah_koli" readonly>
                             </div>
@@ -190,33 +208,27 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Nomor Nota</label>
+                            <label class="form-label">Nomor Nota (Administrasi)</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="nomor_nota" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Nomor Resi</label>
+                            <label class="form-label">Nomor Resi (Ekpedisi)</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="nomor_resi" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Rusak Mesin</label>
+                            <label class="form-label">Rusak Mesin (Forming)</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="rusak_mesin" readonly>
+                                <input type="text" class="form-control" id="rusak_mesin_forming" readonly>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Rusak Cetakan</label>
+                            <label class="form-label">Rusak Cetakan (Forming)</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="rusak_cetakan" readonly>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Tanggal Approve</label>
-                            <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="tanggal_approve" readonly>
+                                <input type="text" class="form-control" id="rusak_cetakan_forming" readonly>
                             </div>
                         </div>
                     </div>

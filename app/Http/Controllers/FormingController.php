@@ -205,9 +205,9 @@ class FormingController extends BaseController
     public function approve_forming(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'rusak_mesin'           => 'required',
-            'rusak_cetakan'         => 'required',
-            'keterangan_approve'    => 'required',
+            'rusak_mesin_approve'   => 'required',
+            'rusak_cetakan_approve' => 'required',
+            'keterangan_approve'    => 'required'
         ], validation_message());
 
         if($validator->stopOnFirstFailure()->fails()){
@@ -218,8 +218,8 @@ class FormingController extends BaseController
             DB::beginTransaction();
 
             $id             = $request->post('uid_approve');
-            $rusak_mesin    = $request->post('rusak_mesin');
-            $rusak_cetakan  = $request->post('rusak_cetakan');
+            $rusak_mesin    = $request->post('rusak_mesin_approve');
+            $rusak_cetakan  = $request->post('rusak_cetakan_approve');
             $ket            = $request->post('keterangan_approve');
             $user           = Auth::user();
 
@@ -235,11 +235,11 @@ class FormingController extends BaseController
 
             $step = $this->order->getNextStep($id);
             Order::where('uid', $id)->update([
-                    'uid_divisi'    => $step->uid_divisi,
-                    'rusak_mesin'   => $rusak_mesin,
-                    'rusak_cetakan' => $rusak_cetakan,
-                    'update_at'     => Carbon::now(), 
-                    'update_by'     => $user->username
+                    'uid_divisi'            => $step->uid_divisi,
+                    'rusak_mesin_forming'   => $rusak_mesin,
+                    'rusak_cetakan_forming' => $rusak_cetakan,
+                    'update_at'             => Carbon::now(), 
+                    'update_by'             => $user->username
                 ]);
             $this->logs($id, $step->uid_divisi, 1);
 
