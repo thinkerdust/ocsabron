@@ -46,7 +46,10 @@ class PackingController extends BaseController
         $data = $this->packing->dataTablePacking($start_date, $end_date, $status); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
+                    
                     $btn = '';
+                    $btn_action = '';
+
                     if(Gate::allows('crudAccess', 'PACK', $row)) {
                         $user = Auth::user();
                         if(in_array($user->id_role, [1,2])) {
