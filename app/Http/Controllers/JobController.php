@@ -45,9 +45,11 @@ class JobController extends BaseController
         $data = $this->job->dataTableJob($start_date, $end_date, $status); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
+
                     $btn = '';
+                    $btn_action = '';
+                    
                     if(Gate::allows('crudAccess', 'JOB', $row)) {
-                        $btn_action     = '';
                         $btn_approve    = '<li><a class="btn" onclick="approve(\'' . $row->uid . '\')"><em class="icon ni ni-check-round-cut"></em><span>Approve</span></a></li>';
                         $btn_pending    = '<li><a class="btn" onclick="pending(\'' . $row->uid . '\')"><em class="icon ni ni-na"></em><span>Pending</span></a></li>';
                         

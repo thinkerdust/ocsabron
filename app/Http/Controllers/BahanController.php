@@ -44,7 +44,10 @@ class BahanController extends BaseController
         $data = $this->bahan->dataTableBahan($start_date, $end_date, $status); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
+                    
                     $btn = '';
+                    $btn_action = '';
+
                     if(Gate::allows('crudAccess', 'BAHAN', $row)) {
                         $user = Auth::user();
                         if(in_array($user->id_role, [1,2])) {

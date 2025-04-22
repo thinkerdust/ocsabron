@@ -44,7 +44,10 @@ class PONController extends BaseController
         $data = $this->pon->dataTablePON($start_date, $end_date, $status); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
+                    
                     $btn = '';
+                    $btn_action = '';
+
                     if(Gate::allows('crudAccess', 'PON', $row)) {
                         $user = Auth::user();
                         if(in_array($user->id_role, [1,2])) {
