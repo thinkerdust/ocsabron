@@ -15,7 +15,7 @@ var table = NioApp.DataTable('#dt-table', {
             d.status        = $('#filter_status').val();
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) { 
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {
@@ -138,7 +138,7 @@ var table = NioApp.DataTable('#dt-table-detail', {
             d.uid       = $('#uid_order').val();
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) { 
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {
@@ -432,7 +432,7 @@ var table = NioApp.DataTable('#dt-table-incoming', {
             d._token        = token;
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) { 
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {

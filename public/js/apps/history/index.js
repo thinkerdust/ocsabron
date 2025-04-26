@@ -14,7 +14,7 @@ var table = NioApp.DataTable('#dt-table', {
             d.end_date      = $('#end_date').val();
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) { 
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {
@@ -132,7 +132,7 @@ var table = NioApp.DataTable('#dt-table-detail', {
             d.uid       = $('#uid_order').val();
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) { 
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {

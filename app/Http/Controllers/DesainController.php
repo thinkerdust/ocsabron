@@ -49,13 +49,12 @@ class DesainController extends BaseController
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
 
-                    $btn = '';
                     $btn_action = '';
                     
                     if(Gate::allows('crudAccess', 'DSN', $row)) {
                         $user = Auth::user();
                         if(in_array($user->id_role, [1,2])) {
-                            $btn_action = '<li><a href="/desain/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                            $btn_action .= '<li><a href="/desain/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a class="btn" onclick="cancel(\'' . $row->uid . '\')"><em class="icon ni ni-undo"></em><span>Cancel</span></a></li>';
                         }
@@ -68,8 +67,9 @@ class DesainController extends BaseController
                         } elseif($row->status == 3) {
                             $btn_action .= $btn_approve;
                         }
+                    }
 
-                        $btn = '<div class="drodown">
+                    $btn = '<div class="drodown">
                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
@@ -78,7 +78,6 @@ class DesainController extends BaseController
                                     </ul>
                                 </div>
                             </div>';
-                    }
 
                     return $btn;
                 })
@@ -182,7 +181,6 @@ class DesainController extends BaseController
                 'keterangan'    => $request->keterangan,
             ];
 
-            // insert order
             if(!empty($id)) {
                 $data['update_at']  = Carbon::now();
                 $data['update_by']  = $user->username;

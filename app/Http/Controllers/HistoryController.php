@@ -4,16 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Repositories\HistoryRepository;
-use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
 class HistoryController extends BaseController

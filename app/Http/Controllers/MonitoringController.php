@@ -4,16 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\BaseController as BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Repositories\MonitoringRepository;
-use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
 class MonitoringController extends BaseController
@@ -42,13 +35,9 @@ class MonitoringController extends BaseController
         $end_date   = $request->end_date;
 
         $data = $this->monitoring->dataTableMonitoring($start_date, $end_date);
-        // dd($data); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $btn = '';
-                    if(Gate::allows('crudAccess', 'MR', $row)) {
-
-                        $btn = '<div class="drodown">
+                    $btn = '<div class="drodown">
                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
@@ -56,7 +45,6 @@ class MonitoringController extends BaseController
                                     </ul>
                                 </div>
                             </div>';
-                    }
 
                     return $btn;
                 })

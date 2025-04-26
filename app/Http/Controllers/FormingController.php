@@ -45,14 +45,13 @@ class FormingController extends BaseController
         $data = $this->forming->dataTableForming($start_date, $end_date, $status); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    
-                    $btn = '';
+
                     $btn_action = '';
 
                     if(Gate::allows('crudAccess', 'FORM', $row)) {
                         $user = Auth::user();
                         if(in_array($user->id_role, [1,2])) {
-                            $btn_action = '<li><a href="/forming/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                            $btn_action .= '<li><a href="/forming/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
                                         <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         <li><a class="btn" onclick="cancel(\'' . $row->uid . '\')"><em class="icon ni ni-undo"></em><span>Cancel</span></a></li>';
                         }
@@ -66,17 +65,18 @@ class FormingController extends BaseController
                             $btn_action .= $btn_approve;
                         }
 
-                        $btn = '<div class="drodown">
+                        $btn_action .= '<li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>';
+                    }
+
+                    $btn = '<div class="drodown">
                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
-                                        <li><a target="_blank" href="' . asset('storage/uploads/' . $row->file_spk) . '" class="btn"><em class="icon ni ni-download"></em><span>Download SPK</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
                             </div>';
-                    }
 
                     return $btn;
                 })
@@ -180,7 +180,6 @@ class FormingController extends BaseController
                 'keterangan'    => $request->keterangan,
             ];
 
-            // insert order
             if(!empty($id)) {
                 $data['update_at']  = Carbon::now();
                 $data['update_by']  = $user->username;
