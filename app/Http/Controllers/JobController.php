@@ -46,7 +46,6 @@ class JobController extends BaseController
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
 
-                    $btn = '';
                     $btn_action = '';
                     
                     if(Gate::allows('crudAccess', 'JOB', $row)) {
@@ -54,23 +53,24 @@ class JobController extends BaseController
                         $btn_pending    = '<li><a class="btn" onclick="pending(\'' . $row->uid . '\')"><em class="icon ni ni-na"></em><span>Pending</span></a></li>';
                         
                         if($row->status == 1) {
-                            $btn_action = $btn_approve.$btn_pending;
+                            $btn_action .= $btn_approve.$btn_pending;
                         } elseif($row->status == 3) {
-                            $btn_action = $btn_approve;
+                            $btn_action .= $btn_approve;
                         }
 
-                        $btn = '<div class="drodown">
+                        $btn_action .= '<li><a href="/job/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                        <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>';
+                    }
+
+                    $btn = '<div class="drodown">
                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <ul class="link-list-opt no-bdr">
                                         <li><a class="btn" onclick="detail(\'' . $row->uid . '\')"><em class="icon ni ni-eye"></em><span>Detail</span></a></li>
-                                        <li><a href="/job/form/'.$row->uid.'" class="btn"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
-                                        <li><a class="btn" onclick="hapus(\'' . $row->uid . '\')"><em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                         '.$btn_action.'
                                     </ul>
                                 </div>
                             </div>';
-                    }
 
                     return $btn;
                 })
@@ -174,7 +174,6 @@ class JobController extends BaseController
                 'keterangan'    => $request->keterangan,
             ];
 
-            // insert order
             if(!empty($id)) {
                 $data['update_at']  = Carbon::now();
                 $data['update_by']  = $user->username;

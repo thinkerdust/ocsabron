@@ -14,7 +14,7 @@ var table = NioApp.DataTable('#dt-table', {
             d.status        = $('#filter_status').val();
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) {
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {
@@ -257,7 +257,6 @@ var table = NioApp.DataTable('#dt-table', {
         }
     ],
     createdRow: function(row, data, dataIndex) {
-        console.log(data);
         // Access the specific cell and apply styles
         if (data.desain === 1) {
             $('td', row).eq(5).addClass('border border-white bg-danger');
@@ -399,7 +398,7 @@ function detail(id) {
     $('#modalDetail').modal('show');
 
     $.ajax({
-        url: '/tambahan/detail/'+id,
+        url: '/monitoring/detail/'+id,
         dataType: 'json',
         success: function(response) {
             let data = response.data.order;
@@ -449,14 +448,14 @@ var table = NioApp.DataTable('#dt-table-detail', {
     searchDelay: 500,
     scrollX: true,
     ajax: {
-        url: '/tambahan/detail/datatable',
+        url: '/monitoring/detail/datatable',
         type: 'POST',
         data: function(d) {
             d._token    = token;
             d.uid       = $('#uid_order').val();
         },
         error: function (xhr) {
-            if (xhr.status === 401) { // Unauthorized error
+            if (xhr.status === 419) {
                 NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
                 window.location.href = "/login"; 
             } else {

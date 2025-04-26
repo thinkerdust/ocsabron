@@ -300,6 +300,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::controller(MonitoringController::class)->group(function () {
             Route::get('/', 'index');
             Route::post('/datatable', 'datatable_monitoring');
+            Route::get('/detail/{id}', 'detail_monitoring');
+            Route::post('/detail/datatable', 'datatable_detail_monitoring');
         });
     });
 

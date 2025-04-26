@@ -4,7 +4,15 @@ var table = NioApp.DataTable('#dt-table', {
     responsive: true,
     searchDelay: 500,
     ajax: {
-        url: '/user-management/datatable-user-management'
+        url: '/user-management/datatable-user-management',
+        error: function (xhr) {
+            if (xhr.status === 419) { 
+                NioApp.Toast('Your session has expired. Redirecting to login...', 'error', {position: 'top-right'});
+                window.location.href = "/login"; 
+            } else {
+                NioApp.Toast('An error occurred while loading data. Please try again.', 'error', {position: 'top-right'});
+            }
+        }
     },
     columns: [
         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
