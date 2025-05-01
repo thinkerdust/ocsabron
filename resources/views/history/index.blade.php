@@ -22,7 +22,7 @@
                                             <label class="form-label">Filter Tanggal</label>
                                             <div class="form-control-wrap">
                                                 <div class="input-daterange date-picker-range input-group">
-                                                    <input type="text" class="form-control" name="start_date" id="start_date" value="{{ date('01/m/Y') }}" readonly /> 
+                                                    <input type="text" class="form-control" name="start_date" id="start_date" value="{{ date('d/m/Y', strtotime('-3 months')) }}" readonly />
                                                     <div class="input-group-addon">TO</div>
                                                     <input type="text" class="form-control" name="end_date" id="end_date" value="{{ date('d/m/Y') }}" readonly />
                                                 </div>
