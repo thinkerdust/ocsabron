@@ -41,7 +41,7 @@ var table = NioApp.DataTable('#dt-table', {
             render: function (data, type, row) {
                 return `
                     <div class="info">
-                        <div class="tanggal-approve">${row.tanggal_approve}</div>
+                        <div class="tanggal-approve">${row.tanggal_approve ?? ''}</div>
                     </div>
                 `;
             },
@@ -52,7 +52,7 @@ var table = NioApp.DataTable('#dt-table', {
             render: function (data, type, row) {
                 return `
                     <div class="info">
-                        <div class="deadline">${row.deadline}</div>
+                        <div class="deadline">${row.deadline ?? ''}</div>
                     </div>
                 `;
             },
