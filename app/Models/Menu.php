@@ -50,9 +50,9 @@ class Menu extends Model
                     $state_fullAccess   = '';
                     $state_noAccess     = '';
                 } else {
-                    $state_readOnly     = ($val->flag_access === 0) ? 'checked' : '';
-                    $state_fullAccess   = ($val->flag_access === 1) ? 'checked' : '';
-                    $state_noAccess     = ($val->flag_access === 9) ? 'checked' : '';
+                    $state_readOnly     = ($val->flag_access == 0) ? 'checked' : '';
+                    $state_fullAccess   = ($val->flag_access == 1) ? 'checked' : '';
+                    $state_noAccess     = ($val->flag_access == 9) ? 'checked' : '';
                 }
 
                 $id_readOnly    = 'ro_' . $id_menu;
