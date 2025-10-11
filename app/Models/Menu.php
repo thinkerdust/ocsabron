@@ -172,7 +172,7 @@ class Menu extends Model
     public function menu()
     {
         $user = Auth::user();
-        $header_menu = DB::select("SELECT m.parent, m.kode, m.nama, m.icon, m.url
+        $header_menu = DB::select("SELECT m.id, m.parent, m.kode, m.nama, m.icon, m.url
                         from menu m 
                         join (
                             select m.parent as kode
@@ -185,7 +185,7 @@ class Menu extends Model
                         ) sq on m.kode = sq.kode
                         where m.status = 1
                         union all
-                        SELECT m.parent, m.kode, m.nama, m.icon, m.url
+                        SELECT m.id, m.parent, m.kode, m.nama, m.icon, m.url
                         from menu m 
                         join (
                             select m.kode
@@ -195,7 +195,8 @@ class Menu extends Model
                             join menu m on ar.kode_menu = m.kode 
                             where ar.flag_access != 9 and u.id = '$user->id' and m.status = 1 and m.parent = '0' and r.status = 1
                         ) sq on m.kode = sq.kode
-                        where m.status = 1");
+                        where m.status = 1
+                        order by id");
 
         $menu = '';
         foreach($header_menu as $row) {
@@ -205,7 +206,8 @@ class Menu extends Model
                                 join `role` r on u.id_role = r.id
                                 join akses_role ar on r.id = ar.id_role 
                                 join menu m on ar.kode_menu = m.kode 
-                                where ar.flag_access != 9 and u.id = $user->id and m.parent = '$row->kode' and m.status = 1 and r.status = 1");
+                                where ar.flag_access != 9 and u.id = $user->id and m.parent = '$row->kode' and m.status = 1 and r.status = 1
+                                order by m.id");
 
             if(!empty($detail_menu)) {
                 $menu .= '<li class="nk-menu-item has-sub">
