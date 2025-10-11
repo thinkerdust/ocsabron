@@ -18,6 +18,7 @@ use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\PackingController;
 use App\Http\Controllers\PONController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TambahanController;
 use App\Http\Controllers\UserManagementController;
 
@@ -312,6 +313,14 @@ Route::group(['middleware' => ['web', 'auth']], function () {
             Route::post('/datatable', 'datatable_history');
             Route::get('/detail/{id}', 'detail_history');
             Route::post('/detail/datatable', 'datatable_detail_history');
+        });
+    });
+
+    // Report
+    Route::prefix('report')->controller(ReportController::class)->group(function () {
+        Route::prefix('operator')->middleware("can:SubMenu, 'RP1'")->group(function () {
+            Route::get('/', 'report_operator');
+            Route::post('/datatable', 'datatable_report_operator');
         });
     });
 });
