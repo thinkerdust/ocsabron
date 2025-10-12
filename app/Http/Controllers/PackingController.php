@@ -264,8 +264,8 @@ class PackingController extends BaseController
 
         $hasil_jadi     = $request->post('generate_hasil_jadi');   
         $jumlah_koli    = $request->post('generate_jumlah_koli');
-        $isi            = $request->post('generate_isi');
-        $keterangan     = $request->post('generate_keterangan');
+        $isi            = $request->post('generate_isi', []);
+        $keterangan     = $request->post('generate_keterangan', []);
         $uid            = $request->post('uid_generate');
 
         // insert to order
