@@ -299,7 +299,7 @@ class PackingController extends BaseController
             'username'         => Auth::user()->username
         ];
 
-        $pdf = PDF::loadView('packing.label', compact($data));
+        $pdf = PDF::loadView('packing.label', compact('data'));
         $pdf->setPaper([0, 0, 283.46, 212.6]);
     
         $pdf->setOptions([
