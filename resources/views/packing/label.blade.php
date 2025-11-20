@@ -5,7 +5,15 @@
     <style>
         @font-face {
             font-family: 'Poppins';
-            src: url("{{ asset('assets/fonts/Poppins-Regular.ttf') }}") format('truetype');
+            font-style: normal;
+            font-weight: normal;
+            src: url("{{ public_path('assets/fonts/Poppins-Regular.ttf') }}") format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            font-weight: bold;
+            src: url("{{ public_path('assets/fonts/Poppins-Bold.ttf') }}") format('truetype');
         }
     
         /* PENTING: Hilangkan margin default browser & margin halaman PDF */
