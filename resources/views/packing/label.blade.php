@@ -6,7 +6,7 @@
     <style>
         @font-face {
             font-family: 'Poppins';
-            src: url("{{ public_path('assets/fonts/Poppins-Regular.ttf') }}") format('truetype');
+            src: url("{{ asset('assets/fonts/Poppins-Regular.ttf') }}") format('truetype');
         }
     
         * {
