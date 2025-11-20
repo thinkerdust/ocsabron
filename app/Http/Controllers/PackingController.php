@@ -262,7 +262,6 @@ class PackingController extends BaseController
     public function generate_label_packing(Request $request)
     {
 
-        ignore_user_abort(true); 
         set_time_limit(0); 
         ini_set('memory_limit', '1024M');
 
@@ -299,15 +298,8 @@ class PackingController extends BaseController
             'username'         => Auth::user()->username
         ];
 
-        $pdf = PDF::loadView('packing.label', compact('data'));
-        $pdf->setPaper([0, 0, 283.46, 212.6]);
-    
-        $pdf->setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => false, 
-            'defaultFont' => 'sans-serif',
-            'dpi' => 72, // Turunkan DPI jika gambar tidak tajam bukan prioritas (standar 96/72)
-        ]);
+        $pdf = PDF::loadView('packing.label', compact('data'))
+                    ->setPaper([0, 0, 283.46, 212.6]);
 
         return $pdf->stream('label.pdf');
     }
