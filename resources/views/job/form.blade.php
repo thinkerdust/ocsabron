@@ -103,6 +103,7 @@
                                                             <option value="OCSAPACK">OCSAPACK</option>
                                                             <option value="BRONPACK">BRONPACK</option>
                                                             <option value="RDS">RDS</option>
+                                                            <option value="LYNUS">LYNUS</option>
                                                         </select>
                                                     </div>
                                                 </div>

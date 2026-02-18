@@ -41,8 +41,9 @@ class JobController extends BaseController
         $start_date = $request->start_date;
         $end_date   = $request->end_date;
         $status     = $request->status;
+        $order_by   = $request->order_by;
 
-        $data = $this->job->dataTableJob($start_date, $end_date, $status); 
+        $data = $this->job->dataTableJob($start_date, $end_date, $status, $order_by); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
 

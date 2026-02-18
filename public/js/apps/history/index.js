@@ -12,6 +12,7 @@ var table = NioApp.DataTable('#dt-table', {
             d._token        = token;
             d.start_date    = $('#start_date').val();
             d.end_date      = $('#end_date').val();
+            d.order_by      = $('#filter_order_by').val();
         },
         error: function (xhr) {
             if (xhr.status === 419) { 
