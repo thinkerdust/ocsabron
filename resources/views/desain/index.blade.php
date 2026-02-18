@@ -48,6 +48,21 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="form-label">Order By</label>
+                                            <div class="form-control-wrap">
+                                                <select class="form-control js-select2" id="filter_order_by" required>
+                                                    <option value="ALL">SEMUA</option>
+                                                    <option value="OCSAPACK">OCSAPACK</option>
+                                                    <option value="BRONPACK">BRONPACK</option>
+                                                    <option value="RDS">RDS</option>
+                                                    <option value="LYNUS">LYNUS</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-2" style="margin-top:30px">
                                         <button type="button" class="btn btn-info" id="btn-filter"><em class="icon ni ni-search"></em><span>Filter</span></button>
                                     </div>

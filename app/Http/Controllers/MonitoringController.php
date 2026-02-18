@@ -33,8 +33,9 @@ class MonitoringController extends BaseController
     {
         $start_date = $request->start_date;
         $end_date   = $request->end_date;
+        $order_by   = $request->order_by;
 
-        $data = $this->monitoring->dataTableMonitoring($start_date, $end_date);
+        $data = $this->monitoring->dataTableMonitoring($start_date, $end_date, $order_by);
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
                     $btn = '<div class="drodown">

@@ -14,7 +14,7 @@ class BahanRepository {
         $this->order = $order;
     }
 
-    public function dataTableBahan($start_date, $end_date, $status)
+    public function dataTableBahan($start_date, $end_date, $status, $order_by)
     {
         $start_date = Carbon::createFromFormat('d/m/Y', $start_date);
         $start_date = $start_date->format('Y-m-d');
@@ -37,6 +37,10 @@ class BahanRepository {
 
         if($status) {
             $query->where('od.status', $status);
+        }
+
+        if($order_by != 'ALL') {
+            $query->where('o.order_by', $order_by);
         }
         
         return $query;

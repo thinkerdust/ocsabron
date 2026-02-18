@@ -14,7 +14,7 @@ class MonitoringRepository {
         $this->order = $order;
     }
 
-    public function dataTableMonitoring($start_date, $end_date)
+    public function dataTableMonitoring($start_date, $end_date, $order_by)
     {
         $start_date = Carbon::createFromFormat('d/m/Y', $start_date);
         $start_date = $start_date->format('Y-m-d');
@@ -82,6 +82,10 @@ class MonitoringRepository {
             )
             ->groupBy('o.uid');
         
+        if($order_by != 'ALL') {
+            $query->where('o.order_by', $order_by);
+        }
+
         return $query;
     }
 

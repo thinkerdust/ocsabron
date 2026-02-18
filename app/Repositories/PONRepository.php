@@ -38,6 +38,10 @@ class PONRepository {
         if($status) {
             $query->where('od.status', $status);
         }
+
+        if($order_by != 'ALL') {
+            $query->where('o.order_by', $order_by);
+        }
         
         return $query;
     }

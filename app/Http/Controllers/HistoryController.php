@@ -35,8 +35,9 @@ class HistoryController extends BaseController
     {
         $start_date = $request->start_date;
         $end_date   = $request->end_date;
+        $order_by   = $request->order_by;
 
-        $data = $this->history->dataTableHistory($start_date, $end_date); 
+        $data = $this->history->dataTableHistory($start_date, $end_date, $order_by); 
         return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function($row) {
                     $btn = '';
