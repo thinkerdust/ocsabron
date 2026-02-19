@@ -33,7 +33,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Order By</label>
                                             <div class="form-control-wrap">
-                                                <select class="form-control js-select2" id="order_by" required>
+                                                <select class="form-control select2-js" id="order_by" required>
                                                     <option value="ALL">SEMUA</option>
                                                     <option value="OCSAPACK">OCSAPACK</option>
                                                     <option value="BRONPACK">BRONPACK</option>

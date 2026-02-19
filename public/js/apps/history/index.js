@@ -66,6 +66,10 @@ $('#btn-filter').click(function() {
     $("#dt-table").DataTable().ajax.reload();
 })
 
+$('.select2-js').select2({
+    minimumResultsForSearch: Infinity
+});
+
 const thousandView = (number = 0) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
