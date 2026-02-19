@@ -66,3 +66,7 @@ var table = NioApp.DataTable('#dt-table', {
 $('#btn-filter').click(function() {
     $("#dt-table").DataTable().ajax.reload();
 })
+
+$('.select2-js').select2({
+    minimumResultsForSearch: Infinity
+});
