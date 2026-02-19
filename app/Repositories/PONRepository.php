@@ -14,7 +14,7 @@ class PONRepository {
         $this->order = $order;
     }
 
-    public function dataTablePON($start_date, $end_date, $status)
+    public function dataTablePON($start_date, $end_date, $status, $order_by = 'ALL')
     {
         $start_date = Carbon::createFromFormat('d/m/Y', $start_date);
         $start_date = $start_date->format('Y-m-d');
