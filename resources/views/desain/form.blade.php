@@ -102,6 +102,7 @@
                                                         <select class="form-control select2-js" name="order_by" id="order_by" required>
                                                             <option value="OCSAPACK">OCSAPACK</option>
                                                             <option value="BRONPACK">BRONPACK</option>
+                                                            <option value="RDS">RDS</option>
                                                             <option value="LYNUS">LYNUS</option>
                                                         </select>
                                                     </div>
